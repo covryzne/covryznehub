@@ -42,6 +42,7 @@ export const siteConfig = {
     contactForm: "/#contact",
     linkedin: "https://www.linkedin.com/in/shendyeff",
     github: "https://github.com/covryzne",
+    dicoding: "https://www.dicoding.com/users/shendyeff",
     mailTo: "mailto:shendyteuku2@gmail.com",
     cvPdf: "/shendi-teuku-maulana-efendi-cv.pdf",
     footer: "#",

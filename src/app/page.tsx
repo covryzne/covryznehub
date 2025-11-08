@@ -8,6 +8,7 @@ import HeroSection from "@/components/hero-section";
 import ProjectsSection from "@/components/projects-section";
 import SectionDivider from "@/components/section-divider";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { BackToTopButton } from "@/components/back-to-top-button";
 
 export default function Home() {
   return (
@@ -26,6 +27,10 @@ export default function Home() {
       </div>
       {/* Desktop: Theme Toggle */}
       <ThemeToggle className="bg-background hidden sm:fixed sm:bottom-8 sm:right-8 sm:flex" />
+      {/* Back To Top Button (visible di semua layar) */}
+      <div className="bg-background fixed bottom-2 right-3 sm:bottom-2 sm:right-8 flex">
+        <BackToTopButton />
+      </div>
     </>
   );
 }

@@ -146,10 +146,11 @@ export const certificationsData: Certification[] = [
   {
     title: "AI Engineer",
     description:
-      "Professional certification program focused on AI engineering principles, practices, and applications.",
+      "A professional certification program focused on end-to-end AI implementation, covering MLOps, model deployment, and intelligent system development.",
     issuer: "Lintasarta",
     issueDate: "",
-    credentialUrl: "",
+    credentialUrl:
+      "https://drive.google.com/file/d/1sEy1muWoWByrxe1Xa8wpBqM-5s7nNtW6/view?usp=sharing",
     image: "/assets/certificates/laskarai-ai-engineer-thumb.jpg",
     details: [
       "/assets/certificates/laskarai-ai-engineer-thumb.jpg",
@@ -160,10 +161,11 @@ export const certificationsData: Certification[] = [
   {
     title: "Associate Data Scientist BNSP",
     description:
-      "Certification recognizing proficiency in data science concepts, techniques, and applications as per BNSP standards.",
+      "A national competency certification assessing data analysis, machine learning modeling, and result communication skills under BNSP standards.",
     issuer: "Badan Nasional Sertifikasi Profesi (BNSP)",
     issueDate: "",
-    credentialUrl: "",
+    credentialUrl:
+      "https://drive.google.com/file/d/1w1g4nqcaofxtS5NFHhZlsjT3Jd2UrxHx/view?usp=sharing",
     image: "/assets/certificates/associate-data-scientist-bnsp-thumb.jpg",
     details: [
       "/assets/certificates/associate-data-scientist-bnsp-detail.jpg",
@@ -173,20 +175,22 @@ export const certificationsData: Certification[] = [
   {
     title: "Alibaba Cloud Associate Big Data",
     description:
-      "Certification validating foundational knowledge and skills in big data technologies and Alibaba Cloud services.",
+      "A certification validating foundational knowledge of big data technologies and cloud computing within the Alibaba Cloud ecosystem.",
     issuer: "Alibaba Cloud",
     issueDate: "",
     credentialId: "",
-    credentialUrl: "",
+    credentialUrl:
+      "https://edu.alibabacloud.com/clouder/Certificate/search?type=1&num=IACA03240800131291L",
     image: "/assets/certificates/alibaba-big-data-thumb.jpg",
   },
   {
     title: "Machine Learning Engineer",
     description:
-      "Professional certification program focused on machine learning principles, practices, and applications.",
+      "A certification program emphasizing the application of machine learning techniques, from data preprocessing to model development and performance evaluation.",
     issuer: "DBS Bank Indonesia",
     issueDate: "",
-    credentialUrl: "",
+    credentialUrl:
+      "https://drive.google.com/file/d/1XW0s3qkNzvXXP56xt1_Y7aGGjICYBCfq/view?usp=sharing",
     image: "/assets/certificates/expert-ml-engineer-thumb.jpg",
     details: [
       "/assets/certificates/expert-ml-engineer-thumb.jpg",
@@ -196,10 +200,10 @@ export const certificationsData: Certification[] = [
   {
     title: "Dicoding Machine Learning Pemula",
     description:
-      "Professional certification program focused on data analysis principles, practices, and applications.",
+      "An introductory course on machine learning covering fundamental AI concepts, supervised learning, and model implementation using Python.",
     issuer: "Dicoding Indonesia",
     issueDate: "",
-    credentialUrl: "",
+    credentialUrl: "https://www.dicoding.com/certificates/L4PQEY1W2PO1",
     image: "/assets/certificates/dicoding-ml-pemula-thumb.jpg",
     details: [
       "/assets/certificates/dicoding-ml-pemula-thumb.jpg",
@@ -210,10 +214,10 @@ export const certificationsData: Certification[] = [
   {
     title: "Dicoding Pengembangan Machine Learning",
     description:
-      "Professional certification program focused on data analysis principles, practices, and applications.",
+      "An advanced program that explores machine learning model development, algorithm optimization, and performance improvement techniques.",
     issuer: "Dicoding Indonesia",
     issueDate: "",
-    credentialUrl: "",
+    credentialUrl: "https://www.dicoding.com/certificates/GRX53E4G3Z0M",
     image: "/assets/certificates/dicoding-pengembangan-ml-thumb.jpg",
     details: [
       "/assets/certificates/dicoding-pengembangan-ml-thumb.jpg",
@@ -224,10 +228,10 @@ export const certificationsData: Certification[] = [
   {
     title: "Dicoding Machine Learning Terapan",
     description:
-      "Professional certification program focused on data analysis principles, practices, and applications.",
+      "A certification emphasizing the practical implementation of machine learning, including NLP, computer vision, and model deployment.",
     issuer: "Dicoding Indonesia",
     issueDate: "",
-    credentialUrl: "",
+    credentialUrl: "https://www.dicoding.com/certificates/N9ZO91YR0XG5",
     image: "/assets/certificates/dicoding-ml-terapan-thumb.jpg",
     details: [
       "/assets/certificates/dicoding-ml-terapan-thumb.jpg",
@@ -238,10 +242,10 @@ export const certificationsData: Certification[] = [
   {
     title: "Dicoding Membangun Sistem Machine Learning",
     description:
-      "Professional certification program focused on data analysis principles, practices, and applications.",
+      "An advanced certification focused on integrating machine learning models into production systems through APIs and automated pipelines.",
     issuer: "Dicoding Indonesia",
     issueDate: "",
-    credentialUrl: "",
+    credentialUrl: "https://www.dicoding.com/certificates/1RXYE5JJKZVM",
     image: "/assets/certificates/dicoding-msml-thumb.jpg",
     details: [
       "/assets/certificates/dicoding-msml-thumb.jpg",
@@ -251,10 +255,10 @@ export const certificationsData: Certification[] = [
   {
     title: "Dicoding Machine Learning Operations (MLOps)",
     description:
-      "Professional certification program focused on data analysis principles, practices, and applications.",
+      "A professional certification covering the implementation of MLOps for automating pipelines, model deployment, and performance monitoring.",
     issuer: "Dicoding Indonesia",
     issueDate: "",
-    credentialUrl: "",
+    credentialUrl: "https://www.dicoding.com/certificates/NVP75740WXR0",
     image: "/assets/certificates/dicoding-mlops-thumb.jpg",
     details: [
       "/assets/certificates/dicoding-mlops-thumb.jpg",
@@ -266,10 +270,10 @@ export const certificationsData: Certification[] = [
   {
     title: "Dicoding Membangun Proyek Deep Learning Tingkat Mahir",
     description:
-      "Professional certification program focused on data analysis principles, practices, and applications.",
+      "An expert-level certification focusing on deep learning projects using CNNs, RNNs, and transfer learning for advanced AI solutions.",
     issuer: "Dicoding Indonesia",
     issueDate: "",
-    credentialUrl: "",
+    credentialUrl: "https://www.dicoding.com/certificates/2VX35R923PYQ",
     image: "/assets/certificates/dicoding-dltm-thumb.jpg",
     details: [
       "/assets/certificates/dicoding-dltm-thumb.jpg",
@@ -279,10 +283,11 @@ export const certificationsData: Certification[] = [
   {
     title: "Data Scientist TSA Komdigi",
     description:
-      "Professional certification program focused on data science principles, practices, and applications.",
+      "A professional certification program developing skills in data analysis, machine learning, and visualization for data-driven decision-making.",
     issuer: "Komdigi",
     issueDate: "",
-    credentialUrl: "",
+    credentialId: "2009530840-2",
+    credentialUrl: "https://digitalent.komdigi.go.id/cek-sertifikat",
     image: "/assets/certificates/data-scientist-komdigi.jpg",
     details: [
       "/assets/certificates/data-scientist-komdigi.jpg",
@@ -292,10 +297,11 @@ export const certificationsData: Certification[] = [
   {
     title: "Data Analyst GreatEdu Global Mahardika",
     description:
-      "Professional certification program focused on data analysis principles, practices, and applications.",
+      "A certification program focusing on data analysis, SQL, and building interactive dashboards to generate business insights.",
     issuer: "GreatEdu Global Mahardika",
     issueDate: "",
-    credentialUrl: "",
+    credentialUrl:
+      "https://drive.google.com/file/d/1x34Bo0_TuxIEc3j0Rj1wRibEsMCBlSIk/view?usp=sharing",
     image: "/assets/certificates/data-analyst-greatedu-thumb.png",
     details: [
       "/assets/certificates/data-analyst-greatedu-detail.jpg",
@@ -305,10 +311,11 @@ export const certificationsData: Certification[] = [
   {
     title: "ASEAN Data Science Explorer",
     description:
-      "Professional certification program focused on machine learning principles, practices, and applications.",
+      "A regional competition and certification assessing data analysis and storytelling skills using real ASEAN datasets.",
     issuer: "ASEAN Data Science Explorer",
     issueDate: "",
-    credentialUrl: "",
+    credentialUrl:
+      "https://drive.google.com/file/d/1rhjkCjoyTIeNE0TxM30MCkC8a-Xn7fWg/view?usp=sharing",
     image: "/assets/certificates/adse-thumb.jpg",
     details: [
       "/assets/certificates/adse-thumb.jpg",
@@ -318,10 +325,11 @@ export const certificationsData: Certification[] = [
   {
     title: "Database Design and Programming TSA Komdigi",
     description:
-      "Professional certification program focused on database design and programming principles, practices, and applications.",
+      "A certification covering database design principles, normalization, and SQL query implementation for data-driven applications.",
     issuer: "Komdigi",
     issueDate: "",
-    credentialUrl: "",
+    credentialId: "2005662840-582",
+    credentialUrl: "https://digitalent.komdigi.go.id/cek-sertifikat",
     image: "/assets/certificates/database-design-programming-sql-thumb.jpg",
     details: [
       "/assets/certificates/database-design-programming-sql-thumb.jpg",
@@ -331,10 +339,11 @@ export const certificationsData: Certification[] = [
   {
     title: "Data Driven Kesiapsigaan Bencana TSA Komdigi",
     description:
-      "Professional certification program focused on data-driven disaster preparedness.",
+      "A certification focusing on applying data science for disaster preparedness and data-driven decision-making in emergency management.",
     issuer: "Komdigi",
     issueDate: "",
-    credentialUrl: "",
+    credentialId: "2007380840-21",
+    credentialUrl: "https://digitalent.komdigi.go.id/cek-sertifikat",
     image: "/assets/certificates/data-driven-komdigi-thumb.jpg",
     details: [
       "/assets/certificates/data-driven-komdigi-thumb.jpg",
@@ -345,13 +354,18 @@ export const certificationsData: Certification[] = [
 ];
 
 export const skillsData: Skill[] = [
-  { name: "Sass", icon: <Icons.sass className="size-12" /> },
-  { name: "Tailwind", icon: <Icons.tailwind className="size-12" /> },
-  { name: "JavaScript", icon: <Icons.javascript className="size-12" /> },
-  { name: "TypeScript", icon: <Icons.typescript className="size-12" /> },
-  { name: "React", icon: <Icons.react className="size-12" /> },
-  { name: "NextJS", icon: <Icons.nextjs className="size-12" /> },
-  { name: "NestJS", icon: <Icons.nestjs className="size-12" /> },
-  { name: "Prisma", icon: <Icons.prisma className="size-12" /> },
+  { name: "Tensorflow", icon: <Icons.tensorflow className="size-12" /> },
+  { name: "Pytorch", icon: <Icons.pytorch className="size-12" /> },
+  { name: "Onnx", icon: <Icons.onnx className="size-12" /> },
+  { name: "Mlflow", icon: <Icons.mlflow className="size-12" /> },
+  { name: "PostgreSQL", icon: <Icons.postgresql className="size-12" /> },
+  { name: "FastAPI", icon: <Icons.fastapi className="size-12" /> },
+  { name: "Matplotlib", icon: <Icons.matplotlib className="size-12" /> },
+  { name: "Prometheus", icon: <Icons.prometheus className="size-12" /> },
+  { name: "Keras", icon: <Icons.keras className="size-12" /> },
+  { name: "Grafana", icon: <Icons.grafana className="size-12" /> },
   { name: "Docker", icon: <Icons.docker className="size-12" /> },
+  { name: "GitHub Actions", icon: <Icons.githubactions className="size-12" /> },
+  { name: "Tailwind", icon: <Icons.tailwind className="size-12" /> },
+  { name: "NextJS", icon: <Icons.nextjs className="size-12" /> },
 ];

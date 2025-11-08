@@ -9,6 +9,7 @@ import SectionHeading from "./section-heading";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
 import Image from "next/image";
+import { toast } from "sonner";
 
 const fadeInAnimationVariants = {
   initial: { opacity: 0, y: 100 },
@@ -80,13 +81,39 @@ export default function CertificationsSection() {
                 <Button variant="outline" onClick={() => setSelectedCert(cert)}>
                   View
                 </Button>
-                <Link
-                  href={cert.credentialUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Button
+                  variant="default"
+                  onClick={() => {
+                    if (
+                      cert.credentialUrl.includes("digitalent.komdigi.go.id") &&
+                      cert.credentialId
+                    ) {
+                      toast.success("Credential ID copied!", {
+                        description: cert.credentialId,
+                        action: {
+                          label: "OK",
+                          onClick: () => {
+                            navigator.clipboard.writeText(cert.credentialId!);
+                            window.open(
+                              cert.credentialUrl,
+                              "_blank",
+                              "noopener,noreferrer"
+                            );
+                          },
+                        },
+                        duration: 10000, // biar ga langsung hilang
+                      });
+                    } else {
+                      window.open(
+                        cert.credentialUrl,
+                        "_blank",
+                        "noopener,noreferrer"
+                      );
+                    }
+                  }}
                 >
-                  <Button variant="default">Verify</Button>
-                </Link>
+                  Verify
+                </Button>
               </div>
             </motion.div>
           )

@@ -163,6 +163,15 @@ export default function HeroSection() {
             <Icons.github className="size-5" />
           </Link>
         </Button>
+        <Button variant="outline" size="lg" className="hidden sm:flex" asChild>
+          <a
+            href={siteConfig.links.dicoding}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Dicoding
+          </a>
+        </Button>
       </motion.div>
     </section>
   );
