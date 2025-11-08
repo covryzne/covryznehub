@@ -22,7 +22,7 @@ export default function AboutSection() {
       <SectionHeading heading="About Me" />
       <div className="-mt-5 max-w-2xl text-center leading-7">
         <p className="mb-4">
-          Fresh Graduate in Computer Science specializing in Artificial
+          Fresh Graduate in Informatics Engineering specializing in Artificial
           Intelligence, Machine Learning, and Data Science. Currently working as
           an External Code Reviewer at Dicoding Indonesia, reviewing and
           improving ML and Data Science projects.
