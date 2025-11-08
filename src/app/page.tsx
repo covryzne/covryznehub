@@ -27,7 +27,7 @@ export default function Home() {
       </div>
       {/* Desktop: Theme Toggle */}
       <ThemeToggle className="bg-background hidden sm:fixed sm:bottom-8 sm:right-8 sm:flex" />
-      {/* Back To Top Button (visible di semua layar) */}
+      {/* Back To Top Button */}
       <div className="bg-background fixed bottom-2 right-3 sm:bottom-2 sm:right-8 flex">
         <BackToTopButton />
       </div>

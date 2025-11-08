@@ -133,45 +133,38 @@ export default function HeroSection() {
         transition={{
           delay: 0.1,
         }}
-        className="flex flex-row gap-2 items-center"
+        className="flex flex-col sm:flex-row gap-2 items-center"
       >
         <Button asChild size="lg">
           <Link href={siteConfig.links.contactForm}>
             Get in touch <Icons.arrowRight className="ml-2 size-4" />
           </Link>
         </Button>
-        <Button variant="outline" size="lg" className="hidden sm:flex" asChild>
+        <Button variant="outline" size="lg" asChild>
           <a href={siteConfig.links.cvPdf} download>
             Download CV <Icons.download className="ml-2 size-4" />
           </a>
         </Button>
-        <Button variant="outline" size="icon" asChild>
-          <Link
-            href={siteConfig.links.linkedin}
-            aria-label="Linkedin"
-            target="_blank"
-          >
-            <Icons.linkedin className="size-5" />
-          </Link>
-        </Button>
-        <Button variant="outline" size="icon" asChild>
-          <Link
-            href={siteConfig.links.github}
-            aria-label="Github"
-            target="_blank"
-          >
-            <Icons.github className="size-5" />
-          </Link>
-        </Button>
-        <Button variant="outline" size="lg" className="hidden sm:flex" asChild>
-          <a
-            href={siteConfig.links.dicoding}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Dicoding
-          </a>
-        </Button>
+        <div className="flex flex-row gap-2">
+          <Button variant="outline" size="icon" asChild>
+            <Link
+              href={siteConfig.links.linkedin}
+              aria-label="Linkedin"
+              target="_blank"
+            >
+              <Icons.linkedin className="size-5" />
+            </Link>
+          </Button>
+          <Button variant="outline" size="icon" asChild>
+            <Link
+              href={siteConfig.links.github}
+              aria-label="Github"
+              target="_blank"
+            >
+              <Icons.github className="size-5" />
+            </Link>
+          </Button>
+        </div>
       </motion.div>
     </section>
   );
