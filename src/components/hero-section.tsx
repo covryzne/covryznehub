@@ -10,7 +10,12 @@ import { Button } from "./ui/button";
 import { GridPattern } from "./ui/grid-pattern";
 import { useEffect, useState } from "react";
 
-const typewriterWords = ["AI Engineer", "Code Reviewer", "Long Life Learner"];
+const typewriterWords = [
+  "AI Engineer",
+  "Code Reviewer",
+  "Data Enthusiast",
+  "Long Life Learner",
+];
 
 function useTypewriter(words: string[], speed = 80, pause = 1200) {
   const [wordIndex, setWordIndex] = useState(0);

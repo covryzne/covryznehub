@@ -30,38 +30,106 @@ export const navLinks: NavLink[] = [
 
 export const projectsData: Project[] = [
   {
-    video: "assets/videos/chat-collector-demo.mp4",
-    title: "Chat Collector Pro",
+    image: "assets/projects/images/tb-detector.png",
+    title: "TB Detector",
     description:
-      "A comprehensive chat collector application built with React and Node.js, featuring real-time collaboration, project tracking, and team management capabilities.",
+      "TB Detector is a Deep Learning–based application that leverages the DenseNet-121 architecture to detect tuberculosis from chest X-Ray images with high accuracy. The model is optimized using ONNX Runtime and seamlessly integrated into a full-stack web system for practical deployment.",
     technologies: [
-      "React.js",
-      "Node.js",
-      "MongoDB",
-      "Socket.io",
-      "Material-UI",
+      "DenseNet-121",
+      "ONNX",
+      "Next.js",
+      "TypeScript",
+      "Tailwind",
+      "FastAPI",
+      "PostgreSQL",
+      "Alembic",
+      "JWT Authentication",
     ],
     links: {
       preview: "#",
-      github: "#",
+      github: "https://github.com/covryzne/tbc-detection-skripsi",
       githubApi: "#",
     },
   },
   {
-    video: "assets/videos/magic-bento-demo.mp4",
-    title: "Magic Bento Box",
+    image: "assets/projects/images/netflix-recommender-system.jpg",
+    title: "Netflix Recommender System",
     description:
-      "Magic Bento Box is a platform for creating and sharing magic recipes that can be used in the game.",
+      "A movie recommendation system that combines collaborative filtering and content-based features to deliver personalized suggestions. Includes evaluation pipelines (RMSE, Precision@K), an API endpoint for serving recommendations, and a demo UI for exploring results.",
     technologies: [
-      "Next.js",
-      "TypeScript",
-      "Express.js",
-      "PostgreSQL",
-      "Stripe",
+      "Python",
+      "TensorFlow",
+      "Keras",
+      "Pandas",
+      "Numpy",
+      "Scikit-learn",
+      "Content-Based Filtering",
+      "Neural Collaborative Filtering",
     ],
     links: {
       preview: "#",
-      github: "#",
+      github:
+        "https://github.com/covryzne/learn-dicoding/tree/main/Submission/Netflix%20Recommender%20System/Renew",
+      githubApi: "#",
+    },
+  },
+  {
+    image: "assets/projects/images/grab-sentiment-analyze.jpg",
+    title: "GrabInsight: Sentiment Analysis on Ride-Hailing User Reviews",
+    description:
+      "GrabInsight is a Natural Language Processing (NLP) project that analyzes user reviews from the Grab application to classify sentiments into positive and negative categories. By leveraging text preprocessing, TF-IDF vectorization, and machine learning classifiers, the system provides valuable insights into customer satisfaction and service quality. This project demonstrates end-to-end skills in data collection, text analytics, model building, and evaluation, highlighting the ability to transform raw feedback into actionable business intelligence.",
+    technologies: [
+      "Google Play Scraper",
+      "Pandas",
+      "Regex",
+      "NLTK",
+      "Sastrawi",
+      "Lexicon-Based",
+      "TF-IDF",
+    ],
+    links: {
+      preview: "#",
+      github:
+        "https://github.com/covryzne/learn-dicoding/tree/main/Submission/Sentimen%20Analysis%20Grab",
+      githubApi: "#",
+    },
+  },
+  {
+    image: "assets/projects/images/atcs-kota-madiun.png",
+    title: "ATCS Kota Madiun",
+    description:
+      "GoldSight is an interactive web platform designed to help investors analyze and predict gold price movements. Leveraging Deep Learning (GRU) for time-series forecasting on historical data since 2000, the system provides accurate predictions up to 90 days ahead. The application also features market trend visualizations, a responsive dashboard, and educational insights, enabling users to make smarter, data-driven investment decisions.",
+    technologies: [
+      "TensorFlow",
+      "Streamlit",
+      "Pandas",
+      "Plotly",
+      "Joblib",
+      "Kaggle",
+    ],
+    links: {
+      preview: "#",
+      github: "https://github.com/covryzne/atcs-kota-madiun",
+      githubApi: "#",
+    },
+  },
+  {
+    image: "assets/projects/images/gold-sight.png",
+    title:
+      "GoldSight: Intelligent Gold Price Prediction & Investment Dashboard",
+    description:
+      "GoldSight is an interactive web platform designed to help investors analyze and predict gold price movements. Leveraging Deep Learning (GRU) for time-series forecasting on historical data since 2000, the system provides accurate predictions up to 90 days ahead. The application also features market trend visualizations, a responsive dashboard, and educational insights, enabling users to make smarter, data-driven investment decisions.",
+    technologies: [
+      "TensorFlow",
+      "Streamlit",
+      "Pandas",
+      "Plotly",
+      "Joblib",
+      "Kaggle",
+    ],
+    links: {
+      preview: "#",
+      github: "https://github.com/covryzne/capstone-goldsight",
       githubApi: "#",
     },
   },
@@ -154,7 +222,7 @@ export const certificationsData: Certification[] = [
     image: "/assets/certificates/laskarai-ai-engineer-thumb.jpg",
     details: [
       "/assets/certificates/laskarai-ai-engineer-thumb.jpg",
-      "/assets/certificates/laskarai-ai-engineer-detail1.jpg",
+      "/assets/certificates/laskarai-ai-engineer-detail.jpg",
       "/assets/certificates/laskarai-ai-engineer-detail2.jpg",
     ],
   },

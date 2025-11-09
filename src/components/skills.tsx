@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { skillsData } from '@/lib/data'
+import { motion } from "framer-motion";
+import { skillsData } from "@/lib/data";
 
 const fadeInAnimationVariants = {
   initial: {
@@ -15,7 +15,7 @@ const fadeInAnimationVariants = {
       delay: 0.05 * index,
     },
   }),
-}
+};
 
 export default function Skills() {
   return (
@@ -35,5 +35,5 @@ export default function Skills() {
         </motion.div>
       ))}
     </div>
-  )
+  );
 }

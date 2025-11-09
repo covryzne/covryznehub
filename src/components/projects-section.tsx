@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import SectionHeading from "./section-heading";
 import { Badge } from "./ui/badge";
+import { useState } from "react";
+import { Button } from "./ui/button";
 
 const fadeInAnimationVariants = {
   initial: {
@@ -23,6 +25,15 @@ const fadeInAnimationVariants = {
 
 export default function ProjectsSection() {
   const { ref } = useSectionInView("Projects");
+  const [showAll, setShowAll] = useState(false);
+  const [expanded, setExpanded] = useState<{ [key: number]: boolean }>({});
+
+  // Tampilkan 4 project saja jika belum showAll
+  const visibleProjects = showAll ? projectsData : projectsData.slice(0, 4);
+
+  // Helper untuk memotong deskripsi
+  const getShortDesc = (desc: string, max = 120) =>
+    desc.length > max ? desc.slice(0, max) + "..." : desc;
 
   return (
     <section ref={ref} id="projects" className="my-10 scroll-mt-28 md:mb-20">
@@ -39,7 +50,7 @@ export default function ProjectsSection() {
       </motion.div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {projectsData.map((data, index) => (
+        {visibleProjects.map((data, index) => (
           <motion.div
             key={data.title}
             variants={fadeInAnimationVariants}
@@ -62,16 +73,16 @@ export default function ProjectsSection() {
                   loop
                   muted
                   playsInline
-                  className="pointer-events-none mx-auto h-40 w-full object-cover object-top"
+                  className="pointer-events-none mx-auto h-50 w-full object-cover object-top"
                 />
               ) : data.image ? (
                 <img
                   src={data.image}
                   alt={data.title}
-                  className="mx-auto h-40 w-full object-cover object-top"
+                  className="mx-auto h-50 w-full object-cover object-top"
                 />
               ) : (
-                <div className="flex h-40 w-full items-center justify-center bg-gray-100 text-gray-500">
+                <div className="flex h-50 w-full items-center justify-center bg-gray-100 text-gray-500">
                   No preview available
                 </div>
               )}
@@ -79,7 +90,19 @@ export default function ProjectsSection() {
 
             <h3 className="mt-4 text-xl font-medium">{data.title}</h3>
             <p className="text-muted-foreground mb-4 mt-1">
-              {data.description}
+              {expanded[index] || data.description.length <= 120
+                ? data.description
+                : getShortDesc(data.description)}
+              {data.description.length > 120 && (
+                <button
+                  className="ml-2 text-xs underline text-primary hover:text-primary/80"
+                  onClick={() =>
+                    setExpanded((prev) => ({ ...prev, [index]: !prev[index] }))
+                  }
+                >
+                  {expanded[index] ? "Less" : "More"}
+                </button>
+              )}
             </p>
 
             <div className="flex flex-wrap gap-2">
@@ -92,6 +115,20 @@ export default function ProjectsSection() {
           </motion.div>
         ))}
       </div>
+      {/* Load All / Hide Button */}
+      {projectsData.length > 4 && (
+        <div className="flex justify-center mt-6">
+          {!showAll ? (
+            <Button variant="default" onClick={() => setShowAll(true)}>
+              {`Show All (${projectsData.length})`}
+            </Button>
+          ) : (
+            <Button variant="outline" onClick={() => setShowAll(false)}>
+              Hide
+            </Button>
+          )}
+        </div>
+      )}
     </section>
   );
 }
