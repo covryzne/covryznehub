@@ -2,13 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 import ragProfile from "@/lib/rag-profile.json";
 
-/* ======================================================
-   ✅ HELPER: dapatkan context relevan berdasarkan pertanyaan
-   ====================================================== */
 async function getRelevantContext(question: string): Promise<string> {
   const q = question.toLowerCase();
 
-  /* === 1. IDENTITAS DASAR === */
   if (
     q.includes("siapa shendi") ||
     (q.includes("siapa") && q.includes("shendi"))
@@ -24,7 +20,6 @@ async function getRelevantContext(question: string): Promise<string> {
   if (q.includes("tentang") || q.includes("about"))
     return `Tentang Shendi: ${ragProfile.about}`;
 
-  /* === 2. CONTACT INFO === */
   if (
     q.includes("kontak") ||
     q.includes("email") ||
@@ -36,7 +31,6 @@ async function getRelevantContext(question: string): Promise<string> {
     return `Berikut kontak Shendi:\n- Email: ${email}\n- Telepon: ${phone}\n- LinkedIn: ${linkedin}\n- GitHub: ${github}`;
   }
 
-  /* === 3. SKILLS === */
   if (
     q.includes("skill") ||
     q.includes("keahlian") ||
@@ -51,7 +45,6 @@ async function getRelevantContext(question: string): Promise<string> {
     return `Beberapa skill yang dikuasai Shendi meliputi: ${skills}`;
   }
 
-  /* === 4. PENGALAMAN === */
   if (
     q.includes("pengalaman") ||
     q.includes("experience") ||
@@ -65,52 +58,60 @@ async function getRelevantContext(question: string): Promise<string> {
     }
     return (
       "Beberapa pengalaman Shendi:\n" +
-      ragProfile.experience
+      (
+        ragProfile.experience as {
+          title: string;
+          company: string;
+          period: string;
+          description: string;
+        }[]
+      )
         .map(
-          (e: any) =>
-            `- ${e.title} di ${e.company} (${e.period}): ${e.description}`
+          (e) => `- ${e.title} di ${e.company} (${e.period}): ${e.description}`
         )
         .join("\n")
     );
   }
 
-  /* === 5. PROJECTS === */
-  // Specific projects by keyword
-  if (q.includes("tbc") || q.includes("tb detector"))
-    return `Project TB Detector: ${
-      ragProfile.projects.find((p: any) => p.title.toLowerCase().includes("tb"))
-        ?.description
-    }`;
+  if (q.includes("tbc") || q.includes("tb detector")) {
+    const tb = (
+      ragProfile.projects as { title: string; description: string }[]
+    ).find((p) => p.title.toLowerCase().includes("tb"));
+    return `Project TB Detector: ${tb?.description ?? "Tidak ada deskripsi."}`;
+  }
 
-  if (q.includes("sentimen") || q.includes("sentiment"))
-    return `Project Sentiment Analysis: ${
-      ragProfile.projects.find(
-        (p: any) =>
-          p.title.toLowerCase().includes("sentimen") ||
-          p.title.toLowerCase().includes("sentiment")
-      )?.description
-    }`;
+  if (q.includes("sentimen") || q.includes("sentiment")) {
+    const sentimen = (
+      ragProfile.projects as { title: string; description: string }[]
+    ).find(
+      (p) =>
+        p.title.toLowerCase().includes("sentimen") ||
+        p.title.toLowerCase().includes("sentiment")
+    );
+    return `Project Sentiment Analysis: ${sentimen?.description ?? "Tidak ada deskripsi."}`;
+  }
 
-  if (q.includes("stunting") || q.includes("serasi"))
-    return `Project SERASI Stunting Infant: ${
-      ragProfile.projects.find((p: any) =>
-        p.title.toLowerCase().includes("stunting")
-      )?.description
-    }`;
+  if (q.includes("stunting") || q.includes("serasi")) {
+    const stunting = (
+      ragProfile.projects as { title: string; description: string }[]
+    ).find((p) => p.title.toLowerCase().includes("stunting"));
+    return `Project SERASI Stunting Infant: ${stunting?.description ?? "Tidak ada deskripsi."}`;
+  }
 
-  if (q.includes("netflix") || q.includes("rekomendasi"))
-    return `Project Netflix Recommender: ${
-      ragProfile.projects.find((p: any) =>
-        p.title.toLowerCase().includes("netflix")
-      )?.description
-    }`;
+  if (q.includes("netflix") || q.includes("rekomendasi")) {
+    const netflix = (
+      ragProfile.projects as { title: string; description: string }[]
+    ).find((p) => p.title.toLowerCase().includes("netflix"));
+    return `Project Netflix Recommender: ${netflix?.description ?? "Tidak ada deskripsi."}`;
+  }
 
-  // Project terbaru
   if (
     q.includes("project") &&
     (q.includes("terbaru") || q.includes("latest"))
   ) {
-    const latest = ragProfile.projects?.[0];
+    const latest = (
+      ragProfile.projects as { title: string; description: string }[]
+    )[0];
     if (latest)
       return `Project terbaru: ${latest.title} — ${latest.description}`;
   }
@@ -119,13 +120,12 @@ async function getRelevantContext(question: string): Promise<string> {
   if (q.includes("project") || q.includes("proyek")) {
     return (
       "Beberapa project yang pernah dikerjakan Shendi:\n" +
-      ragProfile.projects
-        .map((p: any) => `- ${p.title}: ${p.description}`)
+      (ragProfile.projects as { title: string; description: string }[])
+        .map((p) => `- ${p.title}: ${p.description}`)
         .join("\n")
     );
   }
 
-  /* === 6. SERTIFIKASI === */
   if (
     q.includes("sertifikat") ||
     q.includes("sertifikasi") ||
@@ -133,13 +133,18 @@ async function getRelevantContext(question: string): Promise<string> {
   ) {
     return (
       "Sertifikasi yang dimiliki Shendi:\n" +
-      ragProfile.certifications
-        .map((c: any) => `- ${c.title} (${c.issuer}): ${c.description}`)
+      (
+        ragProfile.certifications as {
+          title: string;
+          issuer: string;
+          description: string;
+        }[]
+      )
+        .map((c) => `- ${c.title} (${c.issuer}): ${c.description}`)
         .join("\n")
     );
   }
 
-  /* === 7. PENDIDIKAN === */
   if (
     q.includes("pendidikan") ||
     q.includes("education") ||
@@ -148,8 +153,14 @@ async function getRelevantContext(question: string): Promise<string> {
   ) {
     return (
       "Riwayat pendidikan Shendi:\n" +
-      ragProfile.education
-        .map((e: any) => `- ${e.school} (${e.period}): ${e.degree}`)
+      (
+        ragProfile.education as {
+          school: string;
+          period: string;
+          degree: string;
+        }[]
+      )
+        .map((e) => `- ${e.school} (${e.period}): ${e.degree}`)
         .join("\n")
     );
   }
@@ -167,9 +178,6 @@ async function getRelevantContext(question: string): Promise<string> {
   return `Maaf, aku gak nemu info spesifik tentang itu. Tapi berikut ringkasan profil Shendi:\n${summary}`;
 }
 
-/* ======================================================
-   ✅ HELPER: kirim pertanyaan ke Gemini
-   ====================================================== */
 async function askGemini(question: string, context: string): Promise<string> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) return "API belum di-setup di environment variable.";
@@ -203,9 +211,6 @@ Pertanyaan: ${question}`,
   }
 }
 
-/* ======================================================
-   ✅ ROUTE HANDLER
-   ====================================================== */
 export async function POST(req: NextRequest) {
   try {
     const { question } = await req.json();
