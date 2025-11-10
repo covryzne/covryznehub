@@ -8,7 +8,6 @@ export default function Footer() {
       <Button variant="link" className="text-muted-foreground p-0 font-medium">
         <a href={siteConfig.links.footer}>{siteConfig.creator}</a>
       </Button>
-      . All rights reserved.
     </footer>
   );
 }

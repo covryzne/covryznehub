@@ -16,7 +16,7 @@ import { ChatAssistantButton } from "@/components/chat-assitant";
 export default function Home() {
   return (
     <>
-      <div className="max-w-3xl mx-auto flex flex-col items-center">
+      <div className="max-w-3xl mx-auto px-6 sm:px-0 flex flex flex-col items-center">
         <Header />
         <HeroSection />
         <AboutSection />
@@ -29,7 +29,7 @@ export default function Home() {
         <Footer />
       </div>
       {/* Desktop: Theme Toggle */}
-      <ThemeToggle className="bg-background hidden sm:fixed sm:bottom-12 sm:right-8 flex" />
+      <ThemeToggle className="bg-background hidden sm:fixed sm:bottom-12 sm:right-8 sm-flex" />
       {/* Back To Top Button */}
       <div className="bg-background fixed bottom-2 right-3 sm:bottom-2 sm:right-8 flex">
         <BackToTopButton />
