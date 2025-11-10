@@ -133,6 +133,28 @@ export const projectsData: Project[] = [
       githubApi: "#",
     },
   },
+  {
+    image: "assets/projects/images/serasi-stunting-infant.jpg",
+    title: "SERASI Stunting Infant",
+    description:
+      "SERASI Stunting Invant is a collaborative project developed during the MSIB internship at KOMDIGI, in partnership with RSUD Dr. Soetomo. The project brings together frontend, backend, and data science teams to build a predictive system for identifying stunting risk in infants. In the data science team, I focused on developing and optimizing a machine learning model to predict infant stunting based on health and nutritional data, supporting early detection and preventive healthcare decisions.",
+    technologies: [
+      "Python",
+      "Scikit-learn",
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "FastAPI",
+      "PostgreSQL",
+      "Streamlit",
+      "Team Collaboration",
+    ],
+    links: {
+      preview: "#",
+      github: "#",
+      githubApi: "#",
+    },
+  },
 ] as const;
 
 export const experiencesData: Experience[] = [

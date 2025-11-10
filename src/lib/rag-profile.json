@@ -1,0 +1,255 @@
+{
+  "name": "Shendi Teuku Maulana Efendi",
+  "role": "AI Engineer | Code Reviewer | Long Life Learner",
+  "location": "Madiun, Jawa Timur, Indonesia",
+  "contact": {
+    "email": "shendyteuku2@gmail.com",
+    "phone": "+6289514851100",
+    "linkedin": "https://www.linkedin.com/in/shendyeff",
+    "github": "https://github.com/covryzne"
+  },
+  "about": "Fresh Graduate in Informatics Engineering with strong expertise in Artificial Intelligence, Machine Learning, and Data Science. Experienced in developing end-to-end MLOps pipelines, model deployment, and intelligent data systems. Passionate about crafting AI-driven solutions that bridge data, engineering, and innovation.",
+  "skills": {
+    "core": [
+      "TensorFlow",
+      "PyTorch",
+      "ONNX",
+      "MLflow",
+      "FastAPI",
+      "PostgreSQL",
+      "Docker",
+      "Prometheus",
+      "Grafana",
+      "GitHub Actions",
+      "Next.js",
+      "Tailwind CSS"
+    ],
+    "technical": [
+      "Machine Learning",
+      "Deep Learning",
+      "MLOps",
+      "Data Science",
+      "Model Deployment",
+      "Experiment Tracking",
+      "Time Series Forecasting",
+      "NLP (Natural Language Processing)",
+      "Computer Vision"
+    ],
+    "soft": [
+      "Critical Thinking",
+      "Analytical Problem Solving",
+      "Collaboration",
+      "Communication",
+      "Continuous Learning",
+      "Growth Mindset",
+      "Adaptability",
+      "Time Management"
+    ]
+  },
+  "experience": [
+    {
+      "title": "Code Reviewer",
+      "company": "Dicoding Indonesia",
+      "period": "Aug 2025 - Present",
+      "description": "Served as an External Code Reviewer for Machine Learning and Data Science submissions, reviewing over 220 projects with an average rating of 4.99/5.00. Provided detailed feedback on code structure, modeling approaches, and clean code implementation. Contributed to 130+ forum discussions and verified learner solutions.",
+      "technologies": [
+        "Python",
+        "TensorFlow",
+        "Scikit-learn",
+        "Docker",
+        "MLflow",
+        "GitHub Actions"
+      ]
+    },
+    {
+      "title": "AI Engineer Intern",
+      "company": "Lintasarta (Laskar AI x NVIDIA)",
+      "period": "Feb 2025 - Jun 2025",
+      "description": "Implemented an end-to-end MLOps pipeline for student performance prediction, automating ML workflows using GitHub Actions. Integrated MLflow for experiment tracking, deployed models with Docker, and built real-time monitoring dashboards using Prometheus and Grafana. Developed GoldSight, a GRU-based gold price prediction system achieving R² = 0.9971 and MAPE = 0.62%, integrated with news sentiment analysis and deployed via Streamlit.",
+      "technologies": [
+        "Python",
+        "TensorFlow",
+        "MLflow",
+        "Docker",
+        "FastAPI",
+        "Prometheus",
+        "Grafana",
+        "GitHub Actions"
+      ]
+    },
+    {
+      "title": "Data Scientist Intern",
+      "company": "Kominfo x RSUD Dr. Soetomo (MSIB 7)",
+      "period": "Aug 2024 - Dec 2024",
+      "description": "Built risk classification models for stunting prediction in low birth weight and premature infants using Random Forest, Logistic Regression, and XGBoost. Conducted EDA, feature selection, and statistical analysis. Addressed data imbalance using SMOTE and evaluated models using ROC-AUC, Sensitivity, and Specificity.",
+      "technologies": [
+        "Python",
+        "Pandas",
+        "Scikit-learn",
+        "XGBoost",
+        "PostgreSQL"
+      ]
+    },
+    {
+      "title": "Machine Learning Engineer Intern",
+      "company": "DBS Bank Indonesia (DBS Foundation Coding Camp)",
+      "period": "May 2024 - Oct 2024",
+      "description": "Developed an end-to-end sarcasm detection pipeline using TensorFlow Extended (TFX). Implemented data ingestion, validation, and feature engineering with TF Transform, model training with Keras, and automated evaluation with TensorFlow Model Analysis. Performed hyperparameter tuning using KerasTuner.",
+      "technologies": [
+        "TensorFlow",
+        "Keras",
+        "TFX",
+        "KerasTuner",
+        "TFMA",
+        "Docker"
+      ]
+    },
+    {
+      "title": "Data Analyst Intern",
+      "company": "PT GreatEdu Global Mahardika (MSIB 5)",
+      "period": "Aug 2023 - Dec 2023",
+      "description": "Analyzed Indonesia’s air quality data using K-Means Clustering and Decision Tree Regression. Identified key pollution patterns and trends and visualized insights through Looker Studio dashboards for policy recommendations.",
+      "technologies": [
+        "Python",
+        "Pandas",
+        "Scikit-learn",
+        "Decision Tree",
+        "K-Means",
+        "Looker Studio"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "TB Detector",
+      "description": "Deep Learning–based web application leveraging DenseNet-121 to detect Tuberculosis from chest X-ray images. Optimized using ONNX Runtime and integrated into a full-stack web system built with Next.js and FastAPI.",
+      "technologies": [
+        "DenseNet-121",
+        "ONNX",
+        "Next.js",
+        "TypeScript",
+        "Tailwind",
+        "FastAPI",
+        "PostgreSQL",
+        "Alembic",
+        "JWT Authentication"
+      ]
+    },
+    {
+      "title": "Netflix Recommender System",
+      "description": "A hybrid movie recommendation system combining collaborative filtering and content-based features. Features evaluation metrics such as RMSE and Precision@K, API serving, and demo UI for recommendations.",
+      "technologies": [
+        "Python",
+        "TensorFlow",
+        "Keras",
+        "Scikit-learn",
+        "Pandas",
+        "Neural Collaborative Filtering"
+      ]
+    },
+    {
+      "title": "GrabInsight – Sentiment Analysis on Ride-Hailing User Reviews",
+      "description": "An NLP project analyzing Grab user reviews to classify sentiments using TF-IDF, NLTK, and Lexicon-based methods. Provided business insights on user satisfaction and service improvement.",
+      "technologies": [
+        "Google Play Scraper",
+        "Pandas",
+        "Regex",
+        "NLTK",
+        "Sastrawi",
+        "TF-IDF",
+        "Lexicon-Based"
+      ]
+    },
+    {
+      "title": "GoldSight – Intelligent Gold Price Prediction Dashboard",
+      "description": "Interactive web platform for gold price forecasting using GRU neural networks and news sentiment analysis. Provides 90-day predictions with visualization dashboards and investment insights.",
+      "technologies": [
+        "TensorFlow",
+        "Streamlit",
+        "Pandas",
+        "Plotly",
+        "Joblib",
+        "Kaggle"
+      ]
+    },
+    {
+      "title": "SERASI Stunting Infant",
+      "description": "Collaborative project during MSIB at KOMDIGI in partnership with RSUD Dr. Soetomo. Developed machine learning models for predicting stunting risk in infants using clinical and health data.",
+      "technologies": [
+        "Python",
+        "Scikit-learn",
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "FastAPI",
+        "PostgreSQL",
+        "Streamlit"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "title": "AI Engineer",
+      "issuer": "Lintasarta",
+      "description": "Professional certification focusing on end-to-end AI implementation, MLOps, and model deployment."
+    },
+    {
+      "title": "Associate Data Scientist BNSP",
+      "issuer": "Badan Nasional Sertifikasi Profesi (BNSP)",
+      "description": "National competency certification covering data analysis, ML modeling, and data-driven decision-making."
+    },
+    {
+      "title": "Alibaba Cloud Associate Big Data",
+      "issuer": "Alibaba Cloud",
+      "description": "Certification validating cloud-based big data proficiency in Alibaba Cloud’s ecosystem such as MaxCompute, DataWorks, and Quick BI."
+    },
+    {
+      "title": "Machine Learning Engineer (DBS Foundation)",
+      "issuer": "DBS Bank Indonesia",
+      "description": "Certification emphasizing ML pipeline building, model tuning, and production deployment."
+    },
+    {
+      "title": "Dicoding Machine Learning Series",
+      "issuer": "Dicoding Indonesia",
+      "description": "Comprehensive ML certification path covering beginner to advanced topics including applied ML, deep learning, and MLOps."
+    },
+    {
+      "title": "Data Scientist TSA Komdigi",
+      "issuer": "Komdigi",
+      "description": "Certification program on data analysis, machine learning, and visualization for data-driven decision-making."
+    },
+    {
+      "title": "Data Analyst GreatEdu Global Mahardika",
+      "issuer": "PT GreatEdu Global Mahardika",
+      "description": "Certification focusing on data analysis, SQL, and dashboard creation for actionable business insights."
+    },
+    {
+      "title": "ASEAN Data Science Explorer",
+      "issuer": "ASEAN Foundation",
+      "description": "Regional competition and certification assessing data analysis and storytelling skills using real ASEAN datasets."
+    },
+    {
+      "title": "Database Design and Programming TSA Komdigi",
+      "issuer": "Komdigi",
+      "description": "Certification covering database design, normalization, and SQL implementation for data-driven applications."
+    },
+    {
+      "title": "Data Driven Kesiapsigaan Bencana TSA Komdigi",
+      "issuer": "Komdigi",
+      "description": "Certification focusing on applying data science for disaster preparedness and data-driven decision-making."
+    }
+  ],
+  "education": [
+    {
+      "school": "Universitas PGRI Madiun",
+      "degree": "Bachelor of Informatics Engineering",
+      "period": "Sep 2021 - Aug 2025",
+      "gpa": "3.87 / 4.00"
+    },
+    {
+      "school": "SMAN 2 Madiun",
+      "degree": "Natural Science",
+      "period": "2017 - 2020"
+    }
+  ]
+}
