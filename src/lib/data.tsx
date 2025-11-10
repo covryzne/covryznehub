@@ -380,7 +380,7 @@ export const certificationsData: Certification[] = [
     credentialUrl: "https://digitalent.komdigi.go.id/cek-sertifikat",
     image: "/assets/certificates/data-scientist-komdigi.jpg",
     details: [
-      "/assets/certificates/data-scientist-komdigi.jpg",
+      "/assets/certificates/data-scientist-komdigi-thumb.jpg",
       "/assets/certificates/data-scientist-komdigi-detail.jpg",
     ],
   },
