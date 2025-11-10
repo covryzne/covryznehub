@@ -378,7 +378,7 @@ export const certificationsData: Certification[] = [
     issueDate: "",
     credentialId: "2009530840-2",
     credentialUrl: "https://digitalent.komdigi.go.id/cek-sertifikat",
-    image: "/assets/certificates/data-scientist-komdigi.jpg",
+    image: "/assets/certificates/data-scientist-komdigi-thumb.jpg",
     details: [
       "/assets/certificates/data-scientist-komdigi-thumb.jpg",
       "/assets/certificates/data-scientist-komdigi-detail.jpg",
