@@ -31,7 +31,7 @@ export const siteConfig = {
     "End-to-End ML Pipeline",
     "Tech Enthusiast",
   ],
-  creator: "Covryzne",
+  creator: "Shendi Teuku Maulana Efendi",
   url: "#",
   contact: {
     email: "shendyteuku2@gmail.com",
