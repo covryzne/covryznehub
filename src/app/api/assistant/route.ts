@@ -165,7 +165,6 @@ async function getRelevantContext(question: string): Promise<string> {
     );
   }
 
-  /* === 8. GREETINGS / SMALL TALK === */
   if (q.includes("halo") || q.includes("hai") || q.includes("hi")) {
     return "Halo juga! 👋 Aku asisten virtual Shendi. Mau tahu tentang project, pengalaman, atau skills-nya?";
   }
@@ -173,7 +172,6 @@ async function getRelevantContext(question: string): Promise<string> {
     return "Sama-sama cuy 😎 senang bisa bantu!";
   }
 
-  /* === 9. FALLBACK === */
   const summary = `Nama: ${ragProfile.name}\nRole: ${ragProfile.role}\nLokasi: ${ragProfile.location}\nTentang: ${ragProfile.about}`;
   return `Maaf, aku gak nemu info spesifik tentang itu. Tapi berikut ringkasan profil Shendi:\n${summary}`;
 }
@@ -200,7 +198,7 @@ Pertanyaan: ${question}`,
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash", // bisa juga pakai gemini-1.5-pro buat hasil lebih stabil
+      model: "gemini-2.0-flash",
       contents,
     });
 
