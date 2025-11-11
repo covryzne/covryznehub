@@ -30,7 +30,7 @@ export const navLinks: NavLink[] = [
 
 export const projectsData: Project[] = [
   {
-    image: "assets/projects/images/tb-detector.png",
+    image: "/assets/projects/images/tb-detector.png",
     title: "TB Detector",
     description:
       "TB Detector is a Deep Learning–based application that leverages the DenseNet-121 architecture to detect tuberculosis from chest X-Ray images with high accuracy. The model is optimized using ONNX Runtime and seamlessly integrated into a full-stack web system for practical deployment.",
@@ -52,7 +52,7 @@ export const projectsData: Project[] = [
     },
   },
   {
-    image: "assets/projects/images/netflix-recommender-system.jpg",
+    image: "/assets/projects/images/netflix-recommender-system.jpg",
     title: "Netflix Recommender System",
     description:
       "A movie recommendation system that combines collaborative filtering and content-based features to deliver personalized suggestions. Includes evaluation pipelines (RMSE, Precision@K), an API endpoint for serving recommendations, and a demo UI for exploring results.",
@@ -74,7 +74,7 @@ export const projectsData: Project[] = [
     },
   },
   {
-    image: "assets/projects/images/grab-sentiment-analyze.jpg",
+    image: "/assets/projects/images/grab-sentiment-analyze.jpg",
     title: "GrabInsight: Sentiment Analysis on Ride-Hailing User Reviews",
     description:
       "GrabInsight is a Natural Language Processing (NLP) project that analyzes user reviews from the Grab application to classify sentiments into positive and negative categories. By leveraging text preprocessing, TF-IDF vectorization, and machine learning classifiers, the system provides valuable insights into customer satisfaction and service quality. This project demonstrates end-to-end skills in data collection, text analytics, model building, and evaluation, highlighting the ability to transform raw feedback into actionable business intelligence.",
@@ -95,7 +95,7 @@ export const projectsData: Project[] = [
     },
   },
   {
-    image: "assets/projects/images/atcs-kota-madiun.png",
+    image: "/assets/projects/images/atcs-kota-madiun.png",
     title: "ATCS Kota Madiun",
     description:
       "GoldSight is an interactive web platform designed to help investors analyze and predict gold price movements. Leveraging Deep Learning (GRU) for time-series forecasting on historical data since 2000, the system provides accurate predictions up to 90 days ahead. The application also features market trend visualizations, a responsive dashboard, and educational insights, enabling users to make smarter, data-driven investment decisions.",
@@ -114,7 +114,7 @@ export const projectsData: Project[] = [
     },
   },
   {
-    image: "assets/projects/images/gold-sight.png",
+    image: "/assets/projects/images/gold-sight.png",
     title:
       "GoldSight: Intelligent Gold Price Prediction & Investment Dashboard",
     description:
@@ -134,7 +134,7 @@ export const projectsData: Project[] = [
     },
   },
   {
-    image: "assets/projects/images/serasi-stunting-infant.jpg",
+    image: "/assets/projects/images/serasi-stunting-infant.jpg",
     title: "SERASI Stunting Infant",
     description:
       "SERASI Stunting Invant is a collaborative project developed during the MSIB internship at KOMDIGI, in partnership with RSUD Dr. Soetomo. The project brings together frontend, backend, and data science teams to build a predictive system for identifying stunting risk in infants. In the data science team, I focused on developing and optimizing a machine learning model to predict infant stunting based on health and nutritional data, supporting early detection and preventive healthcare decisions.",

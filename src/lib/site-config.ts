@@ -32,7 +32,7 @@ export const siteConfig = {
     "Tech Enthusiast",
   ],
   creator: "Shendi Teuku Maulana Efendi",
-  url: "#",
+  url: "https://shenditeukumaulanaefendi.vercel.app",
   contact: {
     email: "shendyteuku2@gmail.com",
     linkedin: "https://www.linkedin.com/in/shendyeff",

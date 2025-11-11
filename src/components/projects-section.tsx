@@ -8,6 +8,7 @@ import SectionHeading from "./section-heading";
 import { Badge } from "./ui/badge";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import Image from "next/image";
 
 const fadeInAnimationVariants = {
   initial: {
@@ -76,10 +77,14 @@ export default function ProjectsSection() {
                   className="pointer-events-none mx-auto h-50 w-full object-cover object-top"
                 />
               ) : data.image ? (
-                <img
+                <Image
                   src={data.image}
                   alt={data.title}
+                  width={800}
+                  height={400}
                   className="mx-auto h-50 w-full object-cover object-top"
+                  style={{ width: "100%", height: "200px" }}
+                  priority={index < 2}
                 />
               ) : (
                 <div className="flex h-50 w-full items-center justify-center bg-gray-100 text-gray-500">
