@@ -67,7 +67,7 @@ async function getRelevantContext(question: string): Promise<string> {
         }[]
       )
         .map(
-          (e) => `- ${e.title} di ${e.company} (${e.period}): ${e.description}`
+          (e) => `- ${e.title} di ${e.company} (${e.period}): ${e.description}`,
         )
         .join("\n")
     );
@@ -86,7 +86,7 @@ async function getRelevantContext(question: string): Promise<string> {
     ).find(
       (p) =>
         p.title.toLowerCase().includes("sentimen") ||
-        p.title.toLowerCase().includes("sentiment")
+        p.title.toLowerCase().includes("sentiment"),
     );
     return `Project Sentiment Analysis: ${sentimen?.description ?? "Tidak ada deskripsi."}`;
   }
@@ -198,7 +198,7 @@ Pertanyaan: ${question}`,
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-3.5-flash",
       contents,
     });
 

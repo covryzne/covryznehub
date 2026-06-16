@@ -45,8 +45,8 @@ export default function ProjectsSection() {
         viewport={{ once: true }}
       >
         <SectionHeading
-          heading="My Projects"
-          content="Projects I worked on. Each of them containing its own case study."
+          heading="Projects"
+          content="Real-world projects I have worked on, covering AI, Machine Learning, and MLOps solutions."
         />
       </motion.div>
 
