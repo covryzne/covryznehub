@@ -1,13 +1,32 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useSectionInView } from "@/hooks/use-section-in-view";
 import { experiencesData } from "@/lib/data";
 import SectionHeading from "@/components/section-heading";
 import { Badge } from "@/components/ui/badge";
 import LabReveal, { RevealItem } from "@/components/lab-reveal";
 import { useReadingHighlight } from "@/hooks/use-reading-highlight";
+import AboutSpotlight from "@/app/_sections/about/about-spotlight";
+
 export default function ExperienceSection() {
   const { ref } = useSectionInView("Experience");
-  const readingRef = useReadingHighlight<HTMLOListElement>(".experience-row");
+  const [activeIndex, setActiveIndex] = useState(0);
+  const readingRef = useReadingHighlight<HTMLOListElement>(".experience-row", setActiveIndex);
+
+  useEffect(() => {
+    const list = readingRef.current;
+    if (!list) return;
+    const updateBranch = () => {
+      const activeRow = list.children.item(activeIndex) as HTMLElement | null;
+      if (!activeRow) return;
+      list.style.setProperty("--experience-branch-progress", `${activeRow.offsetTop + 48}px`);
+    };
+    updateBranch();
+    const observer = new ResizeObserver(updateBranch);
+    observer.observe(list);
+    Array.from(list.children).forEach((row) => observer.observe(row));
+    return () => observer.disconnect();
+  }, [activeIndex, readingRef]);
   return (
     <section ref={ref} id="experience" className="lab-section experience-layout">
       <div className="experience-heading">
@@ -20,9 +39,13 @@ export default function ExperienceSection() {
       <LabReveal variant="experience">
         <ol ref={readingRef} className="experience-list">
           {experiencesData.map((data, index) => (
-            <li key={`${data.title}-${data.company}`}>
+            <li
+              key={`${data.title}-${data.company}`}
+              data-branch-state={index === activeIndex ? "active" : index < activeIndex ? "passed" : "upcoming"}
+            >
               <RevealItem index={index}>
-                <article className="experience-row">
+                <article id={`experience-${index + 1}`}>
+                  <AboutSpotlight className="experience-row">
                   <span className="experience-index" aria-hidden="true">
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -39,6 +62,7 @@ export default function ExperienceSection() {
                       ))}
                     </ul>
                   </div>
+                  </AboutSpotlight>
                 </article>
               </RevealItem>
             </li>

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 /** Highlight the nearest intersecting row; no scroll listener or frame loop. */
-export function useReadingHighlight<T extends HTMLElement>(selector: string) {
+export function useReadingHighlight<T extends HTMLElement>(selector: string, onActiveChange?: (index: number) => void) {
   const ref = useRef<T>(null);
 
   useEffect(() => {
@@ -23,7 +23,6 @@ export function useReadingHighlight<T extends HTMLElement>(selector: string) {
       observer?.disconnect();
       visible.clear();
       reset();
-      if (preference.matches) return;
 
       // Pixel margins keep the band centered on both portrait and wide screens.
       const margin = Math.round(window.innerHeight * 0.4);
@@ -46,6 +45,7 @@ export function useReadingHighlight<T extends HTMLElement>(selector: string) {
             return;
           }
           list.dataset.reading = "active";
+          onActiveChange?.(rows.indexOf(nearest));
           rows.forEach((row) => {
             row.dataset.readingActive = String(row === nearest);
           });
@@ -71,7 +71,7 @@ export function useReadingHighlight<T extends HTMLElement>(selector: string) {
       window.removeEventListener("resize", resize);
       reset();
     };
-  }, [selector]);
+  }, [selector, onActiveChange]);
 
   return ref;
 }

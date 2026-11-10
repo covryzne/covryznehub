@@ -18,6 +18,7 @@ import { ErrorLine } from "@/components/ui/error-line";
 import { Textarea } from "@/components/ui/textarea";
 import { Icons } from "@/components/icons";
 import { useSectionInView } from "@/hooks/use-section-in-view";
+import LiquidGlassLayer from "@/components/liquid-glass-layer";
 
 
 export default function ContactSection() {
@@ -91,6 +92,7 @@ export default function ContactSection() {
       <div className="site-container contact-content">
       <LabReveal variant="contact">
         <div className="connect-card">
+          <LiquidGlassLayer variant="card" />
           <div className="connect-card-inner">
             <div className="connect-flow" aria-hidden="true" />
             <div className="connect-layout">

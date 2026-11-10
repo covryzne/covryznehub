@@ -1,97 +1,177 @@
-"use client";
+'use client';
 
-import { useRef, useState } from "react";
-import dynamic from "next/dynamic";
-import { useInView } from "framer-motion";
-import { ChevronLeft, ChevronRight, Pause, Play, ArrowUpRight } from "lucide-react";
-import { useSectionInView } from "@/hooks/use-section-in-view";
-import { certificationsData } from "@/lib/data";
-import SectionHeading from "@/components/section-heading";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import Image from "next/image";
-import { toast } from "sonner";
+import { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
+import { useInView } from 'framer-motion';
+import { Pause, Play, ArrowUpRight } from 'lucide-react';
+import { useSectionInView } from '@/hooks/use-section-in-view';
+import { certificationsData } from '@/lib/data';
+import SectionHeading from '@/components/section-heading';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import Image from 'next/image';
+import { toast } from 'sonner';
 
-const FlexCarousel = dynamic(() => import("@/components/FlexCarousel"), { ssr: false });
-const certificates = certificationsData.filter(cert => cert.image);
-const carouselItems = certificates.map(cert => ({ src: cert.image!, alt: cert.title, title: cert.title, subtitle: cert.issuer }));
+const DriftWall = dynamic(() => import('@/components/DriftWall'), {
+  ssr: false,
+});
+const certificates = certificationsData.filter((cert) => cert.image);
+const wallItems = certificates.map((cert) => ({
+  image: cert.image!,
+  title: cert.title,
+}));
 
 export default function CertificationsSection() {
-  const { ref } = useSectionInView("Certifications");
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const nearby = useInView(carouselRef, { once: true, margin: "240px 0px" });
+  const { ref } = useSectionInView('Certifications');
+  const wallRef = useRef<HTMLDivElement>(null);
+  const nearby = useInView(wallRef, { once: true, margin: '240px 0px' });
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [selectedCert, setSelectedCert] = useState<null | (typeof certificationsData)[0]>(null);
+  const [selectedCert, setSelectedCert] = useState<
+    null | (typeof certificationsData)[0]
+  >(null);
+  const [columns, setColumns] = useState(4);
+  const [tileWidth, setTileWidth] = useState(320);
+  const visible = useInView(wallRef);
   const current = certificates[active] ?? certificates[0];
 
-  const step = (key: "ArrowLeft" | "ArrowRight") => {
-    setPaused(true);
-    carouselRef.current?.querySelector<HTMLElement>('[aria-roledescription="carousel"]')?.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }));
-  };
-  const verify = () => {
-    if (current.credentialUrl.includes("digitalent.komdigi.go.id") && current.credentialId) {
-      toast.success("Credential ID copied!", {
-        description: current.credentialId,
-        action: { label: "OK", onClick: () => {
-          void navigator.clipboard.writeText(current.credentialId!);
-          window.open(current.credentialUrl, "_blank", "noopener,noreferrer");
-        } },
-        duration: 10000,
-      });
-    } else window.open(current.credentialUrl, "_blank", "noopener,noreferrer");
+  useEffect(() => {
+    const element = wallRef.current;
+    if (!element) return;
+    const observer = new ResizeObserver(([entry]) => {
+      const width = entry.contentRect.width;
+      const count = width < 600 ? 2 : 4;
+      setColumns(count);
+      setTileWidth(Math.min(320, Math.max(100, width / (count * 1.18) - 6)));
+    });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  const verify = (certificate: (typeof certificationsData)[number]) => {
+    window.open(certificate.credentialUrl, '_blank', 'noopener,noreferrer');
+
+    const id = certificate.credentialId;
+    if (!certificate.credentialUrl.includes('digitalent.komdigi.go.id') || !id) return;
+
+    const showId = () => toast.message('Credential ID', { description: id, duration: 10000 });
+    if (!navigator.clipboard?.writeText) {
+      showId();
+      return;
+    }
+    void navigator.clipboard.writeText(id).then(
+      () => toast.success('Credential ID copied!', { description: id, duration: 10000 }),
+      showId,
+    );
   };
 
   return (
     <section ref={ref} id="certifications" className="lab-section">
-      <SectionHeading heading="My Certifications" content="Professional certifications that validate my AI and data expertise." />
-      <div ref={carouselRef} className="certification-carousel">
+      <SectionHeading
+        heading="My Certifications"
+        content="Professional certifications that validate my AI and data expertise."
+      />
+      <div ref={wallRef} className="certification-wall">
         {nearby ? (
-          <FlexCarousel
-            items={carouselItems}
-            preset="liquid"
-            intro="spin"
-            cardHeight={0.5}
-            gap={12}
-            squeeze={0.2}
-            focusOnClick
-            captions
-            fit="landscape"
-            radius={0}
-            lensWidth={0.74}
-            lensHeight={1.18}
-            tilt={62}
-            roundness={1}
-            bend={0.34}
-            reach={0.38}
-            curl="twist"
-            dispersion={0.45}
-            liquid={0}
-            followCursor={false}
-            autoplay={!paused && !selectedCert}
-            interval={4}
-            captureWheel
-            onChange={setActive}
+          <DriftWall
+            items={wallItems}
+            columns={columns}
+            tileWidth={tileWidth}
+            tileHeight={tileWidth * (158 / 212)}
+            gap={6}
+            tilt={16}
+            turn={0}
+            perspective={1500}
+            depth={100}
+            speed={28}
+            direction="up"
+            variance={0.45}
+            parallax={0.6}
+            lift={52}
+            fade={0}
+            dim={0.85}
+            overlayColor="#060010"
+            radius={14}
+            roll={0}
+            pauseOnHover={false}
+            grayscale={false}
+            paused={paused || !!selectedCert || !visible}
+            onItemClick={(item: { title: string }) => {
+              const index = certificates.findIndex(
+                (cert) => cert.title === item.title,
+              );
+              if (index < 0) return;
+              setActive(index);
+              setSelectedCert(certificates[index]);
+            }}
           />
         ) : (
-          <div className="certification-preview" aria-label="Certification previews">
-            {certificates.map(cert => <figure key={cert.title}><Image src={cert.image!} alt={cert.title} width={420} height={300} loading="lazy" /><figcaption>{cert.title}</figcaption></figure>)}
+          <div
+            className="certification-preview"
+            aria-label="Certification previews"
+          >
+            {certificates.map((cert) => (
+              <figure key={cert.title}>
+                <Image
+                  src={cert.image!}
+                  alt={cert.title}
+                  width={420}
+                  height={300}
+                  loading="lazy"
+                />
+                <figcaption>{cert.title}</figcaption>
+              </figure>
+            ))}
           </div>
         )}
       </div>
       <div className="certification-toolbar">
-        <p>Drag to explore <span aria-hidden="true">/</span> Use arrow keys</p>
+        <p>Click a certificate to view details</p>
         <div>
-          <Button variant="outline" size="icon" aria-label="Previous certification" onClick={() => step("ArrowLeft")}><ChevronLeft size={18} /></Button>
-          <Button variant="outline" size="icon" aria-label={paused ? "Play certification carousel" : "Pause certification carousel"} aria-pressed={paused} onClick={() => setPaused(value => !value)}>{paused ? <Play size={16} /> : <Pause size={16} />}</Button>
-          <Button variant="outline" size="icon" aria-label="Next certification" onClick={() => step("ArrowRight")}><ChevronRight size={18} /></Button>
+          <label htmlFor="certification-select" className="sr-only">
+            Choose a certification
+          </label>
+          <select
+            id="certification-select"
+            className="certification-select"
+            value={active}
+            onChange={(event) => setActive(Number(event.target.value))}
+          >
+            {certificates.map((cert, index) => (
+              <option key={cert.title} value={index}>
+                {cert.title}
+              </option>
+            ))}
+          </select>
+          <Button
+            variant="outline"
+            size="icon"
+            aria-label={
+              paused ? 'Play certification wall' : 'Pause certification wall'
+            }
+            aria-pressed={paused}
+            onClick={() => setPaused((value) => !value)}
+          >
+            {paused ? <Play size={16} /> : <Pause size={16} />}
+          </Button>
         </div>
       </div>
       <div className="certification-details">
-        <div><p className="cert-meta">{current.issuer}{current.issueDate ? ` / ${current.issueDate}` : ""}</p><h3>{current.title}</h3><p className="text-muted-foreground">{current.description}</p></div>
+        <div>
+          <p className="cert-meta">
+            {current.issuer}
+            {current.issueDate ? ` / ${current.issueDate}` : ''}
+          </p>
+          <h3>{current.title}</h3>
+          <p className="text-muted-foreground">{current.description}</p>
+        </div>
         <div className="certification-actions">
-          <Button variant="outline" onClick={() => setSelectedCert(current)}>View certificate</Button>
-          <Button onClick={verify}>Verify <ArrowUpRight size={16} aria-hidden="true" /></Button>
+          <Button variant="outline" onClick={() => setSelectedCert(current)}>
+            View certificate
+          </Button>
+          <Button onClick={() => verify(current)}>
+            Verify <ArrowUpRight size={16} aria-hidden="true" />
+          </Button>
         </div>
       </div>
       {/* Modal */}
@@ -102,7 +182,12 @@ export default function CertificationsSection() {
         >
           {selectedCert && (
             <div className="flex flex-col gap-4">
-              <DialogTitle>{selectedCert.title}</DialogTitle>
+              <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-3 bg-card pb-4">
+                <DialogTitle>{selectedCert.title}</DialogTitle>
+                <Button onClick={() => verify(selectedCert)}>
+                  Verify <ArrowUpRight size={16} aria-hidden="true" />
+                </Button>
+              </div>
               {/* Show all details images if available */}
               {selectedCert.details && selectedCert.details.length > 0 ? (
                 <div className="flex flex-col gap-4">

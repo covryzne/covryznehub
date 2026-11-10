@@ -8,6 +8,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { useActiveSection } from "@/components/context/active-section-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
+import LiquidGlassLayer from "@/components/liquid-glass-layer";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +50,7 @@ export default function Header() {
               if (!event.currentTarget.contains(event.relatedTarget)) setFocused(null);
             }}
           >
+            <LiquidGlassLayer variant="nav" />
             <ul className="flex items-center gap-1">
               {navLinks.map(({ name, href }) => (
                 <li key={name}>
@@ -87,13 +89,19 @@ export default function Header() {
           </nav>
         </LayoutGroup>
         <div className="header-actions">
-          <ThemeToggle className="header-circle" />
+          <div className="header-glass-control">
+            <LiquidGlassLayer variant="control" />
+            <ThemeToggle className="header-circle" />
+          </div>
           <DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
-            <DialogPrimitive.Trigger asChild>
-              <Button className="header-circle lg:hidden" variant="ghost" size="icon" aria-label="Open navigation menu">
-                <Menu className="size-5" aria-hidden="true" />
-              </Button>
-            </DialogPrimitive.Trigger>
+            <div className="header-glass-control lg:hidden">
+              <LiquidGlassLayer variant="control" />
+              <DialogPrimitive.Trigger asChild>
+                <Button className="header-circle" variant="ghost" size="icon" aria-label="Open navigation menu">
+                  <Menu className="size-5" aria-hidden="true" />
+                </Button>
+              </DialogPrimitive.Trigger>
+            </div>
             <AnimatePresence>
               {isOpen && (
                 <DialogPrimitive.Portal forceMount>

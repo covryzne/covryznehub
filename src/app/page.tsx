@@ -33,12 +33,12 @@ export default function Home() {
             </div>
           </div>
           <ClosingSky>
-            <div className="site-container">
+            <div className="site-container certification-container">
               <CertificationsSection />
             </div>
             <ContactSection />
+            <Footer />
           </ClosingSky>
-          <Footer />
         </main>
         <BackToTopButton />
         <ChatAssistantButton />
