@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 
@@ -11,6 +12,11 @@ export function ChatAssistantButton() {
     { from: "user" | "bot"; text: string }[]
   >([]);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Load chat history saat komponen mount
   useEffect(() => {
@@ -54,8 +60,10 @@ export function ChatAssistantButton() {
       >
         <Icons.bot className="size-6" />
       </Button>
-      {open && (
-        <>
+      {open &&
+        mounted &&
+        createPortal(
+          <>
           <div className="fixed bottom-4 right-3 sm:right-8 z-[10000] w-[95vw] max-w-sm sm:max-w-sm h-[70vh] bg-background rounded-2xl shadow-2xl border flex flex-col overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b">
               <span className="font-bold text-lg">Ask Shendi Assistant</span>
@@ -143,8 +151,9 @@ export function ChatAssistantButton() {
               </div>
             </div>
           )}
-        </>
-      )}
+          </>,
+          document.body
+        )}
     </>
   );
 }
