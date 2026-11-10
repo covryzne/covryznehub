@@ -788,3 +788,184 @@ The mobile menu clips overflow rather than scrolling. All six links fit within
 the viewport; short screens reduce gaps and use two columns below 420px height.
 Verified 390x844, 320x568, 844x390 and 320x320: all links visible, matching fonts,
 no menu scroll after wheel input. Typecheck and changed-component lint passed.
+
+
+## Shared sky on main website
+
+User approved both hamburger sky themes and requested them on the main website.
+Hero and footer now share --sky-background with the menu: midnight in dark mode,
+blue-to-lavender in light mode. Hero grid is replaced by the same static sparse
+star field used in menu/footer. A lower-horizon glow fades toward the content
+sheet; no center circle or text backing is reintroduced. The content sheet has
+a quieter, theme-aware star texture, while existing card/text surfaces remain.
+Stars use shared CSS gradient declarations, no canvas, animation, new library,
+or pointer handlers. Robot scene/integration and page behaviors are untouched.
+
+TypeScript, hero-component ESLint and diff checks passed. Chrome checked both
+themes at 390 and 1440px: no horizontal overflow or runtime errors. Hero, menu
+and footer star maps match; decorative stars ignore pointers and are static.
+Screenshots/results: qa/main-sky/.
+
+
+## Hero LCP correction
+
+User reported 3.21s local LCP with the hero tagline selected. Hero copy now
+renders visible in server HTML, without the opacity-zero entrance. Typewriter
+starts with its complete first role rather than an empty title; the full-role
+pause timer now cleans up correctly. Light text uses a single small shadow.
+
+DeferredHeroRobot is a memoized scheduling wrapper: after initial font readiness,
+two animation frames and an idle callback, it mounts the existing dynamically
+loaded robot. The locked robot scene/zoom/touch/pause implementation is unchanged.
+The star field remains static in hero/menu/footer. The full-content-sheet star
+layer and hero star mask were removed to reduce large decorative paint surfaces.
+
+Exploratory local development measurements (390x844, normal motion) are recorded
+in qa/lcp/before.json and after.json. Initial baseline: 1172ms. Disabling entrance
+in that exploratory run: 572ms; disabling stars: 936ms. These single samples have
+unequal resource timing and do not establish isolated causal improvements.
+Three post-change dev samples: 888, 1072, 776ms, all at first contentful paint.
+They are not production/field results or a direct reproduction of the user's
+3210ms measurement. Long tasks still occur when WebGL initializes/renders.
+
+Typecheck, changed-component ESLint, diff check and real-browser smoke checks
+passed. Hero remains visible without JS; one Spline canvas loads with pan-y;
+mobile menu works and no horizontal overflow/runtime errors were observed.
+
+
+### Render-cost refinement after user reported 1.32s LCP
+
+Robot is not established as the cause of the reported regression after adding
+sky styling. A same-page exploratory comparison with the robot loaded measured
+95th-percentile frames at 16.8ms in every mode: sky on, stars off, all sky/blur
+effects off, sky on again. This environment did not reproduce the user's perceived
+slowdown and cannot rule out GPU-specific costs on their hardware. Raw data:
+qa/lcp/sky-ablation.json. No causal FPS improvement is claimed.
+
+Further low-impact reductions: HeroTypewriter owns its timer state so typing
+no longer rerenders the entire hero. It pauses offscreen/in hidden tabs and
+skips the timer under reduced motion; server-rendered first role remains visible.
+The three gradient star layers are replaced by a single repeating 920-byte SVG
+tile shared by hero/menu/footer; opacity is baked into the tile. Sky palette and
+interactive robot remain. Typecheck/lint/browser checks passed: text cycles,
+pauses/resumes, static reduced-motion role, JS-disabled content, shared star
+asset loaded, one robot canvas, working menu and no runtime errors. Evidence:
+qa/lcp/render-refinement.json. Its single 600ms LCP reading is not a benchmark.
+
+
+## First-visit progress intro and React Bits cursor
+
+Explicit user request implements both features. SplashCursor-JS-CSS was installed
+using npx shadcn@latest add @react-bits/SplashCursor-JS-CSS --yes. Registry source
+is retained in SplashCursor.jsx/css; SiteCursor is the project integration.
+
+SiteExperience wraps the page with a client-only, once-per-tab-session sky intro.
+Readiness stages reflect hydration, fonts, initial load and an optional robot
+wait; percentages are stage progress, not measured network bytes or a promise
+that lazy below-fold media is downloaded. The visual intro has a minimum 1.1s
+presentation, final fill/exit, skip action and a 6.5s watchdog (plus short exit).
+Optional robot wait is capped at 4s. Content is inert and body scroll locked only
+while loading. Focus returns to main on completion. Without JS the server HTML
+stays accessible; no blocking overlay is serialized.
+
+Cursor loads only after intro completion and first fine-pointer movement, uses
+low quality, fixed violet/cyan palette, no bloom/shading/intro, and a short trail.
+Touch-only/reduced-motion devices do not mount it. Hidden tabs unmount the effect
+and release resources; visibility restoration rearms on mouse movement. The
+registry's own simulation sleeps after pointer inactivity. Overlay ignores
+pointers and does not hide the native cursor. This adds a fluid WebGL effect;
+no claim is made that the loading intro accelerates download/rendering or that
+this effect has zero GPU cost.
+
+Typecheck, changed TS/TSX ESLint and browser checks passed: progress to 100,
+revisit skip, manual skip, stalled robot release, click-through navigation/theme,
+mobile/reduced-motion exclusion, no-JS content and no page errors. Source JSX is
+outside this repo's ESLint matching configuration, but was compiled and exercised
+in the browser. Evidence: qa/intro-cursor/.
+
+
+### SplashCursor preset adapted from supplied GlowCursor example
+
+The user's attachment describes GlowCursor, but their request is to adapt its
+setup to existing SplashCursor. Keep SplashCursor's simulation/overlay and map
+color to a one-color palette #1d00a3, intensity 1.25, glow .9, clickBurst to
+clickSplash=true. Added optional trailWidth/linger/maxDevicePixelRatio settings
+to the installed JS component: 23 CSS-pixel Gaussian core diameter converted
+using canvas CSS height, a 2-second inactivity cutoff and linger-based dye decay,
+and DPR capped at 1 by the integration. Existing normalized size/trail behavior
+is retained when the new optional settings are omitted. This is an adaptation;
+the two simulations do not produce identical trails.
+
+Quality stays low, intro/shading stay off, theme follows site light/dark, and
+existing lazy loading, fine-pointer/reduced-motion checks and click-through
+behavior remain. Browser checks at deviceScaleFactor 2 confirmed 1200 CSS pixels
+map to a 1200-pixel canvas, actual rendered ink in both themes, GL error 0,
+pointer-events none and working About navigation. Typecheck and wrapper lint
+passed. Evidence: qa/cursor-preset/results.json and screenshots.
+
+
+## Correction: use the actual GlowCursor
+
+The user explicitly corrected the component choice: use GlowCursor, not a
+SplashCursor preset. Current implementation supersedes all SplashCursor setup
+records above. GlowCursor.jsx and GlowCursor.css were copied from the second
+user attachment's Full Component Source and Component CSS blocks. The only
+source addition is a JSDoc prop type so optional JS props are recognized by
+TypeScript callers; the supplied simulation and CSS are unchanged.
+
+SiteCursor now imports GlowCursor and passes color #5f8bff, intensity 1.3,
+trailWidth 3, linger 1.4, glow 1.2 and clickBurst. Quality low and DPR 1 retain the
+prior performance budget. Theme follows the site. Fixed full-viewport positioning
+and pointer-events none are integration styles; the supplied component remains
+usable in contained contexts. Startup deferral, touch-only/reduced-motion
+exclusion, hidden-tab cleanup and the loading intro remain unchanged.
+
+Unused SplashCursor JSX/CSS were removed. Typecheck, wrapper lint and browser
+checks passed: actual GlowCursor renders pixels in dark/light with screen/normal
+blend respectively, no GL/runtime errors, click-through About navigation and
+no cursor renderer on touch/reduced motion. Evidence: qa/glow-cursor/.
+
+
+## Tools of the Trade uses the supplied React Bits LogoLoop
+
+User requested replacing the old text marquee with LogoLoop and the exact logos
+from The Toolkit. LogoLoop.jsx/css were extracted from their supplied Full
+Component Source / Component CSS blocks. Added JSDoc prop declarations for JS/TS
+interop; the supplied runtime/CSS is otherwise unchanged. No react-icons or
+other new dependency is needed because every node comes from skillsData.icon.
+
+SkillsMarquee retains its section API, label and accessible Pause/Play control,
+but renders LogoLoop using a stable module-level mapping of all 14 skillsData
+names/icons in the same order as Skills. Settings: 50px/s left, 32px logos,
+40px gap, inline names, pause on hover, no scale/magnify/intro. Engine handles
+viewport/hidden-tab pause. Toolkit itself is unchanged. Original marquee CSS
+and custom observer were removed. Scoped SVG sizing overrides the shared
+size-12 class only in the strip. Reduced-motion / scripting-none CSS shows one
+complete wrapping list with no transforms and hides redundant copies/control.
+
+Typecheck, wrapper ESLint, whitespace and actual browser checks passed: all 14
+names/order/SVG markup match Toolkit exactly; loop moves and pause/play works;
+32px logos and no horizontal overflow in both themes at 390/1440px. All 14 tools
+are visible in reduced-motion and JS-disabled static layouts, with no runtime
+page errors. Evidence: qa/logo-loop/results.json and screenshots.
+
+
+### LogoLoop clean Dock preset and placement correction
+
+Current user instruction moves the loop to the content sheet, directly between
+AboutSection and ExperienceSection. Remove the hero-adjacent strip, its title,
+tinted band, inline names and visible pause control. Use one transparent 200px
+row, retaining the exact 14 Toolkit icons. The user screenshot is the selected
+preset: line, left, speed 60, logoHeight/gap 44, hoverSpeed 0, scaleOnHover false,
+bend .5, magnify .8, labels hover, muted .5, focus/tiltX/tiltY/scrollBoost 0,
+fadeOut true with width .14, step false, draggable and intro true. Examples with
+placeholder image logos/duplicate props are not additional requested loops.
+
+Preserve accessibility via named icon nodes and a pause control visible only
+on keyboard focus. Reduced-motion and scripting-none show a complete static
+wrapping list (container can grow beyond 200px in those modes). Toolkit remains
+unchanged. Typecheck/wrapper lint/browser checks passed: immediate preceding and
+following siblings are #about/#experience, transparent 200px row, 44px SVGs,
+no inline labels/strip title, real magnify response, all tools available, both
+themes at 390/1440px without overflow or runtime errors. Evidence:
+qa/logo-loop-dock/results.json and screenshots.

@@ -1,54 +1,56 @@
 "use client";
+
 import { useState } from "react";
-import { Pause, Play, Asterisk } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 import { skillsData } from "@/lib/data";
 import { Button } from "./ui/button";
-import { useEffect, useRef } from "react";
+import LogoLoop from "./LogoLoop";
+
+const toolLogos = skillsData.map(({ name, icon }) => ({
+  node: <span className="tools-loop-icon" role="img" aria-label={name}>{icon}</span>,
+  title: name,
+}));
+
 export default function SkillsMarquee() {
   const [paused, setPaused] = useState(false);
-  const band = useRef<HTMLElement>(null);
-  useEffect(() => {
-    const element = band.current;
-    if (!element) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      element.style.setProperty("--marquee-state", entry.isIntersecting ? "running" : "paused");
-    });
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, []);
+
   return (
-    <section ref={band} aria-label="Technical stack" className="skills-band">
-      <div className="site-container flex items-center gap-4">
-        <span className="eyebrow shrink-0 hidden md:block">TOOLS OF THE TRADE</span>
-        <div className={`marquee-window ${paused ? "is-paused" : ""}`}>
-          <div className="marquee-track">
-            {[0, 1].map((copy) => (
-              <ul key={copy} className="marquee-list" aria-hidden={copy === 1 ? true : undefined}>
-                {skillsData.map(({ name }) => (
-                  <li key={name}>
-                    <Asterisk className="size-4 text-link" aria-hidden="true" />
-                    {name}
-                  </li>
-                ))}
-              </ul>
-            ))}
-          </div>
-        </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="marquee-control shrink-0"
-          onClick={() => setPaused(!paused)}
-          aria-label={paused ? "Play skills animation" : "Pause skills animation"}
-          aria-pressed={paused}
-        >
-          {paused ? (
-            <Play className="size-4" aria-hidden="true" />
-          ) : (
-            <Pause className="size-4" aria-hidden="true" />
-          )}
-        </Button>
-      </div>
+    <section aria-label="Technical stack" className="tools-logo-section">
+      <LogoLoop
+        logos={toolLogos}
+        speed={paused ? 0 : 60}
+        direction="left"
+        logoHeight={44}
+        gap={44}
+        hoverSpeed={0}
+        scaleOnHover={false}
+        layout="line"
+        bend={0.5}
+        magnify={0.8}
+        labels="hover"
+        muted={0.5}
+        focus={0}
+        tiltX={0}
+        tiltY={0}
+        fadeOut
+        fadeOutWidth={0.14}
+        scrollBoost={0}
+        step={false}
+        draggable
+        intro
+        ariaLabel="Technology tools"
+        className="skills-logo-loop"
+      />
+      <Button
+        variant="ghost"
+        size="icon"
+        className="tools-loop-control sr-only focus:not-sr-only"
+        onClick={() => setPaused(!paused)}
+        aria-label={paused ? "Play skills animation" : "Pause skills animation"}
+        aria-pressed={paused}
+      >
+        {paused ? <Play className="size-4" aria-hidden="true" /> : <Pause className="size-4" aria-hidden="true" />}
+      </Button>
     </section>
   );
 }

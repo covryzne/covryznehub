@@ -11,30 +11,33 @@ import SkillsMarquee from "@/components/skills-marquee";
 import { BackToTopButton } from "@/components/back-to-top-button";
 import { ChatAssistantButton } from "@/components/chat-assitant";
 import { MotionConfig } from "framer-motion";
+import SiteExperience from "@/components/site-experience";
 
 export default function Home() {
   return (
     <MotionConfig reducedMotion="user">
-      <a className="skip-link" href="#main">
-        Skip to content
-      </a>
-      <Header />
-      <main id="main" tabIndex={-1}>
-        <HeroSection />
-        <SkillsMarquee />
-        <div className="content-sheet">
-          <div className="site-container">
-            <AboutSection />
-            <ExperienceSection />
-            <ProjectsSection />
-            <CertificationsSection />
-            <ContactSection />
+      <SiteExperience>
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
+        <Header />
+        <main id="main" tabIndex={-1}>
+          <HeroSection />
+          <div className="content-sheet">
+            <div className="site-container">
+              <AboutSection />
+              <SkillsMarquee />
+              <ExperienceSection />
+              <ProjectsSection />
+              <CertificationsSection />
+              <ContactSection />
+            </div>
           </div>
-        </div>
-        <Footer />
-      </main>
-      <BackToTopButton />
-      <ChatAssistantButton />
+          <Footer />
+        </main>
+        <BackToTopButton />
+        <ChatAssistantButton />
+      </SiteExperience>
     </MotionConfig>
   );
 }

@@ -5,78 +5,23 @@ import Link from 'next/link';
 
 import { Icons } from './icons';
 import { Button } from './ui/button';
-import HeroRobotBackground from './hero-robot-background';
-import { useEffect, useState } from 'react';
-
-const typewriterWords = [
-  'AI Engineer',
-  'Code Reviewer',
-  'Data Enthusiast',
-  'Long Life Learner',
-];
-
-function useTypewriter(words: string[], speed = 80, pause = 1200) {
-  const [wordIndex, setWordIndex] = useState(0);
-  const [subIndex, setSubIndex] = useState(0);
-  const [forward, setForward] = useState(true);
-
-  useEffect(() => {
-    if (forward && subIndex === words[wordIndex].length) {
-      setTimeout(() => setForward(false), pause);
-      return;
-    }
-    if (!forward && subIndex === 0) {
-      setForward(true);
-      setWordIndex((prev) => (prev + 1) % words.length);
-      return;
-    }
-    const timeout = setTimeout(
-      () => {
-        setSubIndex((prev) => prev + (forward ? 1 : -1));
-      },
-      forward ? speed : 40,
-    );
-    return () => clearTimeout(timeout);
-  }, [subIndex, forward, wordIndex, words, speed, pause]);
-
-  return { text: words[wordIndex].substring(0, subIndex), wordIndex };
-}
+import DeferredHeroRobot from './deferred-hero-robot';
+import HeroTypewriter from './hero-typewriter';
 
 export default function HeroSection() {
   const { ref } = useSectionInView('Home');
-  const { text: typewriterText, wordIndex } = useTypewriter(
-    typewriterWords,
-    100,
-    1200,
-  );
 
   return (
     <section ref={ref} id="home" className="hero-lab">
       <div className="hero-sky" aria-hidden="true" />
-      <div className="hero-grid" aria-hidden="true" />
-      <HeroRobotBackground />
+      <div className="sky-stars hero-stars" aria-hidden="true" />
+      <DeferredHeroRobot />
       <div className="hero-content">
         <Link href={siteConfig.links.contactForm} className="availability">
           <span className="availability-dot" aria-hidden="true" />
           Available for work!
         </Link>
-        <h1 className="hero-title">
-          <span className="sr-only">{typewriterWords.join(' / ')}</span>
-          <span className="typewriter-visual" aria-hidden="true">
-            {typewriterText}
-            <span
-              className={
-                'typewriter-caret' +
-                (typewriterText.length === typewriterWords[wordIndex].length
-                  ? ' animate-blink'
-                  : '')
-              }
-            />
-          </span>
-          <span className="typewriter-static" aria-hidden="true">
-            AI Engineer
-          </span>
-        </h1>
+        <HeroTypewriter />
         <p className="hero-name text-outline-hero">
           Hey, I'm Shendi Teuku Maulana Efendi
         </p>
