@@ -57,7 +57,7 @@ export default function HeroSection() {
     <section
       ref={ref}
       id="home"
-      className="relative flex min-h-svh scroll-mt-96 flex-col items-center justify-center gap-5 py-16 text-center"
+      className="relative flex min-h-svh scroll-mt-96 flex-col items-center justify-start gap-5 pb-16 pt-24 text-center sm:pt-28"
     >
       <HeroRobotBackground />
       <GridPattern
