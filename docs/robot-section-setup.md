@@ -20,14 +20,13 @@ removed; the scene now mounts from `HeroSection`.
 - On small screens the canvas is `pointer-events: none` entirely, so it
   can never trap touch scrolling; the robot idles.
 - `src/lib/spline.ts` — scene URL (`SCENE_URL_FROM_CODE`, overridable via
-  `NEXT_PUBLIC_SPLINE_ROBOT_SCENE_URL`) and the CC BY attribution data
-  rendered in the footer.
+  `NEXT_PUBLIC_SPLINE_ROBOT_SCENE_URL`).
 
 ## Scene (Spline side)
 
 - File: "COVBOT - Robot Design" (remix of "NEXBOT — robot character
-  concept" by @aximoris / Maksim Borisov, CC BY 4.0 — attribution lives
-  in the footer; keep it).
+  concept" by @aximoris / Maksim Borisov, CC BY 4.0; per the owner's
+  decision no attribution line is displayed on the site).
 - Production scene URL:
   `https://prod.spline.design/rWVleq0k2IugueUD/scene.splinecode`
 - Play Settings required for background use:
