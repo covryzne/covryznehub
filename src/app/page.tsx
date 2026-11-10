@@ -8,7 +8,6 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import HeroSection from "@/components/hero-section";
 import ProjectsSection from "@/components/projects-section";
-import RobotSection from "@/components/robot-section";
 import SectionDivider from "@/components/section-divider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { BackToTopButton } from "@/components/back-to-top-button";
@@ -20,7 +19,6 @@ export default function Home() {
       <div className="max-w-3xl mx-auto px-6 sm:px-0 flex flex flex-col items-center">
         <Header />
         <HeroSection />
-        <RobotSection />
         <AboutSection />
         <SectionDivider />
         <ExperienceSection />

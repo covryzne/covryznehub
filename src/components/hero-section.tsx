@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Icons } from "./icons";
 import { Button } from "./ui/button";
 import { GridPattern } from "./ui/grid-pattern";
+import HeroRobotBackground from "./hero-robot-background";
 import { useEffect, useState } from "react";
 
 const typewriterWords = [
@@ -56,8 +57,9 @@ export default function HeroSection() {
     <section
       ref={ref}
       id="home"
-      className="relative my-10 mb-60 flex scroll-mt-96 flex-col items-center gap-5 text-center sm:mt-28"
+      className="relative flex min-h-svh scroll-mt-96 flex-col items-center justify-center gap-5 py-16 text-center"
     >
+      <HeroRobotBackground />
       <GridPattern
         width={80}
         height={120}
@@ -78,7 +80,9 @@ export default function HeroSection() {
           "opacity-70"
         )}
       />
+      <div className="pointer-events-none relative z-10 flex flex-col items-center gap-5">
       <motion.div
+        className="pointer-events-auto"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{
@@ -138,7 +142,7 @@ export default function HeroSection() {
         transition={{
           delay: 0.1,
         }}
-        className="flex flex-col sm:flex-row gap-2 items-center"
+        className="pointer-events-auto flex flex-col sm:flex-row gap-2 items-center"
       >
         <Button asChild size="lg">
           <Link href={siteConfig.links.contactForm}>
@@ -171,6 +175,7 @@ export default function HeroSection() {
           </Button>
         </div>
       </motion.div>
+      </div>
     </section>
   );
 }

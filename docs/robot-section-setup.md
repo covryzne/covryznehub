@@ -1,82 +1,65 @@
-# Interactive 3D Robot Section — Setup Guide
+# COVBOT — 3D Robot as the Hero Background
 
-Branch: `dev-robot` · Status: **code is wired up; one manual step remains**
-(the Spline scene URL — see step 2). Nothing on `main` was changed.
+Architecture (design lock, 10 Nov 2026): the Spline robot is **not** a
+standalone section anymore. It renders as a full-bleed background layer
+behind the hero content (typing headline, name, tagline, CTAs) on branch
+`dev-robot`. The previous standalone section (`robot-section.tsx`) was
+removed; the scene now mounts from `HeroSection`.
 
-## What was built
+## How it is wired
 
-- `src/components/robot-section.tsx` — a new "Interactive 3D" section,
-  placed between the Hero and About sections. It renders a real-time
-  Spline scene on a dark purple stage; the robot's head/body follow the
-  visitor's cursor (that interaction lives inside the Spline scene
-  itself, not in React code).
-- `src/lib/spline.ts` — the single place that holds the scene URL and
-  the attribution data.
-- Dependencies added: `@splinetool/react-spline` and
-  `@splinetool/runtime`. The scene component is loaded with
-  `next/dynamic` + `ssr: false`, so the heavy 3D runtime never blocks
-  first paint and is only fetched when the section renders.
-- Until a scene URL is configured, the section shows a placeholder panel
-  explaining the setup — the site builds and runs fine without it.
+- `src/components/hero-robot-background.tsx` — client component that
+  lazy-loads `@splinetool/react-spline` (`next/dynamic`, `ssr: false`),
+  positions the canvas absolute + full viewport width behind the hero,
+  fades it in on load, and pauses rendering while the hero is off-screen
+  (IntersectionObserver → `app.stop()` / `app.play()`).
+- `src/components/hero-section.tsx` — the hero is `min-h-svh`; its
+  content sits in a `pointer-events: none` layer so mouse movement falls
+  through to the canvas (the robot keeps following the cursor), while the
+  badge link and the CTA row re-enable `pointer-events: auto`.
+- On small screens the canvas is `pointer-events: none` entirely, so it
+  can never trap touch scrolling; the robot idles.
+- `src/lib/spline.ts` — scene URL (`SCENE_URL_FROM_CODE`, overridable via
+  `NEXT_PUBLIC_SPLINE_ROBOT_SCENE_URL`) and the CC BY attribution data
+  rendered in the footer.
 
-Reference design: Spline's TikTok showcase of a Framer template hero
-("PROXIMA") using this same robot. This portfolio is Next.js, not
-Framer — Spline embeds into both, so no Framer account is needed.
+## Scene (Spline side)
 
-## Step 1 — Get your own copy of the robot scene (Spline account required)
+- File: "COVBOT - Robot Design" (remix of "NEXBOT — robot character
+  concept" by @aximoris / Maksim Borisov, CC BY 4.0 — attribution lives
+  in the footer; keep it).
+- Production scene URL:
+  `https://prod.spline.design/rWVleq0k2IugueUD/scene.splinecode`
+- Play Settings required for background use:
+  - BG Color: alpha 0% in the editor **and** "Hide" in Play Settings.
+  - Orbit / Pan / Zoom / Soft Orbit: **No**; Touch Orbit / Pan:
+    **Disabled**; Touch Zoom: **None**.
+  - Page Scroll: **Yes** (desktop and touch).
+  - Renderer: **WebGL** (WebGPU Only leaves Safari/Firefox visitors
+    with an empty hero).
+  - Animated Turntable: off.
 
-The Community file is **not** directly embeddable: a community scene has
-no public runtime URL. You need your own published copy:
+## "Both" integrations
 
-1. Create a free account at <https://spline.design> (the free plan is
-   enough; published scenes carry a small "Made with Spline" badge,
-   which the license asks us to keep anyway).
-2. Open the source scene:
-   <https://community.spline.design/file/615b9422-9985-43f6-8593-d7d7bc3b0be1>
-   ("NEXBOT — robot character concept" by @aximoris / Maksim Borisov).
-3. Click **Remix** to copy it into your workspace.
-4. Optional, make it yours: adjust materials/colors, camera framing, and
-   check the mouse-follow events that are already set up in the file.
-   Keep the scene light — delete objects you don't use.
-5. Publish a runtime URL: **Export → Public URL / Viewer → Publish**.
-   Copy the resulting URL — it looks like
-   `https://prod.spline.design/<id>/scene.splinecode`.
+Two export routes exist for the same scene URL; only one renders at a
+time (two live canvases would double the GPU/download cost for identical
+pixels):
 
-## Step 2 — Connect the scene to the site
+1. **React (active)** — `@splinetool/react-spline`, as above. Required
+   for the fade-in and play/pause control.
+2. **Web component (fallback)** — zero-code swap if the React runtime
+   ever breaks:
 
-Paste the URL in **one** of these places:
+```html
+<script type="module" src="https://cdn.spline.design/@splinetool/viewer@2.0.159/build/spline-viewer.js" async></script>
+<spline-viewer url="https://prod.spline.design/rWVleq0k2IugueUD/scene.splinecode"></spline-viewer>
+```
 
-- `src/lib/spline.ts` → `SCENE_URL_FROM_CODE`, or
-- environment variable `NEXT_PUBLIC_SPLINE_ROBOT_SCENE_URL`
-  (e.g. in `.env.local` for dev, and in the Vercel project settings for
-  production).
+(The iframe embed from the viewer page works too but gives no control
+over loading or pausing, so it is not used.)
 
-Then run `npm install` (if you pulled this branch fresh) and
-`npm run dev` — the placeholder is replaced by the live robot.
+## Reverting
 
-## Rules that come with the scene
-
-- **License CC BY 4.0 — attribution is mandatory.** The credit line
-  under the canvas (model, creator, Spline Community source, license)
-  must stay. Don't hide the "Made with Spline" badge either.
-- **Performance:** the scene + runtime add real weight. The component
-  already lazy-loads; additionally keep the published scene optimized
-  (Spline: Export → check file size), and test on a mid-range phone.
-- **Mobile:** there is no cursor on touch devices. The robot's idle
-  animation still plays; if you want touch interaction, add a
-  device-motion or tap event inside Spline later.
-
-## How to undo
-
-Remove `<RobotSection />` and its import from `src/app/page.tsx`. The
-rest of the site is untouched; `src/lib/spline.ts`,
-`src/components/robot-section.tsx`, and the two Spline packages can be
-deleted with no side effects.
-
-## Future ideas (not in this branch)
-
-- Move the robot into the Hero once performance is proven in production.
-- Swap NEXBOT for a custom-modeled character once you're comfortable in
-  Spline (start from the remix — don't model from zero as a first
-  project).
-- Theme the stage colors to the site's light/dark mode.
+Remove `<HeroRobotBackground />` from `hero-section.tsx` and restore the
+hero's previous spacing classes; the page returns to the pre-robot hero.
+Nothing else depends on the scene.

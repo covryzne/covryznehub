@@ -55,7 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn('min-h-screen font-sans', fonts)}
+        className={cn('min-h-screen font-sans overflow-x-clip', fonts)}
         style={{ cursor: 'auto' }}
         suppressHydrationWarning
       >
