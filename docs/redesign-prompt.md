@@ -77,6 +77,11 @@ tipografi display besar, baris bernomor, day/night mode) diterjemahkan ke tema
 ```
 Use the ui-ux-pro-max skill to generate and persist a complete design system for this project.
 
+Visual target: docs/dusk-reference.md contains the design tokens extracted from the Dusk
+template's live demo (palette pairs, signature day/night hero gradients, Geist typography,
+glass pill nav, floating cards, motion). Treat it as the look to match: start from THOSE
+tokens and adapt them to the theme below, instead of inventing a new palette.
+
 Product: personal portfolio website of an AI Engineer (single page, Next.js 15 + Tailwind CSS 4).
 Sections: Home hero, About, Experience, Projects, Certifications, Contact, Footer, plus an AI chat assistant widget.
 
