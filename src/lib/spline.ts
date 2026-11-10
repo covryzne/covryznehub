@@ -21,7 +21,8 @@
  * credit line is rendered under the canvas in the robot section; keep it.
  */
 
-const SCENE_URL_FROM_CODE = "";
+const SCENE_URL_FROM_CODE =
+  "https://prod.spline.design/rWVleq0k2IugueUD/scene.splinecode";
 
 export const splineRobotSceneUrl =
   process.env.NEXT_PUBLIC_SPLINE_ROBOT_SCENE_URL || SCENE_URL_FROM_CODE;
