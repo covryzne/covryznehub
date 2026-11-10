@@ -1,13 +1,17 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Pause, Play } from "lucide-react";
-import { skillsData } from "@/lib/data";
-import { Button } from "./ui/button";
-import LogoLoop from "./LogoLoop";
+import { useState } from 'react';
+import { Pause, Play } from 'lucide-react';
+import { skillsData } from '@/lib/data';
+import { Button } from '@/components/ui/button';
+import LogoLoop from '@/components/LogoLoop';
 
 const toolLogos = skillsData.map(({ name, icon }) => ({
-  node: <span className="tools-loop-icon" role="img" aria-label={name}>{icon}</span>,
+  node: (
+    <span className="tools-loop-icon" role="img" aria-label={name}>
+      {icon}
+    </span>
+  ),
   title: name,
 }));
 
@@ -16,11 +20,12 @@ export default function SkillsMarquee() {
 
   return (
     <section aria-label="Technical stack" className="tools-logo-section">
+      {/* <p className="tools-loop-heading">Most I Used</p> */}
       <LogoLoop
         logos={toolLogos}
         speed={paused ? 0 : 60}
         direction="left"
-        logoHeight={44}
+        logoHeight={60}
         gap={44}
         hoverSpeed={0}
         scaleOnHover={false}
@@ -46,10 +51,14 @@ export default function SkillsMarquee() {
         size="icon"
         className="tools-loop-control sr-only focus:not-sr-only"
         onClick={() => setPaused(!paused)}
-        aria-label={paused ? "Play skills animation" : "Pause skills animation"}
+        aria-label={paused ? 'Play skills animation' : 'Pause skills animation'}
         aria-pressed={paused}
       >
-        {paused ? <Play className="size-4" aria-hidden="true" /> : <Pause className="size-4" aria-hidden="true" />}
+        {paused ? (
+          <Play className="size-4" aria-hidden="true" />
+        ) : (
+          <Pause className="size-4" aria-hidden="true" />
+        )}
       </Button>
     </section>
   );

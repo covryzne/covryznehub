@@ -1,7 +1,7 @@
 /**
  * Spline 3D scene configuration for the hero robot background.
  *
- * The robot in `src/components/hero-robot-background.tsx` is rendered
+ * The robot in `src/app/_sections/hero/hero-robot-background.tsx` is rendered
  * from a *published* Spline scene URL (a `*.splinecode` runtime file).
  * A Spline Community file by itself has no runtime URL — it must first
  * be remixed into your own Spline account and published from there.

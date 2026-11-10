@@ -8,12 +8,12 @@ removed; the scene now mounts from `HeroSection`.
 
 ## How it is wired
 
-- `src/components/hero-robot-background.tsx` — client component that
+- `src/app/_sections/hero/hero-robot-background.tsx` — client component that
   lazy-loads `@splinetool/react-spline` (`next/dynamic`, `ssr: false`),
   positions the canvas absolute + full viewport width behind the hero,
   fades it in on load, and pauses rendering while the hero is off-screen
   (IntersectionObserver → `app.stop()` / `app.play()`).
-- `src/components/hero-section.tsx` — the hero is `min-h-svh`; its
+- `src/app/_sections/hero/hero-section.tsx` — the hero is `min-h-svh`; its
   content sits in a `pointer-events: none` layer so mouse movement falls
   through to the canvas (the robot keeps following the cursor), while the
   badge link and the CTA row re-enable `pointer-events: auto`.

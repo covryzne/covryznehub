@@ -23,7 +23,7 @@ Dokumen ini = brief + prompt siap tempel. Ikuti urutannya; jangan loncat.
 - Section saat ini (konten JANGAN berubah, hanya tampilan):
   Home (hero) → About → Experience (6 entri) → Projects (4) → Certifications (4) → Contact → Footer.
 - Aset utama: **robot 3D Spline** sebagai background hero fullscreen yang mengikuti kursor.
-  URL scene ada di `src/lib/spline.ts`; integrasi di `src/components/hero-robot-background.tsx`.
+  URL scene ada di `src/lib/spline.ts`; integrasi di `src/app/_sections/hero/hero-robot-background.tsx`.
 - Ada chatbot "Ask Shendi Assistant" (`src/components/chat-assitant.tsx` + `src/app/api/assistant/route.ts`,
   Gemini) dengan guardrail scope. Redesign hanya boleh mengganti KULITNYA, bukan perilakunya.
 
@@ -118,8 +118,8 @@ Apply the persisted design system (design-system/) to the global shell of this N
 ## Prompt 3 — Home hero (robot tetap raja)
 
 ```
-Redesign the Home hero (src/components/hero-section.tsx) using the persisted design system.
-- The Spline robot background (src/components/hero-robot-background.tsx) stays EXACTLY as the
+Redesign the Home hero (src/app/_sections/hero/hero-section.tsx) using the persisted design system.
+- The Spline robot background (src/app/_sections/hero/hero-robot-background.tsx) stays EXACTLY as the
   visual centerpiece: keep its component contract (full-bleed canvas behind content, content
   layer pointer-events-none with pointer-events-auto on badge + CTAs, runtime zoom values,
   downward shift, pause off-screen, touch-action pan-y on mobile). Restyle AROUND it, never
@@ -143,7 +143,7 @@ Using the persisted design system:
    vLLM, React, Next.js, TypeScript, Python — take the list from the existing About/skills
    content) with Lucide/simple SVG icons where sensible, pause on hover, mono labels,
    hairline top/bottom borders. Respect prefers-reduced-motion (static row fallback).
-2) Redesign About (src/components/about-section.tsx) as a BENTO grid in the AI-lab style:
+2) Redesign About (src/app/_sections/about/about-section.tsx) as a BENTO grid in the AI-lab style:
    intro card, stats cards, "currently" card, and a personal card (music taste: emo/alt-rock).
    Content from the existing section only — restructure layout, do not rewrite facts.
 Acceptance: marquee loops seamlessly at all widths, no horizontal page scroll, bento grid
@@ -153,7 +153,7 @@ collapses cleanly to one column on mobile.
 ## Prompt 5 — Experience numbered rows
 
 ```
-Redesign Experience (src/components/experience-section.tsx) using the persisted design system,
+Redesign Experience (src/app/_sections/experience/experience-section.tsx) using the persisted design system,
 borrowing the Dusk template's NUMBERED feature-row pattern:
 - Each role becomes a numbered row (01–06) with mono index, role, company, period, description,
   and skill chips. Sticky section heading on the left for desktop; rows subtly expand/highlight
@@ -165,8 +165,8 @@ Acceptance: order and content unchanged, keyboard-focusable rows, mobile stacks 
 ## Prompt 6 — Projects spotlight cards + Certifications
 
 ```
-Redesign Projects (src/components/projects-section.tsx) and Certifications
-(src/components/certifications-section.tsx) using the persisted design system:
+Redesign Projects (src/app/_sections/projects/projects-section.tsx) and Certifications
+(src/app/_sections/certifications/certifications-section.tsx) using the persisted design system:
 - Projects: large cards (2-col desktop, 1-col mobile) with image/media area, title, description,
   tech chips, and links from existing data. Add a pointer-tracking spotlight glow on cards
   (CSS variables --x/--y), subtle and performant.
@@ -179,7 +179,7 @@ Acceptance: no layout shift on hover, glow disabled for touch/reduced-motion, im
 
 ```
 Using the persisted design system:
-1) Redesign Contact (src/components/contact-section.tsx) as a Dusk-style support panel:
+1) Redesign Contact (src/app/_sections/contact/contact-section.tsx) as a Dusk-style support panel:
    big display heading, the existing contact form behaviour preserved, direct contact links
    (email, LinkedIn, GitHub) as glass rows with Lucide icons.
 2) Restyle ONLY the appearance of the chat assistant (src/components/chat-assitant.tsx) to

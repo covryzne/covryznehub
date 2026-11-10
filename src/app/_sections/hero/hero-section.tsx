@@ -3,10 +3,11 @@ import { useSectionInView } from '@/hooks/use-section-in-view';
 import { siteConfig } from '@/lib/site-config';
 import Link from 'next/link';
 
-import { Icons } from './icons';
-import { Button } from './ui/button';
+import { Icons } from '@/components/icons';
+import { Button } from '@/components/ui/button';
 import DeferredHeroRobot from './deferred-hero-robot';
 import HeroTypewriter from './hero-typewriter';
+import HeroName from './hero-name';
 
 export default function HeroSection() {
   const { ref } = useSectionInView('Home');
@@ -15,17 +16,18 @@ export default function HeroSection() {
     <section ref={ref} id="home" className="hero-lab">
       <div className="hero-sky" aria-hidden="true" />
       <div className="sky-stars hero-stars" aria-hidden="true" />
-      <DeferredHeroRobot />
+      <div className="hero-robot-stage">
+        <DeferredHeroRobot />
+      </div>
       <div className="hero-content">
         <Link href={siteConfig.links.contactForm} className="availability">
           <span className="availability-dot" aria-hidden="true" />
           Available for work!
         </Link>
         <HeroTypewriter />
-        <p className="hero-name text-outline-hero">
-          Hey, I'm Shendi Teuku Maulana Efendi
-        </p>
-        <p className="hero-tagline text-outline-hero">
+        <p className="hero-introduction">Hey, I'm</p>
+        <HeroName />
+        <p className="hero-tagline">
           I vibe with data, play with models, and ship AI systems that make an
           impact.
         </p>
@@ -42,7 +44,7 @@ export default function HeroSection() {
               <Icons.download className="size-4" aria-hidden="true" />
             </a>
           </Button>
-          <div className="flex gap-2">
+          <div className="hero-socials">
             <Button variant="outline" size="icon" asChild>
               <Link
                 href={siteConfig.links.linkedin}

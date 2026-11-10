@@ -1,9 +1,9 @@
 "use client";
 import { useSectionInView } from "@/hooks/use-section-in-view";
 import { experiencesData } from "@/lib/data";
-import SectionHeading from "./section-heading";
-import { Badge } from "./ui/badge";
-import LabReveal, { RevealItem } from "./lab-reveal";
+import SectionHeading from "@/components/section-heading";
+import { Badge } from "@/components/ui/badge";
+import LabReveal, { RevealItem } from "@/components/lab-reveal";
 import { useReadingHighlight } from "@/hooks/use-reading-highlight";
 export default function ExperienceSection() {
   const { ref } = useSectionInView("Experience");

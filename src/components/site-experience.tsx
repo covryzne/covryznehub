@@ -72,7 +72,7 @@ export default function SiteExperience({ children }: { children: ReactNode }) {
       if (cancelled || finished) return;
       setProgress(78);
       setStage("Menyiapkan Konten");
-      const robotReady = () => Boolean(document.querySelector("#home > .opacity-100"));
+      const robotReady = () => Boolean(document.querySelector("#home .hero-robot-stage > .opacity-100"));
       if (!robotReady()) {
         await Promise.race([
           new Promise<void>(resolve => {

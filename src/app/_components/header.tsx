@@ -5,9 +5,9 @@ import { useState, useId, useEffect } from "react";
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { useActiveSection } from "./context/active-section-provider";
-import { ThemeToggle } from "./theme-toggle";
-import { Button } from "./ui/button";
+import { useActiveSection } from "@/components/context/active-section-provider";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);

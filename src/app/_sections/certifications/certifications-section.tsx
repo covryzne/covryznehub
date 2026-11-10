@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useSectionInView } from "@/hooks/use-section-in-view";
 import { certificationsData } from "@/lib/data";
-import LabReveal, { RevealItem } from "./lab-reveal";
-import SectionHeading from "./section-heading";
-import { Button } from "./ui/button";
-import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
+import LabReveal, { RevealItem } from "@/components/lab-reveal";
+import SectionHeading from "@/components/section-heading";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import Image from "next/image";
 import { toast } from "sonner";
 

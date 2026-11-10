@@ -2,13 +2,13 @@
 import { useSectionInView } from "@/hooks/use-section-in-view";
 import { projectsData } from "@/lib/data";
 import { ArrowUpRight, Github } from "lucide-react";
-import SectionHeading from "./section-heading";
-import { Badge } from "./ui/badge";
+import SectionHeading from "@/components/section-heading";
+import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import LabReveal, { RevealItem } from "./lab-reveal";
-import SpotlightCard from "./spotlight-card";
+import LabReveal, { RevealItem } from "@/components/lab-reveal";
+import SpotlightCard from "@/components/spotlight-card";
 
 const workingLink = (url?: string) => Boolean(url && url !== "#");
 export default function ProjectsSection() {

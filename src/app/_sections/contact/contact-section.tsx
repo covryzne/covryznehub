@@ -1,9 +1,9 @@
 "use client";
 
-import LabReveal, { RevealItem } from "./lab-reveal";
+import LabReveal, { RevealItem } from "@/components/lab-reveal";
 import { Mail, Github, Linkedin, ArrowUpRight } from "lucide-react";
-import SectionHeading from "./section-heading";
-import { Button } from "./ui/button";
+import SectionHeading from "@/components/section-heading";
+import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -11,12 +11,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema, ContactFormSchema } from "@/lib/schema";
 import { sendEmailAction } from "@/lib/actions";
 import { toast } from "sonner";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { ErrorLine } from "./ui/error-line";
-import { Textarea } from "./ui/textarea";
-import { Icons } from "./icons";
+import { ErrorLine } from "@/components/ui/error-line";
+import { Textarea } from "@/components/ui/textarea";
+import { Icons } from "@/components/icons";
 import { useSectionInView } from "@/hooks/use-section-in-view";
 
 export default function ContactSection() {

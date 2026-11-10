@@ -43,7 +43,7 @@ support panel on a rounded content sheet → night-sky Footer finale. Preserve t
 
 ## 2. Behavior and content locks
 
-- Preserve `src/components/hero-robot-background.tsx` and `src/lib/spline.ts`.
+- Preserve `src/app/_sections/hero/hero-robot-background.tsx` and `src/lib/spline.ts`.
   Canvas remains full-bleed behind content, with the same scene URL. Zoom remains
   0.45 below 640px, 0.6 below 1024px, and 0.75 above; downward canvas translations
   remain 14% below 640px and 10% from 640px upward. Do not resize or reposition
@@ -969,3 +969,134 @@ following siblings are #about/#experience, transparent 200px row, 44px SVGs,
 no inline labels/strip title, real magnify response, all tools available, both
 themes at 390/1440px without overflow or runtime errors. Evidence:
 qa/logo-loop-dock/results.json and screenshots.
+
+
+## Reversible reference hero layout trial
+
+User explicitly approved trying the supplied mobile/desktop placement images,
+keeping the existing assets and matching hamburger typography. This supersedes
+the earlier centered-hero/framing composition: desktop content left, existing
+robot centered at 75% width; mobile text above the existing robot. Runtime zoom,
+scene and interaction code stay untouched. Robot positioning is CSS on a stage
+wrapper, clipped within the hero. Name hierarchy is Hey, I'm / Shendi gradient /
+Teuku Maulana Efendi, with a smaller role above. Mobile social buttons form their
+own row. Existing Geist replaces Bricolage for all display/heading roles, as
+requested; fonts.ts no longer downloads that unused display family.
+
+Header max width aligns to the 1200px desktop content and logo padding aligns
+with mobile content. The startup readiness selector now follows the robot stage.
+The loop stays between About and Experience. No new image/robot asset is added.
+Rollback snapshot + guarded restore script and QA evidence are stored in
+qa/hero-layout-trial/. Four implementation files are snapshotted. Typecheck,
+changed-component lint and 12 viewport/theme browser checks passed.
+
+
+## React Bits Shuffle on the hero name
+
+User explicitly requested installing @react-bits/Shuffle-JS-CSS with the flip
+preset. CLI installed Shuffle.jsx/css plus gsap and @gsap/react dependencies.
+This current request supersedes the earlier no-GSAP preference for this effect.
+HeroName applies actual Shuffle separately to Shendi and Teuku Maulana Efendi,
+retaining the approved two-line scale, Geist family, case, alignment and gradient.
+The supplied pixel-font/uppercase/hidden demo CSS is overridden only within the
+hero name. A per-character CSS index in Shuffle keeps the gradient visible when
+flipped characters have their own transformed layers. Added JSDoc for optional
+JS props consumed by TypeScript; the animation engine is otherwise unchanged.
+
+Settings match the user: flip/down, duration 1.5, sequence, shuffleTimes 4,
+power3.out, stagger .07, threshold .1, triggerOnce/triggerOnHover true,
+hoverRadius 0, motionBlur false, respectReducedMotion true, maxDelay 0,
+uppercase scramble charset, loop false, loopDelay 0. Names are pointer targets
+for hover while the rest of the hero pointer contract stays unchanged.
+
+GSAP/Shuffle is lazy loaded after the first-visit loader makes content non-inert;
+it does not play behind the loading screen. Server/Suspense fallback text stays
+visible and reduced-motion users get static names without importing GSAP.
+Typecheck, changed TSX ESLint and browser checks passed: after-loader animation,
+complete final name, hover replay, matching Geist/case, no mobile horizontal
+overflow at 320/390, visible reduced-motion/no-JS fallback and zero page errors.
+Evidence: qa/shuffle-name/results.json and screenshots.
+
+
+## Shuffle canceled: plain white raised hero lettering
+
+User canceled Shuffle and requested plain white text from the role through the
+full name, with a thin shadow for subtle depth. HeroName is now static markup;
+Shuffle JSX/CSS and unused gsap/@gsap/react dependencies were removed. The
+existing role typewriter behavior is retained, with a white caret. Role,
+Hey I'm, first name and surname now use #ffffff with shadows 0 1px 1px at 40%
+black and 0 3px 6px at 20% black, in both themes. The name gradient and all
+Shuffle styling/state were removed; typography/placement stay as approved.
+
+Typecheck and changed-component lint passed. After restarting the dev server
+which had retained stale CSS, browser computed styles verified white color/fill,
+non-empty shadow, absent Shuffle DOM and no mobile horizontal overflow in both
+themes. No background panel/circle was introduced.
+
+
+## Hero robot edge alignment and compact mobile text
+
+User requested lowering the desktop robot to the hero boundary, while shrinking
+mobile typography to lift the robot and expose more of its body. Desktop stage
+shift is now 0% instead of -4%, so the renderer wrapper's bottom matches the
+hero's bottom. Existing runtime scene/zoom and touch settings are unchanged.
+
+Mobile first name is clamp(56px,17vw,72px), 66.3px at 390px; role, surname,
+intro and tagline are smaller, and vertical gaps are tighter. Hero minimum is
+max(100svh,820px) instead of 1000px. Its stage shift uses a viewport-aware pixel
+clamp to keep the robot head around the lower content area across phone heights;
+tablet has its own offset. Desktop typography/column sizing stays unchanged.
+
+Actual Chrome screenshots and seven viewport checks passed at 320x568,375x812,
+390x844,390x1000,768x1024,1024x768,1440x900: no horizontal overflow, one unchanged
+Spline canvas with pan-y, mobile content fits upper portion, desktop renderer
+bottom equals hero bottom. Evidence: qa/hero-framing-refine/.
+
+
+## Remove content-sheet overlap at hero boundary
+
+User identified that the content sheet covers the robot at the hero boundary.
+Removed its -16px top margin and upward box shadow; sheet now follows hero in
+normal flow at margin-top 0. Rounded top corners, padding, background and sticky
+ancestor behavior are retained. Current user decision supersedes previous
+sheet-over-hero overlap styling. Browser checks at 390/768/1440px confirmed
+sheet top equals hero bottom exactly, margin 0, no shadow and no page overflow.
+Robot position, source and hero's own boundary clipping are unchanged.
+
+
+## Reviewer statistics replace The Toolkit card
+
+User supplied reviewer-specific facts: 1000+ code reviews, 4.9/5.0 average
+rating and more than one year of external code-review experience. These are
+authorized user-provided metrics, superseding the earlier no-new-review-counts
+restriction for these three facts. Replace only the lower The Toolkit About
+card with an External Code Reviewer / Dicoding Indonesia card. The existing
+Experience & Exploration card stays; tools remain in the separate LogoLoop.
+
+Installed the requested @react-bits/CountUp-JS-CSS via shadcn. Registry ships
+CountUp.jsx (inline styling, no separate CSS). Its motion dependency shares the
+deduplicated framer-motion version installed by npm. Added JSDoc prop typing;
+counting engine is unchanged. ReviewerStats lazily loads it as the metrics near
+the viewport, keeping the full final values in server HTML and Suspense fallback.
+Settings: from 0, count, easeOut, standard, empty separator/prefix, up, 3.2s,
+no delay, trigger view, replayOnHover. Suffix/decimals produce exact 1000+,
+4.9/5.0 and 1+. Main metric uses 72px/500; compact secondary values fit phones.
+Stable screen-reader values accompany aria-hidden animated numbers. Reduced
+motion renders static final values without loading the counter.
+
+Typecheck, About/ReviewerStats ESLint and browser checks passed: sampled count
+0+ then 454+ then exact final metrics, hover replay, Toolkit card absent while
+LogoLoop remains, values fit both themes at 320/390/1440px, correct reduced-motion
+and JS-disabled output, zero page errors. Evidence: qa/reviewer-countup/.
+
+### About counters � scroll trigger (10 Nov 2026)
+- All five About metrics count whenever their numbers re-enter the viewport; hover does not replay them.
+- Experience/project totals come from the existing datasets, displayed as 06 and 07 with two-digit padding throughout the animation.
+- Shared AboutCounter uses React Bits CountUp, preserving static final values for reduced motion and without JavaScript.
+- Verified in Chrome: intermediate values animate, final values remain after hover; viewport re-entry restarts from zero, no horizontal overflow at 390px. TypeScript and targeted ESLint pass.
+
+### Homepage file organization (10 Nov 2026)
+
+Page sections and their private helpers live under src/app/_sections, grouped by section.
+Header and footer live in src/app/_components; reusable UI stays in src/components.
+This is a file/import refactor; section order, content, styles, and interactions are preserved.

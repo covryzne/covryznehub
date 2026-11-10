@@ -54,7 +54,7 @@ Requirements:
 
 ```
 Add a Framer Motion entrance timeline and scroll-away parallax to the
-hero (src/components/hero-section.tsx and the hero rules in globals.css).
+hero (src/app/_sections/hero/hero-section.tsx and the hero rules in globals.css).
 
 Entrance (on load, once): stagger the hero content top-down — eyebrow,
 availability badge, title, name, tagline, actions, scroll cue — each

@@ -1,14 +1,15 @@
-"use client";
-import { useSectionInView } from "@/hooks/use-section-in-view";
-import { siteConfig } from "@/lib/site-config";
-import { experiencesData, projectsData } from "@/lib/data";
-import { ArrowUpRight, Cpu, Layers3 } from "lucide-react";
-import Link from "next/link";
-import SectionHeading from "./section-heading";
-import Skills from "./skills";
-import LabReveal, { RevealItem } from "./lab-reveal";
+'use client';
+import { useSectionInView } from '@/hooks/use-section-in-view';
+import { siteConfig } from '@/lib/site-config';
+import { experiencesData, projectsData } from '@/lib/data';
+import { ArrowUpRight, Cpu, Layers3 } from 'lucide-react';
+import Link from 'next/link';
+import SectionHeading from '@/components/section-heading';
+import ReviewerStats from './reviewer-stats';
+import AboutCounter from './about-counter';
+import LabReveal, { RevealItem } from '@/components/lab-reveal';
 export default function AboutSection() {
-  const { ref } = useSectionInView("About");
+  const { ref } = useSectionInView('About');
   return (
     <section ref={ref} id="about" className="lab-section">
       <SectionHeading heading="About Me" />
@@ -18,17 +19,18 @@ export default function AboutSection() {
             <Cpu aria-hidden="true" />
           </span>
           <p className="about-lead">
-            Fresh Graduate in Informatics Engineering specializing in Artificial Intelligence,
-            Machine Learning, and Data Science.
+            Informatics Engineering graduate specializing in Artificial
+            Intelligence, Machine Learning, and Data Science.
           </p>
           <p className="text-muted-foreground">
-            Currently working as an External Code Reviewer at Dicoding Indonesia, reviewing and
-            improving ML and Data Science projects.
+            Currently working as an External Code Reviewer at Dicoding
+            Indonesia, reviewing and improving ML and Data Science projects.
           </p>
           <p className="text-muted-foreground">
-            Experienced in end-to-end AI development, MLOps, and data-driven systems through
-            programs like Laskar AI x NVIDIA, Kampus Merdeka, and DBS Foundation Coding Camp.
-            Passionate about turning data into meaningful insights and scalable AI solutions.
+            Experienced in end-to-end AI development, MLOps, and data-driven
+            systems through programs like Laskar AI x NVIDIA, Kampus Merdeka,
+            and DBS Foundation Coding Camp. Passionate about turning data into
+            meaningful insights and scalable AI solutions.
           </p>
           <Link href={siteConfig.links.contactForm} className="inline-link">
             Contact Me <ArrowUpRight size={18} aria-hidden="true" />
@@ -42,11 +44,11 @@ export default function AboutSection() {
             </p>
             <div className="about-numbers">
               <div>
-                <span>{String(experiencesData.length).padStart(2, "0")}</span>
+                <AboutCounter value={experiencesData.length} minDigits={2} />
                 <p>Experiences</p>
               </div>
               <div>
-                <span>{String(projectsData.length).padStart(2, "0")}</span>
+                <AboutCounter value={projectsData.length} minDigits={2} />
                 <p>Projects</p>
               </div>
             </div>
@@ -54,9 +56,8 @@ export default function AboutSection() {
               Artificial Intelligence / Machine Learning / MLOps
             </p>
           </RevealItem>
-          <RevealItem className="lab-card about-stack">
-            <p className="eyebrow">THE TOOLKIT</p>
-            <Skills />
+          <RevealItem className="lab-card about-stack reviewer-card">
+            <ReviewerStats />
           </RevealItem>
         </div>
       </LabReveal>
