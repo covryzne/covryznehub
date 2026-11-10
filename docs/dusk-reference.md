@@ -81,3 +81,41 @@ HTML and variables in the CSS, but component source, exact responsive
 rules, and JS-driven animation logic are not recoverable from it. Treat
 these tokens as the target look; the design system (and the sections)
 are still written fresh for this portfolio.
+
+## Motion & section transitions (from the official screen recording, 10 Nov 2026)
+
+Static CSS cannot show these; they were read from a recording of the demo:
+
+- **Sheet-over-hero (signature transition):** content sections live on a
+  light "sheet" with large rounded top corners that slides OVER the
+  gradient hero while scrolling; the hero stays pinned/parallaxes behind
+  it. The same sheet device separates gradient zones from light content
+  throughout the page.
+- **Sky-state sequencing:** the page is a journey through gradient
+  "skies" — day gradient → light sheet → deep night → bright violet →
+  light sheet → night footer. Backgrounds morph per section instead of
+  one flat page color.
+- **Scroll-synced steps ("One night with Dusk"):** a sticky visual panel
+  (phone + huge ghost numerals behind it) stays fixed while a vertical
+  list of timed steps highlights one by one as you scroll; the visual
+  content swaps with the active step.
+- **Reading-highlight list:** a stacked list of benefit lines where only
+  the line at the reading position is fully bright; the rest are dim —
+  highlight advances with scroll.
+- **Statement interstitial:** a full-screen gradient break with a giant
+  sentence ("Let the day go.") whose letters/words stagger up into place.
+- **Reveals everywhere:** staggered fade + rise on scroll (headlines,
+  cards, nav), floating glass stat cards drifting around the hero
+  visual, animated counters on statistics.
+- **Page wipe:** switching pages wipes through a full-screen gradient
+  (multi-page only; not needed for this one-page portfolio).
+- **Footer finale:** night gradient returns; giant outlined wordmark
+  ("Dusk") sits behind a glowing horizon arc at the very bottom, with a
+  slow light beam sweeping across a star field.
+
+Portfolio translations: sheet-over-hero between the robot hero and the
+light sections; scroll-synced steps for Experience (sticky panel +
+highlighting roles); reading-highlight list for an "what I do" statement
+in About; a statement interstitial before Projects; animated counters in
+the hero stats row; giant outlined "COVRYZNE" wordmark + horizon glow in
+the footer.
