@@ -121,7 +121,7 @@ export default function HeroSection() {
       <motion.h2
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
-        className="font-heading max-w-3xl text-3xl font-bold md:text-4xl mb-2"
+        className="font-heading text-outline-hero max-w-3xl text-3xl font-bold md:text-4xl mb-2"
       >
         Hey, I’m Shendi Teuku Maulana Efendi
       </motion.h2>
@@ -131,7 +131,7 @@ export default function HeroSection() {
         transition={{
           delay: 0.1,
         }}
-        className="text-muted-foreground max-w-xl"
+        className="text-muted-foreground text-outline-hero max-w-xl"
       >
         I vibe with data, play with models, and ship AI systems that make an
         impact.

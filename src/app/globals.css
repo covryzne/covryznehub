@@ -132,3 +132,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+/*
+ * Thin light-mode outline for hero text that overlaps the black robot
+ * (name heading + tagline). The white rim separates dark glyphs from the
+ * robot's dark body; over the white page background it is invisible.
+ * Dark mode needs no outline (light text on dark), so it is disabled.
+ */
+.text-outline-hero {
+  -webkit-text-stroke: 0.035em rgb(255 255 255 / 0.85);
+}
+.dark .text-outline-hero {
+  -webkit-text-stroke: 0 transparent;
+}
