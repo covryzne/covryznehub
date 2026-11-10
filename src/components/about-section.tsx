@@ -6,14 +6,14 @@ import { ArrowUpRight, Cpu, Layers3 } from "lucide-react";
 import Link from "next/link";
 import SectionHeading from "./section-heading";
 import Skills from "./skills";
-import LabReveal from "./lab-reveal";
+import LabReveal, { RevealItem } from "./lab-reveal";
 export default function AboutSection() {
   const { ref } = useSectionInView("About");
   return (
     <section ref={ref} id="about" className="lab-section">
-      <SectionHeading label="SYS.01 // ABOUT" heading="About Me" />
+      <SectionHeading heading="About Me" />
       <LabReveal className="about-grid">
-        <div className="lab-card bracket-card about-intro">
+        <RevealItem className="lab-card bracket-card about-intro">
           <span className="card-symbol">
             <Cpu aria-hidden="true" />
           </span>
@@ -33,9 +33,9 @@ export default function AboutSection() {
           <Link href={siteConfig.links.contactForm} className="inline-link">
             Contact Me <ArrowUpRight size={18} aria-hidden="true" />
           </Link>
-        </div>
+        </RevealItem>
         <div className="about-side">
-          <div className="lab-card flex-1">
+          <RevealItem className="lab-card flex-1">
             <p className="eyebrow">
               <Layers3 size={14} aria-hidden="true" />
               EXPERIENCE & EXPLORATION
@@ -53,11 +53,11 @@ export default function AboutSection() {
             <p className="text-muted-foreground text-sm">
               Artificial Intelligence / Machine Learning / MLOps
             </p>
-          </div>
-          <div className="lab-card about-stack">
+          </RevealItem>
+          <RevealItem className="lab-card about-stack">
             <p className="eyebrow">THE TOOLKIT</p>
             <Skills />
-          </div>
+          </RevealItem>
         </div>
       </LabReveal>
     </section>

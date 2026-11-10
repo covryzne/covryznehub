@@ -22,14 +22,16 @@ export default function Home() {
       <main id="main" tabIndex={-1}>
         <HeroSection />
         <SkillsMarquee />
-        <div className="site-container">
-          <AboutSection />
-          <ExperienceSection />
-          <ProjectsSection />
-          <CertificationsSection />
-          <ContactSection />
-          <Footer />
+        <div className="content-sheet">
+          <div className="site-container">
+            <AboutSection />
+            <ExperienceSection />
+            <ProjectsSection />
+            <CertificationsSection />
+            <ContactSection />
+          </div>
         </div>
+        <Footer />
       </main>
       <BackToTopButton />
       <ChatAssistantButton />

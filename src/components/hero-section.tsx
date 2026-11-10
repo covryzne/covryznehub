@@ -1,14 +1,19 @@
-"use client";
-import { useSectionInView } from "@/hooks/use-section-in-view";
-import { siteConfig } from "@/lib/site-config";
-import Link from "next/link";
+'use client';
+import { useSectionInView } from '@/hooks/use-section-in-view';
+import { siteConfig } from '@/lib/site-config';
+import Link from 'next/link';
 
-import { Icons } from "./icons";
-import { Button } from "./ui/button";
-import HeroRobotBackground from "./hero-robot-background";
-import { useEffect, useState } from "react";
+import { Icons } from './icons';
+import { Button } from './ui/button';
+import HeroRobotBackground from './hero-robot-background';
+import { useEffect, useState } from 'react';
 
-const typewriterWords = ["AI Engineer", "Code Reviewer", "Data Enthusiast", "Long Life Learner"];
+const typewriterWords = [
+  'AI Engineer',
+  'Code Reviewer',
+  'Data Enthusiast',
+  'Long Life Learner',
+];
 
 function useTypewriter(words: string[], speed = 80, pause = 1200) {
   const [wordIndex, setWordIndex] = useState(0);
@@ -38,8 +43,12 @@ function useTypewriter(words: string[], speed = 80, pause = 1200) {
 }
 
 export default function HeroSection() {
-  const { ref } = useSectionInView("Home");
-  const { text: typewriterText, wordIndex } = useTypewriter(typewriterWords, 100, 1200);
+  const { ref } = useSectionInView('Home');
+  const { text: typewriterText, wordIndex } = useTypewriter(
+    typewriterWords,
+    100,
+    1200,
+  );
 
   return (
     <section ref={ref} id="home" className="hero-lab">
@@ -47,24 +56,20 @@ export default function HeroSection() {
       <div className="hero-grid" aria-hidden="true" />
       <HeroRobotBackground />
       <div className="hero-content">
-        <p className="eyebrow hero-eyebrow">
-          <span className="label-mark" aria-hidden="true" />
-          SYS.00 // AI ENGINEER
-        </p>
         <Link href={siteConfig.links.contactForm} className="availability">
           <span className="availability-dot" aria-hidden="true" />
           Available for work!
         </Link>
         <h1 className="hero-title">
-          <span className="sr-only">{typewriterWords.join(" / ")}</span>
+          <span className="sr-only">{typewriterWords.join(' / ')}</span>
           <span className="typewriter-visual" aria-hidden="true">
             {typewriterText}
             <span
               className={
-                "typewriter-caret" +
+                'typewriter-caret' +
                 (typewriterText.length === typewriterWords[wordIndex].length
-                  ? " animate-blink"
-                  : "")
+                  ? ' animate-blink'
+                  : '')
               }
             />
           </span>
@@ -72,9 +77,12 @@ export default function HeroSection() {
             AI Engineer
           </span>
         </h1>
-        <p className="hero-name text-outline-hero">Hey, I'm Shendi Teuku Maulana Efendi</p>
+        <p className="hero-name text-outline-hero">
+          Hey, I'm Shendi Teuku Maulana Efendi
+        </p>
         <p className="hero-tagline text-outline-hero">
-          I vibe with data, play with models, and ship AI systems that make an impact.
+          I vibe with data, play with models, and ship AI systems that make an
+          impact.
         </p>
         <div className="hero-actions">
           <Button asChild size="lg">

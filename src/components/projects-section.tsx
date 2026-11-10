@@ -7,7 +7,7 @@ import { Badge } from "./ui/badge";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import LabReveal from "./lab-reveal";
+import LabReveal, { RevealItem } from "./lab-reveal";
 import SpotlightCard from "./spotlight-card";
 
 const workingLink = (url?: string) => Boolean(url && url !== "#");
@@ -19,13 +19,12 @@ export default function ProjectsSection() {
   return (
     <section ref={ref} id="projects" className="lab-section">
       <SectionHeading
-        label="SYS.03 // PROJECTS"
         heading="Projects"
         content="Real-world projects I have worked on, covering AI, Machine Learning, and MLOps solutions."
       />
-      <div className="project-grid">
+      <LabReveal className="project-grid">
         {visibleProjects.map((data, index) => (
-          <LabReveal key={data.title}>
+          <RevealItem key={data.title}>
             <SpotlightCard>
               <div className="project-media">
                 {data.video ? (
@@ -120,9 +119,9 @@ export default function ProjectsSection() {
                 </div>
               </div>
             </SpotlightCard>
-          </LabReveal>
+          </RevealItem>
         ))}
-      </div>
+      </LabReveal>
       {projectsData.length > 4 && (
         <div className="mt-8 flex justify-center">
           <Button variant="outline" onClick={() => setShowAll(!showAll)} aria-expanded={showAll}>

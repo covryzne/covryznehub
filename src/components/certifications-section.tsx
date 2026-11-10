@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useSectionInView } from "@/hooks/use-section-in-view";
 import { certificationsData } from "@/lib/data";
-import LabReveal from "./lab-reveal";
+import LabReveal, { RevealItem } from "./lab-reveal";
 import SectionHeading from "./section-heading";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
@@ -19,14 +19,13 @@ export default function CertificationsSection() {
     <section ref={ref} id="certifications" className="lab-section">
       {/* Section Heading */}
       <SectionHeading
-        label="SYS.04 // CERTIFICATIONS"
         heading="My Certifications"
         content="Professional certifications that validate my AI and data expertise."
       />
 
-      <div className="cert-grid">
+      <LabReveal className="cert-grid">
         {(showAll ? certificationsData : certificationsData.slice(0, 4)).map((cert) => (
-          <LabReveal key={cert.title}>
+          <RevealItem key={cert.title}>
             <article className="lab-card cert-card">
               {/* Thumbnail */}
               {cert.image && (
@@ -81,9 +80,9 @@ export default function CertificationsSection() {
                 </Button>
               </div>
             </article>
-          </LabReveal>
+          </RevealItem>
         ))}
-      </div>
+      </LabReveal>
       {/* Load All / Hide Button */}
       {certificationsData.length > 4 && (
         <div className="flex justify-center mt-6">

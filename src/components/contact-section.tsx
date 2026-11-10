@@ -1,6 +1,6 @@
 "use client";
 
-import LabReveal from "./lab-reveal";
+import LabReveal, { RevealItem } from "./lab-reveal";
 import { Mail, Github, Linkedin, ArrowUpRight } from "lucide-react";
 import SectionHeading from "./section-heading";
 import { Button } from "./ui/button";
@@ -90,58 +90,65 @@ export default function ContactSection() {
       <LabReveal>
         <div className="contact-panel bracket-card">
           <div className="min-w-0">
-            <SectionHeading
-              label="SYS.05 // CONTACT"
-              heading="Get In Touch"
-              content={
-                <>
-                  Please contact me directly at{" "}
-                  <a
-                    className="text-link underline underline-offset-4"
-                    href={siteConfig.links.mailTo}
-                  >
-                    {siteConfig.contact.email}
-                  </a>{" "}
-                  or through this form.
-                </>
-              }
-            />
+            <RevealItem>
+              <SectionHeading
+                heading="Get In Touch"
+                content={
+                  <>
+                    Please contact me directly at{" "}
+                    <a
+                      className="text-link underline underline-offset-4"
+                      href={siteConfig.links.mailTo}
+                    >
+                      {siteConfig.contact.email}
+                    </a>{" "}
+                    or through this form.
+                  </>
+                }
+              />
+            </RevealItem>
             <div className="contact-links">
-              <Link className="contact-link" href={siteConfig.links.mailTo}>
-                <Mail className="size-5" aria-hidden="true" />
-                <span>
-                  <small>EMAIL</small>
-                  {siteConfig.contact.email}
-                </span>
-                <ArrowUpRight className="ml-auto size-4" aria-hidden="true" />
-              </Link>
-              <Link
-                className="contact-link"
-                href={siteConfig.links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Linkedin className="size-5" aria-hidden="true" />
-                <span>
-                  <small>CONNECT</small>LinkedIn
-                </span>
-                <ArrowUpRight className="ml-auto size-4" aria-hidden="true" />
-              </Link>
-              <Link
-                className="contact-link"
-                href={siteConfig.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="size-5" aria-hidden="true" />
-                <span>
-                  <small>EXPLORE</small>GitHub
-                </span>
-                <ArrowUpRight className="ml-auto size-4" aria-hidden="true" />
-              </Link>
+              <RevealItem>
+                <Link className="contact-link" href={siteConfig.links.mailTo}>
+                  <Mail className="size-5" aria-hidden="true" />
+                  <span>
+                    <small>EMAIL</small>
+                    {siteConfig.contact.email}
+                  </span>
+                  <ArrowUpRight className="ml-auto size-4" aria-hidden="true" />
+                </Link>
+              </RevealItem>
+              <RevealItem>
+                <Link
+                  className="contact-link"
+                  href={siteConfig.links.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin className="size-5" aria-hidden="true" />
+                  <span>
+                    <small>CONNECT</small>LinkedIn
+                  </span>
+                  <ArrowUpRight className="ml-auto size-4" aria-hidden="true" />
+                </Link>
+              </RevealItem>
+              <RevealItem>
+                <Link
+                  className="contact-link"
+                  href={siteConfig.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Github className="size-5" aria-hidden="true" />
+                  <span>
+                    <small>EXPLORE</small>GitHub
+                  </span>
+                  <ArrowUpRight className="ml-auto size-4" aria-hidden="true" />
+                </Link>
+              </RevealItem>
             </div>
           </div>
-          <div className="min-w-0">{ContactForm()}</div>
+          <RevealItem className="min-w-0">{ContactForm()}</RevealItem>
         </div>
       </LabReveal>
     </section>
