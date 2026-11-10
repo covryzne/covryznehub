@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import LabReveal from "./lab-reveal";
+import { Mail, Github, Linkedin, ArrowUpRight } from "lucide-react";
 import SectionHeading from "./section-heading";
 import { Button } from "./ui/button";
 import { siteConfig } from "@/lib/site-config";
@@ -25,7 +26,7 @@ export default function ContactSection() {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<ContactFormSchema>({ resolver: zodResolver(contactFormSchema) });
 
   const onSubmit = async (values: ContactFormSchema) => {
@@ -42,85 +43,107 @@ export default function ContactSection() {
 
   const ContactForm = () => {
     return (
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center gap-5"
-      >
-        <div className="w-full max-w-xl">
-          <Label
-            htmlFor="email"
-            className={cn(errors.email?.message && "text-destructive")}
-          >
+      <form onSubmit={handleSubmit(onSubmit)} className="contact-form">
+        <div className="w-full">
+          <Label htmlFor="email" className={cn(errors.email?.message && "text-destructive")}>
             Email
           </Label>
           <Input
             type="email"
             id="email"
+            autoComplete="email"
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "email-error" : undefined}
             placeholder="hello@gmail.com"
             {...register("email")}
             className={cn(errors.email?.message && "border-destructive")}
           />
-          <ErrorLine message={errors.email?.message} />
+          <div id="email-error">
+            <ErrorLine message={errors.email?.message} />
+          </div>
         </div>
-        <div className="w-full max-w-xl">
-          <Label
-            htmlFor="message"
-            className={cn(errors.message?.message && "text-destructive")}
-          >
+        <div className="w-full">
+          <Label htmlFor="message" className={cn(errors.message?.message && "text-destructive")}>
             Message
           </Label>
           <Textarea
             id="message"
+            aria-invalid={Boolean(errors.message)}
+            aria-describedby={errors.message ? "message-error" : undefined}
             placeholder="Hello! What's up?"
             {...register("message")}
             className={cn(errors.message?.message && "border-destructive")}
           />
-          <ErrorLine message={errors.message?.message} />
+          <div id="message-error">
+            <ErrorLine message={errors.message?.message} />
+          </div>
         </div>
-        <Button type={"submit"} size="lg">
-          Submit <Icons.arrowRight className="ml-2 size-4" />
+        <Button type={"submit"} size="lg" disabled={isSubmitting} className="self-start">
+          {isSubmitting ? "Sending..." : "Submit"} <Icons.arrowRight className="ml-2 size-4" />
         </Button>
       </form>
     );
   };
 
   return (
-    <motion.section
-      ref={ref}
-      id="contact"
-      className="my-10 w-full scroll-mt-28 md:mb-20"
-      initial={{
-        opacity: 0,
-      }}
-      whileInView={{
-        opacity: 1,
-      }}
-      transition={{
-        duration: 1,
-      }}
-      viewport={{
-        once: true,
-      }}
-    >
-      <SectionHeading
-        heading="Get In Touch"
-        content={
-          <>
-            Please contact me directly at{" "}
-            <Button
-              variant="link"
-              className="text-muted-foreground hover:text-foreground h-fit p-0 font-medium underline transition-colors"
-              asChild
-            >
-              <Link href={siteConfig.links.mailTo}>
-                {siteConfig.contact.email}
+    <section ref={ref} id="contact" className="lab-section border-b-0">
+      <LabReveal>
+        <div className="contact-panel bracket-card">
+          <div className="min-w-0">
+            <SectionHeading
+              label="SYS.05 // CONTACT"
+              heading="Get In Touch"
+              content={
+                <>
+                  Please contact me directly at{" "}
+                  <a
+                    className="text-link underline underline-offset-4"
+                    href={siteConfig.links.mailTo}
+                  >
+                    {siteConfig.contact.email}
+                  </a>{" "}
+                  or through this form.
+                </>
+              }
+            />
+            <div className="contact-links">
+              <Link className="contact-link" href={siteConfig.links.mailTo}>
+                <Mail className="size-5" aria-hidden="true" />
+                <span>
+                  <small>EMAIL</small>
+                  {siteConfig.contact.email}
+                </span>
+                <ArrowUpRight className="ml-auto size-4" aria-hidden="true" />
               </Link>
-            </Button>{" "}
-            or through this form.
-          </>
-        }
-      />
-      <ContactForm />
-    </motion.section>
+              <Link
+                className="contact-link"
+                href={siteConfig.links.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Linkedin className="size-5" aria-hidden="true" />
+                <span>
+                  <small>CONNECT</small>LinkedIn
+                </span>
+                <ArrowUpRight className="ml-auto size-4" aria-hidden="true" />
+              </Link>
+              <Link
+                className="contact-link"
+                href={siteConfig.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="size-5" aria-hidden="true" />
+                <span>
+                  <small>EXPLORE</small>GitHub
+                </span>
+                <ArrowUpRight className="ml-auto size-4" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+          <div className="min-w-0">{ContactForm()}</div>
+        </div>
+      </LabReveal>
+    </section>
   );
 }

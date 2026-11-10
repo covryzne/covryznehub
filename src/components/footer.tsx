@@ -1,15 +1,17 @@
-import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
-
 export default function Footer() {
   return (
-    <footer className="text-muted-foreground my-2 flex flex-col items-center gap-1 text-sm">
+    <footer className="lab-footer">
       <div>
-        © {new Date().getFullYear()}{" "}
-        <Button variant="link" className="text-muted-foreground p-0 font-medium">
-          <a href={siteConfig.links.footer}>{siteConfig.creator}</a>
-        </Button>
+        <p className="eyebrow mb-3">SYS.06 // END</p>
+        <p>
+          &copy; {new Date().getFullYear()}{" "}
+          <span className="text-foreground">{siteConfig.creator}</span>
+        </p>
       </div>
+      <a href="#home" className="footer-wordmark" aria-label="Back to Home">
+        shendi<span>.</span>
+      </a>
     </footer>
   );
 }

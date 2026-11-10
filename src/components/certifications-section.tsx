@@ -3,81 +3,54 @@
 import { useState } from "react";
 import { useSectionInView } from "@/hooks/use-section-in-view";
 import { certificationsData } from "@/lib/data";
-import { motion } from "framer-motion";
-import Link from "next/link";
+import LabReveal from "./lab-reveal";
 import SectionHeading from "./section-heading";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
 import Image from "next/image";
 import { toast } from "sonner";
 
-const fadeInAnimationVariants = {
-  initial: { opacity: 0, y: 100 },
-  animate: (index: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: 0.1 * index },
-  }),
-};
-
 export default function CertificationsSection() {
   const { ref } = useSectionInView("Certifications");
-  const [selectedCert, setSelectedCert] = useState<
-    null | (typeof certificationsData)[0]
-  >(null);
+  const [selectedCert, setSelectedCert] = useState<null | (typeof certificationsData)[0]>(null);
   const [showAll, setShowAll] = useState(false);
 
   return (
-    <section
-      ref={ref}
-      id="certifications"
-      className="my-10 scroll-mt-28 md:mb-20"
-    >
+    <section ref={ref} id="certifications" className="lab-section">
       {/* Section Heading */}
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.175 }}
-        viewport={{ once: true }}
-      >
-        <SectionHeading
-          heading="My Certifications"
-          content="Professional certifications that validate my AI and data expertise."
-        />
-      </motion.div>
+      <SectionHeading
+        label="SYS.04 // CERTIFICATIONS"
+        heading="My Certifications"
+        content="Professional certifications that validate my AI and data expertise."
+      />
 
-      {/* Certification Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {(showAll ? certificationsData : certificationsData.slice(0, 4)).map(
-          (cert, index) => (
-            <motion.div
-              key={cert.title}
-              variants={fadeInAnimationVariants}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              custom={index}
-              className="flex flex-col rounded border p-4"
-            >
+      <div className="cert-grid">
+        {(showAll ? certificationsData : certificationsData.slice(0, 4)).map((cert) => (
+          <LabReveal key={cert.title}>
+            <article className="lab-card cert-card">
               {/* Thumbnail */}
               {cert.image && (
-                <div className="overflow-hidden rounded-md">
+                <div className="cert-image">
                   <Image
                     src={cert.image}
                     alt={cert.title}
                     width={700}
                     height={400}
-                    className="h-60 w-60 w-full object-cover object-center"
+                    className="object-contain"
+                    loading="lazy"
+                    sizes="(min-width: 768px) 42vw, 85vw"
                   />
                 </div>
               )}
-              <h3 className="mt-4 text-xl font-medium">{cert.title}</h3>
-              <p className="text-muted-foreground mb-4 mt-1">
-                {cert.description}
+              <p className="cert-meta">
+                <span>{cert.issuer}</span>
+                {cert.issueDate && <span>{cert.issueDate}</span>}
               </p>
+              <h3>{cert.title}</h3>
+              <p className="text-muted-foreground">{cert.description}</p>
 
               {/* Buttons */}
-              <div className="mt-4 flex gap-3 justify-center">
+              <div className="mt-auto pt-4 flex flex-wrap gap-3">
                 <Button variant="outline" onClick={() => setSelectedCert(cert)}>
                   View
                 </Button>
@@ -94,30 +67,22 @@ export default function CertificationsSection() {
                           label: "OK",
                           onClick: () => {
                             navigator.clipboard.writeText(cert.credentialId!);
-                            window.open(
-                              cert.credentialUrl,
-                              "_blank",
-                              "noopener,noreferrer"
-                            );
+                            window.open(cert.credentialUrl, "_blank", "noopener,noreferrer");
                           },
                         },
                         duration: 10000, // biar ga langsung hilang
                       });
                     } else {
-                      window.open(
-                        cert.credentialUrl,
-                        "_blank",
-                        "noopener,noreferrer"
-                      );
+                      window.open(cert.credentialUrl, "_blank", "noopener,noreferrer");
                     }
                   }}
                 >
                   Verify
                 </Button>
               </div>
-            </motion.div>
-          )
-        )}
+            </article>
+          </LabReveal>
+        ))}
       </div>
       {/* Load All / Hide Button */}
       {certificationsData.length > 4 && (
@@ -136,7 +101,10 @@ export default function CertificationsSection() {
 
       {/* Modal */}
       <Dialog open={!!selectedCert} onOpenChange={() => setSelectedCert(null)}>
-        <DialogContent className="w-full max-w-[90vw] sm:max-w-3xl md:max-w-4xl lg:max-w-5xl p-4 overflow-y-auto max-h-[80vh]">
+        <DialogContent
+          aria-describedby={undefined}
+          className="w-full max-w-[90vw] sm:max-w-3xl md:max-w-4xl lg:max-w-5xl p-6 pt-14 overflow-y-auto max-h-[80dvh] bg-card"
+        >
           {selectedCert && (
             <div className="flex flex-col gap-4">
               <DialogTitle>{selectedCert.title}</DialogTitle>

@@ -1,22 +1,14 @@
 "use client";
 import { useSectionInView } from "@/hooks/use-section-in-view";
 import { siteConfig } from "@/lib/site-config";
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 import { Icons } from "./icons";
 import { Button } from "./ui/button";
-import { GridPattern } from "./ui/grid-pattern";
 import HeroRobotBackground from "./hero-robot-background";
 import { useEffect, useState } from "react";
 
-const typewriterWords = [
-  "AI Engineer",
-  "Code Reviewer",
-  "Data Enthusiast",
-  "Long Life Learner",
-];
+const typewriterWords = ["AI Engineer", "Code Reviewer", "Data Enthusiast", "Long Life Learner"];
 
 function useTypewriter(words: string[], speed = 80, pause = 1200) {
   const [wordIndex, setWordIndex] = useState(0);
@@ -37,7 +29,7 @@ function useTypewriter(words: string[], speed = 80, pause = 1200) {
       () => {
         setSubIndex((prev) => prev + (forward ? 1 : -1));
       },
-      forward ? speed : 40
+      forward ? speed : 40,
     );
     return () => clearTimeout(timeout);
   }, [subIndex, forward, wordIndex, words, speed, pause]);
@@ -47,134 +39,83 @@ function useTypewriter(words: string[], speed = 80, pause = 1200) {
 
 export default function HeroSection() {
   const { ref } = useSectionInView("Home");
-  const { text: typewriterText, wordIndex } = useTypewriter(
-    typewriterWords,
-    100,
-    1200
-  );
+  const { text: typewriterText, wordIndex } = useTypewriter(typewriterWords, 100, 1200);
 
   return (
-    <section
-      ref={ref}
-      id="home"
-      className="relative flex min-h-svh scroll-mt-96 flex-col items-center justify-start gap-5 pb-16 pt-24 text-center sm:pt-28"
-    >
+    <section ref={ref} id="home" className="hero-lab">
+      <div className="hero-sky" aria-hidden="true" />
+      <div className="hero-grid" aria-hidden="true" />
       <HeroRobotBackground />
-      <GridPattern
-        width={80}
-        height={120}
-        squares={[
-          [0, 3],
-          [3, 1],
-          [2, 0],
-          [7, 2],
-          [8, 3],
-          [2, 4],
-          [6, 4],
-        ]}
-        strokeDasharray={"4"}
-        className={cn(
-          "absolute inset-0",
-          "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
-          "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
-          "opacity-70"
-        )}
-      />
-      <div className="pointer-events-none relative z-10 flex flex-col items-center gap-5">
-      <motion.div
-        className="pointer-events-auto"
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          type: "tween",
-          duration: 0.2,
-        }}
-      >
-        <Link
-          href={siteConfig.links.contactForm}
-          className="flex items-center gap-3 rounded border px-3 py-1"
-        >
-          <span className="relative flex size-2">
-            <span className="absolute flex size-full animate-ping rounded-full bg-green-400 opacity-75" />
-            <span className="relative flex size-2 rounded-full bg-green-400"></span>
-          </span>
-          <span className="text-sm">Available for work!</span>
+      <div className="hero-content">
+        <p className="eyebrow hero-eyebrow">
+          <span className="label-mark" aria-hidden="true" />
+          SYS.00 // AI ENGINEER
+        </p>
+        <Link href={siteConfig.links.contactForm} className="availability">
+          <span className="availability-dot" aria-hidden="true" />
+          Available for work!
         </Link>
-      </motion.div>
-      <motion.h1
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="font-heading max-w-3xl text-4xl font-extrabold md:text-6xl mb-2"
-      >
-        <span className="text-black dark:text-white">
-          {typewriterText}
-          <span
-            className={
-              `inline-block w-2 h-16 bg-black dark:bg-white ml-1 align-middle` +
-              (typewriterText.length === typewriterWords[wordIndex].length
-                ? " animate-blink"
-                : "")
-            }
-          />
-        </span>
-      </motion.h1>
-      <motion.h2
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="font-heading text-outline-hero max-w-3xl text-3xl font-bold md:text-4xl mb-2"
-      >
-        Hey, I’m Shendi Teuku Maulana Efendi
-      </motion.h2>
-      <motion.p
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.1,
-        }}
-        className="text-muted-foreground text-outline-hero max-w-xl"
-      >
-        I vibe with data, play with models, and ship AI systems that make an
-        impact.
-      </motion.p>
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.1,
-        }}
-        className="pointer-events-auto flex flex-col sm:flex-row gap-2 items-center"
-      >
-        <Button asChild size="lg">
-          <Link href={siteConfig.links.contactForm}>
-            Get in touch <Icons.arrowRight className="ml-2 size-4" />
-          </Link>
-        </Button>
-        <Button variant="outline" size="lg" asChild>
-          <a href={siteConfig.links.cvPdf} download>
-            Download CV <Icons.download className="ml-2 size-4" />
-          </a>
-        </Button>
-        <div className="flex flex-row gap-2">
-          <Button variant="outline" size="icon" asChild>
-            <Link
-              href={siteConfig.links.linkedin}
-              aria-label="Linkedin"
-              target="_blank"
-            >
-              <Icons.linkedin className="size-5" />
+        <h1 className="hero-title">
+          <span className="sr-only">{typewriterWords.join(" / ")}</span>
+          <span className="typewriter-visual" aria-hidden="true">
+            {typewriterText}
+            <span
+              className={
+                "typewriter-caret" +
+                (typewriterText.length === typewriterWords[wordIndex].length
+                  ? " animate-blink"
+                  : "")
+              }
+            />
+          </span>
+          <span className="typewriter-static" aria-hidden="true">
+            AI Engineer
+          </span>
+        </h1>
+        <p className="hero-name text-outline-hero">Hey, I'm Shendi Teuku Maulana Efendi</p>
+        <p className="hero-tagline text-outline-hero">
+          I vibe with data, play with models, and ship AI systems that make an impact.
+        </p>
+        <div className="hero-actions">
+          <Button asChild size="lg">
+            <Link href={siteConfig.links.contactForm}>
+              Get in touch
+              <Icons.arrowRight className="size-4" aria-hidden="true" />
             </Link>
           </Button>
-          <Button variant="outline" size="icon" asChild>
-            <Link
-              href={siteConfig.links.github}
-              aria-label="Github"
-              target="_blank"
-            >
-              <Icons.github className="size-5" />
-            </Link>
+          <Button variant="outline" size="lg" className="hero-cv" asChild>
+            <a href={siteConfig.links.cvPdf} download>
+              Download CV
+              <Icons.download className="size-4" aria-hidden="true" />
+            </a>
           </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" size="icon" asChild>
+              <Link
+                href={siteConfig.links.linkedin}
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icons.linkedin className="size-5" aria-hidden="true" />
+              </Link>
+            </Button>
+            <Button variant="outline" size="icon" asChild>
+              <Link
+                href={siteConfig.links.github}
+                aria-label="GitHub"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icons.github className="size-5" aria-hidden="true" />
+              </Link>
+            </Button>
+          </div>
         </div>
-      </motion.div>
+      </div>
+      <div className="hero-scroll" aria-hidden="true">
+        <span />
+        SCROLL TO EXPLORE
       </div>
     </section>
   );

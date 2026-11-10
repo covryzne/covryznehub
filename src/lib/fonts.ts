@@ -1,13 +1,15 @@
-import { Bricolage_Grotesque, Darker_Grotesque } from 'next/font/google'
+import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 
-const fontSans = Bricolage_Grotesque({
-  subsets: ['latin'],
-  variable: '--font-sans',
-})
-
-const fontHeading = Darker_Grotesque({
-  subsets: ['latin'],
-  variable: '--font-heading',
-})
-
-export const fonts = [fontSans.variable, fontHeading.variable]
+const display = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-bricolage-face",
+  display: "swap",
+});
+const body = Geist({ subsets: ["latin"], variable: "--font-geist-face", display: "swap" });
+const mono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono-face",
+  display: "swap",
+  preload: false,
+});
+export const fonts = [display.variable, body.variable, mono.variable];

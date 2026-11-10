@@ -1,137 +1,133 @@
 "use client";
-
 import { useSectionInView } from "@/hooks/use-section-in-view";
 import { projectsData } from "@/lib/data";
-import { motion } from "framer-motion";
-import Link from "next/link";
+import { ArrowUpRight, Github } from "lucide-react";
 import SectionHeading from "./section-heading";
 import { Badge } from "./ui/badge";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import LabReveal from "./lab-reveal";
+import SpotlightCard from "./spotlight-card";
 
-const fadeInAnimationVariants = {
-  initial: {
-    opacity: 0,
-    y: 100,
-  },
-  animate: (index: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 0.1 * index,
-    },
-  }),
-};
-
+const workingLink = (url?: string) => Boolean(url && url !== "#");
 export default function ProjectsSection() {
   const { ref } = useSectionInView("Projects");
   const [showAll, setShowAll] = useState(false);
   const [expanded, setExpanded] = useState<{ [key: number]: boolean }>({});
-
-  // Tampilkan 4 project saja jika belum showAll
   const visibleProjects = showAll ? projectsData : projectsData.slice(0, 4);
-
-  // Helper untuk memotong deskripsi
-  const getShortDesc = (desc: string, max = 120) =>
-    desc.length > max ? desc.slice(0, max) + "..." : desc;
-
   return (
-    <section ref={ref} id="projects" className="my-10 scroll-mt-28 md:mb-20">
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.175 }}
-        viewport={{ once: true }}
-      >
-        <SectionHeading
-          heading="Projects"
-          content="Real-world projects I have worked on, covering AI, Machine Learning, and MLOps solutions."
-        />
-      </motion.div>
-
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+    <section ref={ref} id="projects" className="lab-section">
+      <SectionHeading
+        label="SYS.03 // PROJECTS"
+        heading="Projects"
+        content="Real-world projects I have worked on, covering AI, Machine Learning, and MLOps solutions."
+      />
+      <div className="project-grid">
         {visibleProjects.map((data, index) => (
-          <motion.div
-            key={data.title}
-            variants={fadeInAnimationVariants}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            custom={index}
-            className="flex flex-col rounded border p-4 cursor-pointer"
-          >
-            <Link
-              href={data.links.github ?? "#"}
-              aria-label={data.title}
-              target="_blank"
-              className="overflow-hidden rounded"
-            >
-              {data.video ? (
-                <video
-                  src={data.video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="pointer-events-none mx-auto h-50 w-full object-cover object-top"
-                />
-              ) : data.image ? (
-                <Image
-                  src={data.image}
-                  alt={data.title}
-                  width={800}
-                  height={400}
-                  className="mx-auto h-50 w-full object-cover object-top"
-                  style={{ width: "100%", height: "200px" }}
-                  priority={index < 2}
-                />
-              ) : (
-                <div className="flex h-50 w-full items-center justify-center bg-gray-100 text-gray-500">
-                  No preview available
+          <LabReveal key={data.title}>
+            <SpotlightCard>
+              <div className="project-media">
+                {data.video ? (
+                  <video
+                    src={data.video}
+                    controls
+                    muted
+                    playsInline
+                    preload="none"
+                    poster={data.image}
+                    aria-label={`${data.title} preview`}
+                  />
+                ) : data.image ? (
+                  <Image
+                    src={data.image}
+                    alt={data.title}
+                    width={800}
+                    height={450}
+                    sizes="(min-width: 1280px) 588px, (min-width: 768px) 46vw, 90vw"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center text-muted-foreground">
+                    No preview available
+                  </div>
+                )}
+              </div>
+              <div className="project-body">
+                <p className="project-number">PROJECT // {String(index + 1).padStart(2, "0")}</p>
+                <h3>{data.title}</h3>
+                <div>
+                  <p id={`project-description-${index}`} className="text-muted-foreground">
+                    {expanded[index] || data.description.length <= 120
+                      ? data.description
+                      : data.description.slice(0, 120) + "..."}
+                  </p>
+                  {data.description.length > 120 && (
+                    <button
+                      type="button"
+                      className="inline-link text-sm"
+                      aria-expanded={Boolean(expanded[index])}
+                      aria-controls={`project-description-${index}`}
+                      onClick={() => setExpanded((prev) => ({ ...prev, [index]: !prev[index] }))}
+                    >
+                      {expanded[index] ? "Less" : "More"}
+                      <span className="sr-only"> about {data.title}</span>
+                    </button>
+                  )}
                 </div>
-              )}
-            </Link>
-
-            <h3 className="mt-4 text-xl font-medium">{data.title}</h3>
-            <p className="text-muted-foreground mb-4 mt-1">
-              {expanded[index] || data.description.length <= 120
-                ? data.description
-                : getShortDesc(data.description)}
-              {data.description.length > 120 && (
-                <button
-                  className="ml-2 text-xs underline text-primary hover:text-primary/80"
-                  onClick={() =>
-                    setExpanded((prev) => ({ ...prev, [index]: !prev[index] }))
-                  }
-                >
-                  {expanded[index] ? "Less" : "More"}
-                </button>
-              )}
-            </p>
-
-            <div className="flex flex-wrap gap-2">
-              {data.technologies.map((tech) => (
-                <Badge key={tech} variant="outline" size="lg">
-                  {tech}
-                </Badge>
-              ))}
-            </div>
-          </motion.div>
+                <ul className="flex flex-wrap gap-2" aria-label="Technologies">
+                  {data.technologies.map((tech) => (
+                    <li key={tech}>
+                      <Badge variant="secondary">{tech}</Badge>
+                    </li>
+                  ))}
+                </ul>
+                <div className="project-links">
+                  {workingLink(data.links.github) && (
+                    <a
+                      className="inline-link text-sm"
+                      href={data.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Github className="size-4" aria-hidden="true" />
+                      Source code<span className="sr-only"> for {data.title}</span>
+                      <ArrowUpRight className="size-4" aria-hidden="true" />
+                    </a>
+                  )}
+                  {workingLink(data.links.preview) && (
+                    <a
+                      className="inline-link text-sm"
+                      href={data.links.preview}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Live preview<span className="sr-only"> for {data.title}</span>
+                      <ArrowUpRight className="size-4" aria-hidden="true" />
+                    </a>
+                  )}
+                  {workingLink(data.links.githubApi) && (
+                    <a
+                      className="inline-link text-sm"
+                      href={data.links.githubApi}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      API source<span className="sr-only"> for {data.title}</span>
+                      <ArrowUpRight className="size-4" aria-hidden="true" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </SpotlightCard>
+          </LabReveal>
         ))}
       </div>
-      {/* Load All / Hide Button */}
       {projectsData.length > 4 && (
-        <div className="flex justify-center mt-6">
-          {!showAll ? (
-            <Button variant="default" onClick={() => setShowAll(true)}>
-              {`Show All (${projectsData.length})`}
-            </Button>
-          ) : (
-            <Button variant="outline" onClick={() => setShowAll(false)}>
-              Hide
-            </Button>
-          )}
+        <div className="mt-8 flex justify-center">
+          <Button variant="outline" onClick={() => setShowAll(!showAll)} aria-expanded={showAll}>
+            {showAll ? "Hide" : `Show All (${projectsData.length})`}
+          </Button>
         </div>
       )}
     </section>

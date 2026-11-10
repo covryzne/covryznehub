@@ -1,17 +1,21 @@
-import React, { ReactNode } from 'react'
-
-type Props = {
-  heading: string
-  content?: ReactNode
-}
-
-export default function SectionHeading({ heading, content }: Props) {
+import { ReactNode } from "react";
+type Props = { heading: string; content?: ReactNode; label?: string };
+export default function SectionHeading({ heading, content, label }: Props) {
   return (
-    <div className="mb-10 text-center">
-      <h2 className="font-heading text-3xl font-bold">{heading}</h2>
-      {content && (
-        <p className="text-muted-foreground mt-3 text-sm">{content}</p>
+    <div className="section-heading">
+      {label && (
+        <p className="eyebrow">
+          <span className="label-mark" aria-hidden="true" />
+          {label}
+        </p>
       )}
+      <h2>
+        {heading}
+        <span className="text-link" aria-hidden="true">
+          .
+        </span>
+      </h2>
+      {content && <p className="section-description">{content}</p>}
     </div>
-  )
+  );
 }

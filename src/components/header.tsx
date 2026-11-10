@@ -1,102 +1,98 @@
-'use client'
-
-import { navLinks } from '@/lib/data'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { useState } from 'react'
-import { useActiveSection } from './context/active-section-provider'
-import { Icons } from './icons'
-import { ThemeToggle } from './theme-toggle'
-import { Button } from './ui/button'
+"use client";
+import { navLinks } from "@/lib/data";
+import Link from "next/link";
+import { useState } from "react";
+import { Menu, ArrowUpRight } from "lucide-react";
+import { useActiveSection } from "./context/active-section-provider";
+import { ThemeToggle } from "./theme-toggle";
+import { Button } from "./ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from './ui/dialog'
+} from "./ui/dialog";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
-  const { activeSection, setActiveSection, setTimeOfLastClick } =
-    useActiveSection()
-
+  const [isOpen, setIsOpen] = useState(false);
+  const { activeSection, setActiveSection, setTimeOfLastClick } = useActiveSection();
+  const select = (name: (typeof navLinks)[number]["name"]) => {
+    setActiveSection(name);
+    setTimeOfLastClick(Date.now());
+    setIsOpen(false);
+  };
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      className="sticky top-5 z-20 my-5 sm:top-10 sm:my-10"
-    >
-      {/* Mobile Navbar */}
-      <div className="sm:hidden flex items-center gap-2 justify-center">
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
-            <Button
-              variant="outline"
-              size="lg"
-              className="bg-background/80 backdrop-blur-sm"
-            >
-              Menu <Icons.chevronDown className="ml-2 size-4" />
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle className="text-md self-start font-medium">
-                Navigation
-              </DialogTitle>
-            </DialogHeader>
-            <nav>
-              <ul>
-                {navLinks.map((data) => (
-                  <li
-                    key={data.name}
-                    onClick={() => setIsOpen(false)}
-                    className="border-muted-foreground/10 py-3 text-sm [&:not(:last-child)]:border-b"
-                  >
-                    <Link className="block" href={data.href}>
-                      {data.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </DialogContent>
-        </Dialog>
-        {/* Tablet/Desktop Navbar */}
-        <ThemeToggle className="bg-background/80 backdrop-blur-sm" />
-      </div>
-      {/* Desktop Navbar */}
-      <div className="hidden sm:block">
-        <nav className="bg-background/80 items-center gap-2 text-muted-foreground text-sm flex rounded-full border px-2 py-3 backdrop-blur-sm">
-          <ul className="flex gap-5">
-            {navLinks.map((data) => (
-              <li key={data.name}>
+    <header className="site-header">
+      <div className="glass-nav">
+        <Link
+          href="#home"
+          onClick={() => select("Home")}
+          className="nav-wordmark"
+          aria-label="Shendi - Home"
+        >
+          <span className="brand-glyph" aria-hidden="true">
+            s<span>.</span>
+          </span>
+          <span className="hidden xl:inline">
+            shendi<span className="text-muted-foreground"> / ai</span>
+          </span>
+        </Link>
+        <nav aria-label="Main navigation" className="hidden lg:block">
+          <ul className="flex items-center gap-1">
+            {navLinks.map(({ name, href }) => (
+              <li key={name}>
                 <Link
-                  href={data.href}
-                  className="hover:text-foreground relative px-4 py-2 transition-colors"
-                  onClick={() => {
-                    setActiveSection(data.name)
-                    setTimeOfLastClick(Date.now())
-                  }}
+                  href={href}
+                  onClick={() => select(name)}
+                  className="nav-link"
+                  aria-current={activeSection === name ? "location" : undefined}
                 >
-                  {data.name}
-                  {data.name === activeSection && (
-                    <motion.span
-                      className="bg-muted absolute inset-0 -z-10 rounded-full"
-                      layoutId="activeSection"
-                      transition={{
-                        type: 'spring',
-                        stiffness: 380,
-                        damping: 30,
-                      }}
-                    ></motion.span>
-                  )}
+                  {activeSection === name && <span className="nav-dot" aria-hidden="true" />}
+                  {name}
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
+        <div className="flex items-center gap-2">
+          <ThemeToggle className="border-0 bg-transparent" />
+          <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <DialogTrigger asChild>
+              <Button className="lg:hidden" variant="ghost">
+                <Menu size={18} aria-hidden="true" />
+                Menu
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="rounded-3xl bg-card">
+              <DialogHeader>
+                <p className="eyebrow">PORTFOLIO // INDEX</p>
+                <DialogTitle className="font-display text-3xl">Explore the lab.</DialogTitle>
+                <DialogDescription>Experience, experiments, and ways to connect.</DialogDescription>
+              </DialogHeader>
+              <nav aria-label="Mobile navigation">
+                <ul>
+                  {navLinks.map(({ name, href }, index) => (
+                    <li key={name}>
+                      <Link
+                        href={href}
+                        onClick={() => select(name)}
+                        aria-current={activeSection === name ? "location" : undefined}
+                        className="mobile-nav-link"
+                      >
+                        <span className="font-mono text-xs text-muted-foreground">0{index}</span>
+                        {name}
+                        <ArrowUpRight className="ml-auto size-4" aria-hidden="true" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
-    </motion.header>
-  )
+    </header>
+  );
 }
