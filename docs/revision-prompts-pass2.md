@@ -6,6 +6,11 @@ api/assistant/route.ts tidak berubah; pola pointer-events hero dipertahankan
 lewat CSS `.hero-content`; portal chat utuh; typecheck lulus). Yang di bawah
 ini poles-nya, urut prioritas. Jalankan satu-satu, review visual tiap habis satu.
 
+> Update 18:34 WIB: pendekatan transisi berubah ke Framer Motion bertahap
+> (keputusan Shendi). **R1 digantikan FM-3 dan R5 ditunda ke pass 3** —
+> lihat `docs/fm-migration-prompts.md` (FM-1 reveal, FM-2 hero, FM-3 sheet).
+> R2 dijalankan setelah FM-2; R3/R4 tetap berlaku.
+
 ## R1 — Sheet-over-hero (signature Dusk yang belum ada)
 
 ```
