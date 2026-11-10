@@ -7,14 +7,16 @@ import Link from 'next/link';
 import SectionHeading from '@/components/section-heading';
 import ReviewerStats from './reviewer-stats';
 import AboutCounter from './about-counter';
+import AboutSpotlight from './about-spotlight';
 import LabReveal, { RevealItem } from '@/components/lab-reveal';
 export default function AboutSection() {
   const { ref } = useSectionInView('About');
   return (
     <section ref={ref} id="about" className="lab-section">
       <SectionHeading heading="About Me" />
-      <LabReveal className="about-grid">
-        <RevealItem className="lab-card bracket-card about-intro">
+      <LabReveal variant="about" className="about-grid">
+        <RevealItem className="h-full">
+        <AboutSpotlight className="bracket-card about-intro h-full">
           <span className="card-symbol">
             <Cpu aria-hidden="true" />
           </span>
@@ -35,9 +37,16 @@ export default function AboutSection() {
           <Link href={siteConfig.links.contactForm} className="inline-link">
             Contact Me <ArrowUpRight size={18} aria-hidden="true" />
           </Link>
+        </AboutSpotlight>
         </RevealItem>
         <div className="about-side">
-          <RevealItem className="lab-card flex-1">
+          <RevealItem index={1}>
+          <AboutSpotlight className="about-stack reviewer-card">
+            <ReviewerStats />
+          </AboutSpotlight>
+          </RevealItem>
+          <RevealItem index={2} className="flex-1">
+          <AboutSpotlight className="h-full">
             <p className="eyebrow">
               <Layers3 size={14} aria-hidden="true" />
               EXPERIENCE & EXPLORATION
@@ -55,9 +64,7 @@ export default function AboutSection() {
             <p className="text-muted-foreground text-sm">
               Artificial Intelligence / Machine Learning / MLOps
             </p>
-          </RevealItem>
-          <RevealItem className="lab-card about-stack reviewer-card">
-            <ReviewerStats />
+          </AboutSpotlight>
           </RevealItem>
         </div>
       </LabReveal>

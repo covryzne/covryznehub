@@ -1,8 +1,9 @@
+import { RevealItem } from "./lab-reveal";
 import { ReactNode } from "react";
-type Props = { heading: string; content?: ReactNode; label?: string };
-export default function SectionHeading({ heading, content, label }: Props) {
+type Props = { heading: string; content?: ReactNode; label?: string; revealTrigger?: string };
+export default function SectionHeading({ heading, content, label, revealTrigger }: Props) {
   return (
-    <div className="section-heading">
+    <RevealItem className="section-heading" variant="heading" triggerElement={revealTrigger}>
       {label && (
         <p className="eyebrow">
           <span className="label-mark" aria-hidden="true" />
@@ -16,6 +17,6 @@ export default function SectionHeading({ heading, content, label }: Props) {
         </span>
       </h2>
       {content && <p className="section-description">{content}</p>}
-    </div>
+    </RevealItem>
   );
 }

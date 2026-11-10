@@ -1100,3 +1100,60 @@ and JS-disabled output, zero page errors. Evidence: qa/reviewer-countup/.
 Page sections and their private helpers live under src/app/_sections, grouped by section.
 Header and footer live in src/app/_components; reusable UI stays in src/components.
 This is a file/import refactor; section order, content, styles, and interactions are preserved.
+
+### Varied section transitions (11 Nov 2026)
+
+- User requested React Bits scroll transitions after rolling back Galaxy. Queried React Bits via shadcn MCP and installed AnimatedContent-TS-CSS (GSAP/ScrollTrigger). No canvas/background effect added.
+- LabReveal remains a plain layout/context container; RevealItem uses the actual React Bits component with per-section presets. About splits horizontally, Experience enters from the left, Projects rise with alternating distances and subtle scale, Certifications use a short rise/scale, Contact splits horizontally. Headings rise gently and tools fade.
+- Each card triggers individually and replays on returning from either scroll direction. Only transform/opacity are animated; filters, wipes, tilt, scrub and pinning are disabled. Hero initial paint and existing robot interaction are unchanged.
+- Motion never transforms the content sheet or the sticky Experience heading ancestor. CountUp view-based replay remains independent. Settings live in src/components/lab-reveal.tsx.
+- Registry adjustments: SSR content starts visible without JS; ScrollTrigger onEnterBack restarts repeatable animations. Reduced motion bypasses animated wrappers. GSAP remains lazily imported via next/dynamic.
+- Chrome verification: all section headings settle at opacity 1/transform none; sticky ancestors untransformed; reduced-motion and no-JS content visible; no page errors; no overflow at 320/390px; project Show All/Hide and certification Show All/Hide/View remain functional. TypeScript and targeted ESLint pass. LCP not benchmarked.
+
+### Experience heading trigger correction (11 Nov 2026)
+
+My Experience heading reveal is anchored to #experience rather than measuring the sticky heading itself. AnimatedContent accepts an optional triggerElement forwarded through SectionHeading/RevealItem. This reveals the title at section entry and keeps it visible throughout all rows. Chrome verified opacity 1 at first-card entry on 390/1440px and through desktop cards 2, 4, and 6. TypeScript and targeted ESLint pass.
+
+### Mobile tools marquee (11 Nov 2026)
+
+Below 768px the existing 14 tool logos split into two seven-logo rows moving in opposite directions at 40px/s, with 36px logos and 28px gaps. Mobile vertical padding is reduced while preserving label space. Desktop retains its original single 60px-logo row at 60px/s with 44px gaps. Only the active viewport layout mounts; both rows share pause control and existing reduced-motion behavior. Chrome verified opposite movement, responsive resize, no page errors and no overflow at 320/390px. TypeScript and ESLint pass.
+
+### Certification ScrollStack (11 Nov 2026)
+
+- Installed actual React Bits ScrollStack-JS-CSS via shadcn after inspecting it through the registry MCP.
+- CertificationStack groups four initial cards into two desktop rows of two (2x2), with each row forming a sticky stack layer. Show All expands the same stack to all 15 records; mobile uses one card per layer for readable content.
+- Uses window scrolling with smoothScroll=false and snap=false; no nested 600px scroll area or wheel hijacking. Stack controls transforms, so the previous certification RevealItem wrappers are removed.
+- Reuses existing certificate surfaces, thumbnails, text, verification action and image dialog. Reduced motion/no-JS renders the ordinary cert-grid. StackPosition 120px desktop/96px mobile clears the navbar; scaling is subtle with zero blur/tilt/rotation.
+- Integration/settings: src/app/_sections/certifications/certification-stack.tsx. Registry components remain reusable under src/components.
+- Verified Chrome: desktop two layers with two cards each, real sticky overlap/scale while scrolling, View modal, Show All expands to 15 cards/eight layers, Hide restores four, mobile four single-card layers with no horizontal overflow; changing reduced-motion restores static cards; no page errors. TypeScript/targeted ESLint pass.
+
+### Certificate image frame fit (11 Nov 2026)
+
+Certificate thumbnails use full-width natural-height images instead of a fixed 16:9 padded frame. The frame follows the original image ratio, preserves rounded corners, and cannot shrink in the card flex layout. Chrome verified all four initial thumbnails match frame bounds and original aspect ratios; mobile has no horizontal overflow.
+
+### About spotlight and reviewer order (11 Nov 2026)
+
+Installed actual React Bits SpotlightCard-JS-CSS. All three About cards use AboutSpotlight with the requested white/circle settings: intensity .2, size 200, softness .6, borderGlow .5, proximity 80, smoothing .2, grain 0, ambient false, flare true. Theme surfaces and existing About spacing are preserved through CSS variables; Projects retain their existing separate spotlight component. External Code Reviewer now precedes Experience & Exploration in both DOM and visual order. Counters and reveal wrappers are preserved. Chrome verified three spotlights, hover opacity near .2, clickable Contact link, correct card order, white light-theme surface, no mobile overflow or page errors. TypeScript and targeted ESLint pass.
+
+### Mobile robot spacing (11 Nov 2026)
+
+Raised the robot stage by 40px below 640px: --hero-robot-y now clamp(180px, calc(500px - 27svh), 300px). Tablet/desktop breakpoint overrides and Spline scene/zoom/pointer handling are unchanged. Chrome computed styles verified the mobile offset and desktop zero translation.
+
+### Contact sky finale and minimal footer (11 Nov 2026)
+
+Moved the former footer sky, stars, single CSS beam, COVRYZNE outline wordmark and horizon into Get in Touch. Contact now sits outside the content-sheet container for a full-width background, while its existing panel/form retain the site-container width. Footer now only renders centered copyright text using the current year and siteConfig.creator. No new canvas or animation dependency. Updated reduced-motion beam selector. Chrome verified desktop/mobile layout, contact form remains editable, correct centered copyright, decorative wordmark inside Contact, no page errors or mobile overflow.
+
+### Contact gradient correction (11 Nov 2026)
+
+User clarified the Contact background must match the hamburger menu soft blue/periwinkle/pink glow. Contact horizon now shares the exact .menu-horizon CSS gradient, proportions, and 14px blur. Removed the previous sharp border/shadow planet horizon and beam; stars and COVRYZNE remain in Contact and the footer stays centered copyright only. Chrome confirms identical computed gradient/blur to menu, zero horizon border/shadow, correct copyright and no mobile overflow. TypeScript/targeted ESLint pass.
+
+### Continuous closing sky (11 Nov 2026)
+
+Certifications and Contact now share one ClosingSky wrapper under src/app/_components. Certifications moved out of the paper content sheet into the same full-width sky as Contact; content widths, anchors and stack layout remain unchanged. Contact has a transparent background so the shared menu-style gradient/stars continue through both sections. COVRYZNE remains at the bottom of the sky and copyright remains a separate minimal footer. No transformed or scroll-container ancestor is added to sticky cards (overflow: clip). Refreshed stale Next development CSS; Chrome verified transparent Contact, shared midnight background, no mobile overflow and desktop stack pin at 120px.
+
+### Connect card and FlexCarousel (11 Nov 2026)
+
+- Reviewed https://github.com/DavidHDev/rbp-portfolio and its components/contact/contact-card.tsx, contact-button.tsx and contact-card-ctas.tsx. Contact adapts its rounded double frame, two-column composition, hover-to-reveal copy-email CTA and secondary project link with existing Geist typography and theme tokens. The reference shader is replaced by a static CSS flow texture; the right inset panel retains the existing email/message form, Zod validation, server action and submission feedback. Real email/LinkedIn/GitHub links and shared sky/copyright remain.
+- Installed actual React Bits FlexCarousel-JS-CSS with ogl; replaced the certification ScrollStack integration and removed unused stack files/styles. All 15 existing certificates feed the carousel. User configuration is applied (liquid/spin, landscape, .5 card height, gap12, squeeze.2, lens .74/1.18, tilt62, roundness1, bend.34, reach.38, twist, dispersion.45, liquid0, followCursor false, interval4, captureWheel).
+- Carousel lazily mounts near viewport, pauses offscreen via the registry engine, offers explicit pause/previous/next controls, and keeps active-certificate description, View details modal and credential Verify flow. Autoplay pauses while modal is open. Server/no-JS output uses a native horizontal preview list. Desktop area is 560px; mobile 480px.
+- Functional checks only, per user request: no QA screenshots were taken. Initial Chrome checks verified live WebGL, 15-item data, navigation, View dialog, contact validation, hover email reveal, retained form input, and no page errors. TypeScript and targeted ESLint pass.

@@ -1,60 +1,57 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
-import { motion, useAnimationControls, useReducedMotion, type Variants } from "framer-motion";
+import { createContext, useContext, type ReactNode } from "react";
+import dynamic from "next/dynamic";
+import { useReducedMotion } from "framer-motion";
+import type { AnimatedContentProps } from "./AnimatedContent";
 
-const containerVariants: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-};
+const AnimatedContent = dynamic(() => import("./AnimatedContent"));
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+type RevealVariant = "rise" | "about" | "experience" | "projects" | "certifications" | "contact" | "heading" | "tools";
+type RevealProps = { children: ReactNode; className?: string; variant?: RevealVariant; index?: number; triggerElement?: string };
+const RevealContext = createContext<RevealVariant>("rise");
 
-type RevealProps = { children: ReactNode; className?: string };
-
-/** SSR stays visible. Only off-screen content is armed after hydration. */
-export default function LabReveal({ children, className = "" }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const controls = useAnimationControls();
-  const reducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    const node = ref.current;
-    // MotionConfig suppresses transforms, but does not suppress opacity fades.
-    if (reducedMotion) {
-      controls.set("visible");
-    } else if (node && node.getBoundingClientRect().top >= window.innerHeight) {
-      controls.set("hidden");
-    }
-  }, [controls, reducedMotion]);
-
+/** Layout containers stay untransformed, including the sticky Experience ancestor. */
+export default function LabReveal({ children, className = "", variant = "rise" }: RevealProps) {
   return (
-    <motion.div
-      ref={ref}
-      className={`lab-reveal ${className}`}
-      initial={false}
-      animate={controls}
-      whileInView="visible"
-      viewport={{ once: true, margin: "-12% 0px -12% 0px" }}
-      variants={containerVariants}
-    >
-      {children}
-    </motion.div>
+    <RevealContext.Provider value={variant}>
+      <div className={`lab-reveal ${className}`}>{children}</div>
+    </RevealContext.Provider>
   );
 }
 
-/** Inherits the nearest LabReveal trigger and its stagger order. */
-export function RevealItem({ children, className = "" }: RevealProps) {
+function preset(variant: RevealVariant, index: number): Partial<AnimatedContentProps> {
+  switch (variant) {
+    case "about": return { direction: "horizontal", distance: 16, reverse: index === 0 };
+    case "experience": return { direction: "horizontal", distance: 28, reverse: true };
+    case "projects": return { distance: index % 2 ? 38 : 24, scale: 0.98 };
+    case "certifications": return { distance: 18, scale: 0.97 };
+    case "contact": return { direction: "horizontal", distance: 20, reverse: index % 2 === 0 };
+    case "heading": return { distance: 12, duration: 0.5 };
+    case "tools": return { distance: 0, duration: 0.7 };
+    default: return { distance: 20 };
+  }
+}
+
+/** Each item enters independently, so long lists don't animate below the viewport. */
+export function RevealItem({ children, className = "", variant, index = 0, triggerElement }: RevealProps) {
+  const inheritedVariant = useContext(RevealContext);
+  const reducedMotion = useReducedMotion();
+
+  if (reducedMotion) return <div className={className}>{children}</div>;
+
   return (
-    <motion.div className={className} variants={itemVariants}>
+    <AnimatedContent
+      className={className}
+      triggerElement={triggerElement}
+      duration={0.7}
+      ease="power3.out"
+      threshold={0.12}
+      delay={Math.min(index % 3, 2) * 0.08}
+      once={false}
+      {...preset(variant ?? inheritedVariant, index)}
+    >
       {children}
-    </motion.div>
+    </AnimatedContent>
   );
 }

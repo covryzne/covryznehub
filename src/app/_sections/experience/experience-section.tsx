@@ -13,14 +13,15 @@ export default function ExperienceSection() {
       <div className="experience-heading">
         <SectionHeading
           heading="My Experience"
+          revealTrigger="#experience"
           content="Experience gained through applied machine learning and data science projects."
         />
       </div>
-      <LabReveal>
+      <LabReveal variant="experience">
         <ol ref={readingRef} className="experience-list">
           {experiencesData.map((data, index) => (
             <li key={`${data.title}-${data.company}`}>
-              <RevealItem>
+              <RevealItem index={index}>
                 <article className="experience-row">
                   <span className="experience-index" aria-hidden="true">
                     {String(index + 1).padStart(2, "0")}

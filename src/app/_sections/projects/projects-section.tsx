@@ -22,9 +22,9 @@ export default function ProjectsSection() {
         heading="Projects"
         content="Real-world projects I have worked on, covering AI, Machine Learning, and MLOps solutions."
       />
-      <LabReveal className="project-grid">
+      <LabReveal variant="projects" className="project-grid">
         {visibleProjects.map((data, index) => (
-          <RevealItem key={data.title}>
+          <RevealItem key={data.title} index={index}>
             <SpotlightCard>
               <div className="project-media">
                 {data.video ? (

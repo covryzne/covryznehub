@@ -3,6 +3,7 @@ import AboutSection from "@/app/_sections/about/about-section";
 import ContactSection from "@/app/_sections/contact/contact-section";
 import ExperienceSection from "@/app/_sections/experience/experience-section";
 import CertificationsSection from "@/app/_sections/certifications/certifications-section";
+import ClosingSky from "@/app/_components/closing-sky";
 import Footer from "@/app/_components/footer";
 import Header from "@/app/_components/header";
 import HeroSection from "@/app/_sections/hero/hero-section";
@@ -29,10 +30,14 @@ export default function Home() {
               <SkillsMarquee />
               <ExperienceSection />
               <ProjectsSection />
-              <CertificationsSection />
-              <ContactSection />
             </div>
           </div>
+          <ClosingSky>
+            <div className="site-container">
+              <CertificationsSection />
+            </div>
+            <ContactSection />
+          </ClosingSky>
           <Footer />
         </main>
         <BackToTopButton />
