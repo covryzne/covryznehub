@@ -4,8 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Loader2, MousePointer } from "lucide-react";
-import SectionHeading from "./section-heading";
-import { splineRobotAttribution, splineRobotSceneUrl } from "@/lib/spline";
+import { splineRobotSceneUrl } from "@/lib/spline";
 
 function SceneStatus({ message }: { message: string }) {
   return (
@@ -57,11 +56,6 @@ export default function RobotSection() {
       transition={{ delay: 0.175 }}
       className="my-10 flex w-full scroll-mt-28 flex-col items-center md:mb-20"
     >
-      <SectionHeading
-        heading="Interactive 3D"
-        content="A small experiment with real-time 3D on the web — this robot follows your cursor. Built with Spline."
-      />
-
       <div className="relative w-full">
         {/* Soft violet halo so the light scene panel feels anchored to the
             dark page instead of pasted onto it */}
@@ -95,28 +89,6 @@ export default function RobotSection() {
         </div>
       </div>
 
-      <p className="mt-4 max-w-xl text-center text-xs leading-5 text-muted-foreground">
-        3D model:{" "}
-        <a
-          href={splineRobotAttribution.sourceUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="underline-offset-4 hover:underline"
-        >
-          {splineRobotAttribution.work}
-        </a>{" "}
-        by {splineRobotAttribution.creator} via Spline Community, licensed
-        under{" "}
-        <a
-          href={splineRobotAttribution.licenseUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="underline-offset-4 hover:underline"
-        >
-          {splineRobotAttribution.license}
-        </a>
-        . Rendered with Spline.
-      </p>
     </motion.section>
   );
 }
