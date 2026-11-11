@@ -1,40 +1,48 @@
 "use client";
-
-import AboutSection from "@/components/about-section";
-import ContactSection from "@/components/contact-section";
-import ExperienceSection from "@/components/experience-section";
-import CertificationsSection from "@/components/certifications-section";
-import Footer from "@/components/footer";
-import Header from "@/components/header";
-import HeroSection from "@/components/hero-section";
-import ProjectsSection from "@/components/projects-section";
-import SectionDivider from "@/components/section-divider";
-import { ThemeToggle } from "@/components/theme-toggle";
+import AboutSection from "@/app/_sections/about/about-section";
+import ContactSection from "@/app/_sections/contact/contact-section";
+import ExperienceSection from "@/app/_sections/experience/experience-section";
+import CertificationsSection from "@/app/_sections/certifications/certifications-section";
+import ClosingSky from "@/app/_components/closing-sky";
+import Footer from "@/app/_components/footer";
+import Header from "@/app/_components/header";
+import HeroSection from "@/app/_sections/hero/hero-section";
+import ProjectsSection from "@/app/_sections/projects/projects-section";
+import SkillsMarquee from "@/app/_sections/tools/skills-marquee";
 import { BackToTopButton } from "@/components/back-to-top-button";
 import { ChatAssistantButton } from "@/components/chat-assitant";
+import { MotionConfig } from "framer-motion";
+import SiteExperience from "@/components/site-experience";
 
 export default function Home() {
   return (
-    <>
-      <div className="max-w-3xl mx-auto px-6 sm:px-0 flex flex flex-col items-center">
+    <MotionConfig reducedMotion="user">
+      <SiteExperience>
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
         <Header />
-        <HeroSection />
-        <AboutSection />
-        <SectionDivider />
-        <ExperienceSection />
-        <SectionDivider />
-        <ProjectsSection />
-        <CertificationsSection />
-        <ContactSection />
-        <Footer />
-      </div>
-      {/* Desktop: Theme Toggle */}
-      <ThemeToggle className="bg-background hidden sm:fixed sm:bottom-12 sm:right-8 sm-flex" />
-      {/* Back To Top Button */}
-      <div className="bg-background fixed bottom-2 right-3 sm:bottom-2 sm:right-8 flex">
+        <main id="main" tabIndex={-1}>
+          <HeroSection />
+          <div className="content-sheet">
+            <div className="site-container">
+              <AboutSection />
+              <SkillsMarquee />
+              <ExperienceSection />
+              <ProjectsSection />
+            </div>
+          </div>
+          <ClosingSky>
+            <div className="site-container certification-container">
+              <CertificationsSection />
+            </div>
+            <ContactSection />
+            <Footer />
+          </ClosingSky>
+        </main>
         <BackToTopButton />
         <ChatAssistantButton />
-      </div>
-    </>
+      </SiteExperience>
+    </MotionConfig>
   );
 }

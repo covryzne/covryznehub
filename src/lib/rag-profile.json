@@ -6,7 +6,8 @@
     "email": "shendyteuku2@gmail.com",
     "phone": "+6289514851100",
     "linkedin": "https://www.linkedin.com/in/shendyeff",
-    "github": "https://github.com/covryzne"
+    "github": "https://github.com/covryzne",
+    "website": "https://shenditeukumaulanaefendi.vercel.app"
   },
   "about": "Fresh Graduate in Informatics Engineering with strong expertise in Artificial Intelligence, Machine Learning, and Data Science. Experienced in developing end-to-end MLOps pipelines, model deployment, and intelligent data systems. Passionate about crafting AI-driven solutions that bridge data, engineering, and innovation.",
   "skills": {
@@ -18,6 +19,8 @@
       "FastAPI",
       "PostgreSQL",
       "Docker",
+      "MinIO",
+      "Hugging Face",
       "Prometheus",
       "Grafana",
       "GitHub Actions",
@@ -25,15 +28,14 @@
       "Tailwind CSS"
     ],
     "technical": [
-      "Machine Learning",
-      "Deep Learning",
-      "MLOps",
-      "Data Science",
-      "Model Deployment",
-      "Experiment Tracking",
+      "Large Language Models (LLM)",
+      "Computer Vision (ViT, RT-DETR, OCR)",
+      "Model Fine-Tuning (CPT, SFT, LoRA)",
+      "MLOps & AI Deployment",
+      "Model Serving & Inference Pipeline",
+      "Web Crawling & Data Engineering",
       "Time Series Forecasting",
-      "NLP (Natural Language Processing)",
-      "Computer Vision"
+      "NLP"
     ],
     "soft": [
       "Critical Thinking",
@@ -42,53 +44,65 @@
       "Communication",
       "Continuous Learning",
       "Growth Mindset",
-      "Adaptability",
-      "Time Management"
+      "Interpersonal skills",
+      "Time Management",
+      "Self-motivated"
     ]
   },
   "experience": [
     {
-      "title": "Code Reviewer",
-      "company": "Dicoding Indonesia",
-      "period": "Aug 2025 - Present",
-      "description": "Served as an External Code Reviewer for Machine Learning and Data Science submissions, reviewing over 220 projects with an average rating of 4.99/5.00. Provided detailed feedback on code structure, modeling approaches, and clean code implementation. Contributed to 130+ forum discussions and verified learner solutions.",
+      "title": "AI Engineer Intern",
+      "company": "Ministry of Communication and Digital (Komdigi)",
+      "period": "Nov 2025 - May 2026",
+      "description": "Architected and deployed an end-to-end microservices pipeline on a Linux VPS using Docker Compose, FastAPI, PostgreSQL, MinIO, and Vite. Developed an agentic smart crawler with Browser Use and Playwright, powered by Qwen 3.5 4B, and a Selenium-based crawler for AMP domains. Executed Continual Pre-Training (CPT) and Supervised Fine-Tuning (SFT) on Qwen3-8B using LoRA and 4-bit quantization. Engineered a multimodal vision pipeline fine-tuning ViT (99% accuracy) and RT-DETR for UI element detection.",
       "technologies": [
-        "Python",
-        "TensorFlow",
-        "Scikit-learn",
+        "FastAPI",
         "Docker",
-        "MLflow",
-        "GitHub Actions"
+        "PostgreSQL",
+        "MinIO",
+        "Playwright",
+        "Selenium",
+        "Qwen",
+        "LoRA",
+        "Vision Transformer (ViT)",
+        "RT-DETR"
       ]
     },
     {
-      "title": "AI Engineer Intern",
-      "company": "Lintasarta (Laskar AI x NVIDIA)",
-      "period": "Feb 2025 - Jun 2025",
-      "description": "Implemented an end-to-end MLOps pipeline for student performance prediction, automating ML workflows using GitHub Actions. Integrated MLflow for experiment tracking, deployed models with Docker, and built real-time monitoring dashboards using Prometheus and Grafana. Developed GoldSight, a GRU-based gold price prediction system achieving R² = 0.9971 and MAPE = 0.62%, integrated with news sentiment analysis and deployed via Streamlit.",
+      "title": "External Code Reviewer (Freelance)",
+      "company": "Dicoding Indonesia",
+      "period": "Aug 2025 - Present",
+      "description": "Conducted technical audits, debugging, and code reviews for 400 to 450 projects per month across Gen AI, MLOps, Data Science, and Deep Learning paths. Evaluated Custom Training Loops, Seq2Seq, and Multi-Head Attention. Audited deployment pipelines via GitHub Actions, MLflow, DagsHub, Prometheus, and Grafana.",
       "technologies": [
         "Python",
         "TensorFlow",
         "MLflow",
-        "Docker",
-        "FastAPI",
+        "DagsHub",
+        "GitHub Actions",
         "Prometheus",
-        "Grafana",
-        "GitHub Actions"
+        "Grafana"
+      ]
+    },
+    {
+      "title": "AI Engineer Cohort",
+      "company": "Lintasarta (Laskar AI x NVIDIA)",
+      "period": "Feb 2025 - Jun 2025",
+      "description": "Graduated with Distinction (Ranked 37th out of 616). Completed 900+ hours of intensive project-based training in AI. Developed a Gold price prediction system utilizing a GRU with a 60-day sliding window architecture achieving R² = 0.9971. Optimized using hyperopt and VADER sentiment analysis, deployed via Streamlit.",
+      "technologies": [
+        "Python",
+        "TensorFlow",
+        "GRU",
+        "Hyperopt",
+        "VADER",
+        "Streamlit"
       ]
     },
     {
       "title": "Data Scientist Intern",
-      "company": "Kominfo x RSUD Dr. Soetomo (MSIB 7)",
+      "company": "RSUD Dr. Soetomo (MSIB Batch 7)",
       "period": "Aug 2024 - Dec 2024",
-      "description": "Built risk classification models for stunting prediction in low birth weight and premature infants using Random Forest, Logistic Regression, and XGBoost. Conducted EDA, feature selection, and statistical analysis. Addressed data imbalance using SMOTE and evaluated models using ROC-AUC, Sensitivity, and Specificity.",
-      "technologies": [
-        "Python",
-        "Pandas",
-        "Scikit-learn",
-        "XGBoost",
-        "PostgreSQL"
-      ]
+      "description": "Designed predictive classification models (XGBoost, Random Forest, Logistic Regression) to detect stunting risk using >1,500 patient records. Resolved extreme class imbalance via SMOTE and class-weighting, increasing Sensitivity (Recall) to ~0.89. Achieved ROC-AUC of 0.86 with 5-fold cross-validation.",
+      "technologies": ["Python", "Pandas", "Scikit-learn", "XGBoost", "SMOTE"]
     },
     {
       "title": "Machine Learning Engineer Intern",
@@ -121,6 +135,21 @@
   ],
   "projects": [
     {
+      "title": "Online Gambling & Pornographic Content Detection System (AITF Komdigi)",
+      "description": "End-to-end ML pipeline and agentic web crawler to detect illegal content. Features CPT/SFT on Qwen3-8B, Vision Transformer (ViT) classification, RT-DETR for UI elements, and deployed via Docker Compose on Linux VPS.",
+      "technologies": [
+        "Qwen3-8B",
+        "LoRA",
+        "ViT",
+        "RT-DETR",
+        "Selenium",
+        "Playwright",
+        "Docker Compose",
+        "FastAPI",
+        "MinIO"
+      ]
+    },
+    {
       "title": "TB Detector",
       "description": "Deep Learning–based web application leveraging DenseNet-121 to detect Tuberculosis from chest X-ray images. Optimized using ONNX Runtime and integrated into a full-stack web system built with Next.js and FastAPI.",
       "technologies": [
@@ -131,9 +160,18 @@
         "Tailwind",
         "FastAPI",
         "PostgreSQL",
-        "Alembic",
-        "JWT Authentication"
+        "Docker"
       ]
+    },
+    {
+      "title": "SERASI Stunting Infant",
+      "description": "Collaborative project during MSIB 7 in partnership with RSUD Dr. Soetomo. Developed machine learning models (XGBoost, Random Forest) for predicting stunting risk using clinical data, utilizing SMOTE for extreme class imbalance.",
+      "technologies": ["Python", "Scikit-learn", "XGBoost", "SMOTE", "Pandas"]
+    },
+    {
+      "title": "GoldSight – Intelligent Gold Price Prediction Dashboard",
+      "description": "Interactive web platform for gold price forecasting using GRU neural networks and VADER news sentiment analysis. Achieved R² = 0.9971 with hyperparameter tuning via hyperopt.",
+      "technologies": ["TensorFlow", "GRU", "Hyperopt", "Streamlit", "Pandas"]
     },
     {
       "title": "Netflix Recommender System",
@@ -143,65 +181,25 @@
         "TensorFlow",
         "Keras",
         "Scikit-learn",
-        "Pandas",
         "Neural Collaborative Filtering"
-      ]
-    },
-    {
-      "title": "GrabInsight – Sentiment Analysis on Ride-Hailing User Reviews",
-      "description": "An NLP project analyzing Grab user reviews to classify sentiments using TF-IDF, NLTK, and Lexicon-based methods. Provided business insights on user satisfaction and service improvement.",
-      "technologies": [
-        "Google Play Scraper",
-        "Pandas",
-        "Regex",
-        "NLTK",
-        "Sastrawi",
-        "TF-IDF",
-        "Lexicon-Based"
-      ]
-    },
-    {
-      "title": "GoldSight – Intelligent Gold Price Prediction Dashboard",
-      "description": "Interactive web platform for gold price forecasting using GRU neural networks and news sentiment analysis. Provides 90-day predictions with visualization dashboards and investment insights.",
-      "technologies": [
-        "TensorFlow",
-        "Streamlit",
-        "Pandas",
-        "Plotly",
-        "Joblib",
-        "Kaggle"
-      ]
-    },
-    {
-      "title": "SERASI Stunting Infant",
-      "description": "Collaborative project during MSIB at KOMDIGI in partnership with RSUD Dr. Soetomo. Developed machine learning models for predicting stunting risk in infants using clinical and health data.",
-      "technologies": [
-        "Python",
-        "Scikit-learn",
-        "Pandas",
-        "NumPy",
-        "Matplotlib",
-        "FastAPI",
-        "PostgreSQL",
-        "Streamlit"
       ]
     }
   ],
   "certifications": [
     {
+      "title": "Associate Data Science",
+      "issuer": "Badan Nasional Sertifikasi Profesi (BNSP)",
+      "description": "National competency certification covering data analysis, ML modeling, and data-driven decision-making. (Feb 2024 & Dec 2025)"
+    },
+    {
+      "title": "Associate Big Data",
+      "issuer": "Alibaba Cloud",
+      "description": "Certification validating cloud-based big data proficiency in Alibaba Cloud’s ecosystem. (Aug 2024)"
+    },
+    {
       "title": "AI Engineer",
       "issuer": "Lintasarta",
       "description": "Professional certification focusing on end-to-end AI implementation, MLOps, and model deployment."
-    },
-    {
-      "title": "Associate Data Scientist BNSP",
-      "issuer": "Badan Nasional Sertifikasi Profesi (BNSP)",
-      "description": "National competency certification covering data analysis, ML modeling, and data-driven decision-making."
-    },
-    {
-      "title": "Alibaba Cloud Associate Big Data",
-      "issuer": "Alibaba Cloud",
-      "description": "Certification validating cloud-based big data proficiency in Alibaba Cloud’s ecosystem such as MaxCompute, DataWorks, and Quick BI."
     },
     {
       "title": "Machine Learning Engineer (DBS Foundation)",
@@ -212,31 +210,6 @@
       "title": "Dicoding Machine Learning Series",
       "issuer": "Dicoding Indonesia",
       "description": "Comprehensive ML certification path covering beginner to advanced topics including applied ML, deep learning, and MLOps."
-    },
-    {
-      "title": "Data Scientist TSA Komdigi",
-      "issuer": "Komdigi",
-      "description": "Certification program on data analysis, machine learning, and visualization for data-driven decision-making."
-    },
-    {
-      "title": "Data Analyst GreatEdu Global Mahardika",
-      "issuer": "PT GreatEdu Global Mahardika",
-      "description": "Certification focusing on data analysis, SQL, and dashboard creation for actionable business insights."
-    },
-    {
-      "title": "ASEAN Data Science Explorer",
-      "issuer": "ASEAN Foundation",
-      "description": "Regional competition and certification assessing data analysis and storytelling skills using real ASEAN datasets."
-    },
-    {
-      "title": "Database Design and Programming TSA Komdigi",
-      "issuer": "Komdigi",
-      "description": "Certification covering database design, normalization, and SQL implementation for data-driven applications."
-    },
-    {
-      "title": "Data Driven Kesiapsigaan Bencana TSA Komdigi",
-      "issuer": "Komdigi",
-      "description": "Certification focusing on applying data science for disaster preparedness and data-driven decision-making."
     }
   ],
   "education": [

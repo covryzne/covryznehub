@@ -2,6 +2,7 @@ import { ActionSectionProvider } from "@/components/context/active-section-provi
 import { fonts } from "@/lib/fonts";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
@@ -54,11 +55,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("min-h-screen font-sans", fonts)}>
-        <ThemeProvider attribute="class">
+      <body
+        className={cn("min-h-screen font-sans overflow-x-clip", fonts)}
+        style={{ cursor: "auto" }}
+        suppressHydrationWarning
+      >
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <ActionSectionProvider>{children}</ActionSectionProvider>
         </ThemeProvider>
         <Toaster position="top-right" />
+        <SpeedInsights />
       </body>
     </html>
   );
