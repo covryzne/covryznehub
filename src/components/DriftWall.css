@@ -85,7 +85,7 @@
   height: 100%;
   object-fit: contain;
   display: block;
-  filter: grayscale(var(--dw-gray)) saturate(0.92);
+  filter: grayscale(var(--dw-gray)) saturate(1);
   transition: filter 0.42s cubic-bezier(0.22, 1, 0.36, 1);
   user-select: none;
   -webkit-user-drag: none;
@@ -95,9 +95,17 @@
   position: absolute;
   inset: 0;
   background: var(--dw-overlay);
-  opacity: 0.42;
+  opacity: 0.16;
   pointer-events: none;
   transition: opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.drift-wall__tile[data-transparent] .drift-wall__inner {
+  background: transparent;
+}
+
+.drift-wall__tile[data-transparent] .drift-wall__overlay {
+  display: none;
 }
 
 .drift-wall__tile.is-active .drift-wall__inner,

@@ -4,7 +4,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import './DriftWall.css';
 
-/** @type {{ image: string, title?: string, href?: string }[]} */
+/** @type {{ image: string, title?: string, href?: string, transparentBackground?: boolean }[]} */
 const DEFAULT_ITEMS = Array.from({ length: 15 }, (_, i) => {
   const ids = [1015, 1025, 1039, 1043, 1044, 1050, 1062, 1069, 1074, 1080, 1084, 106, 110, 133, 164];
   return {
@@ -255,6 +255,7 @@ const DriftWall = ({
       className: `drift-wall__tile${activeId === id ? ' is-active' : ''}`,
       'data-tile-id': id,
       'data-col': colIndex,
+      'data-transparent': item.transparentBackground ? '' : undefined,
       tabIndex: duplicate ? -1 : 0,
       onFocus: () => activate(id, colIndex),
       onBlur: release,

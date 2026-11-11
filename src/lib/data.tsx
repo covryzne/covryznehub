@@ -289,6 +289,34 @@ export const experiencesData: Experience[] = [
 
 export const certificationsData: Certification[] = [
   {
+    title: "AWS Machine Learning Certified",
+    description:
+      "Earners of this badge have demonstrated solution building knowledge with AWS Machine Learning services. Badge earners have acquired hands-on experience with AWS ML/AI services.",
+    issuer: "Amazon Web Services",
+    issueDate: "",
+    credentialUrl:
+      "https://www.credly.com/badges/2dcae457-8375-4266-9c39-7c35c6374ed4",
+    image: "/assets/certificates/aws-simulearn-machine-learning-training-badge.png",
+    transparentBackground: true,
+    details: [
+      "/assets/certificates/aws-simulearn-machine-learning-training-badge.png",
+    ],
+  },
+  {
+    title: "AI Practitioner Certified",
+    description:
+      "Earners of this badge showcase proficiency in building generative AI solutions utilizing AWS AI services. They gained experience with prompt engineering, code generation, chatbot development, implementing content moderation systems, and fine-tuning models for enhanced performance.",
+    issuer: "Amazon Web Services",
+    issueDate: "",
+    credentialUrl:
+      "https://www.credly.com/badges/f4663992-5221-4f5d-aec4-53e117720b2d",
+    image: "/assets/certificates/aws-simulearn-ai-practitioner-training-badge.png",
+    transparentBackground: true,
+    details: [
+      "/assets/certificates/aws-simulearn-ai-practitioner-training-badge.png",
+    ],
+  },
+  {
     title: "AI Engineer",
     description:
       "A professional certification program focused on end-to-end AI implementation, covering MLOps, model deployment, and intelligent system development.",

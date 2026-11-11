@@ -25,6 +25,7 @@ export type Experience = {
 
 export type Certification = {
   image?: string;
+  transparentBackground?: boolean;
   pdf?: string;
   title: string;
   description: string;

@@ -19,6 +19,7 @@ const certificates = certificationsData.filter((cert) => cert.image);
 const wallItems = certificates.map((cert) => ({
   image: cert.image!,
   title: cert.title,
+  transparentBackground: cert.transparentBackground,
 }));
 
 export default function CertificationsSection() {
@@ -89,7 +90,7 @@ export default function CertificationsSection() {
             parallax={0.6}
             lift={52}
             fade={0}
-            dim={0.85}
+            dim={0.97}
             overlayColor="#060010"
             radius={14}
             roll={0}
