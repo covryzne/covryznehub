@@ -2,6 +2,7 @@ import { ActionSectionProvider } from "@/components/context/active-section-provi
 import { fonts } from "@/lib/fonts";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
@@ -64,6 +65,7 @@ export default function RootLayout({
           <ActionSectionProvider>{children}</ActionSectionProvider>
         </ThemeProvider>
         <Toaster position="top-right" />
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
