@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.agents
+/design-system/*
+!/design-system/MASTER.md
+!/design-system/README.md
+!/design-system/qa/
+/design-system/qa/*
+!/design-system/qa/pass-2/
+/design-system/qa/pass-2/*
+!/design-system/qa/pass-2/REPORT.md
+!/design-system/qa/pass-2/verify.cjs
+docs

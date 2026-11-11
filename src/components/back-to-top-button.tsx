@@ -17,8 +17,8 @@ export function BackToTopButton() {
 
   return (
     <Button
-      className="fixed bottom-8 sm:bottom-24 right-3 sm:right-8 z-[9999] pointer-events-auto rounded-full shadow-lg transition-opacity duration-300 opacity-100 hover:opacity-80"
-      variant="default"
+      className="fixed bottom-4 sm:bottom-20 right-3 sm:right-8 z-[9999] pointer-events-auto rounded-full shadow-lg transition-opacity duration-300 opacity-100 hover:opacity-80"
+      variant="outline"
       size="icon"
       aria-label="Back to top"
       style={{
@@ -27,7 +27,13 @@ export function BackToTopButton() {
         zIndex: 9999,
       }}
       onClick={() =>
-        document.getElementById("home")?.scrollIntoView({ behavior: "smooth" })
+        document
+          .getElementById("home")
+          ?.scrollIntoView({
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+              ? "auto"
+              : "smooth",
+          })
       }
     >
       <Icons.arrowUp className="size-5" />
